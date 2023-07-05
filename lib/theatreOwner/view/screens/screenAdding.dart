@@ -37,9 +37,9 @@ TextEditingController columnController=TextEditingController();
               ],),
              ) */
              Text('How many rows?',style: TextStyle(color: textwhite,fontSize: 20,fontWeight: FontWeight.bold,),),
-             TextformField1(hintText: 'Enter Rows', textController:rowController , textIcon: Icons.table_rows_outlined,input: TextInputType.number,),
+             TextformField1(hintText: 'Enter Rows', textController:rowController , textIcon: Icons.table_rows_outlined,),
              sizedH20,
-              Text('How many rows?',style: TextStyle(color: textwhite,fontSize: 20,fontWeight: FontWeight.bold,),),
+              Text('How many columns?',style: TextStyle(color: textwhite,fontSize: 20,fontWeight: FontWeight.bold,),),
              TextformField1(hintText: 'Enter Rows', textController:columnController , textIcon: Icons.table_rows_outlined,),
                sizedH20,
               Text('Total Seats',style: TextStyle(color: textwhite,fontSize: 20,fontWeight: FontWeight.bold,),),

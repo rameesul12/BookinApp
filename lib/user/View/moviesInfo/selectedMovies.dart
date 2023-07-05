@@ -1,3 +1,4 @@
+import 'package:bookingapp/theatreOwner/view/bookingStatus/booking.dart';
 import 'package:bookingapp/user/View/bookinPage/bookingPage.dart';
 import 'package:bookingapp/user/View/dataAndTime/dateAndTime.dart';
 import 'package:bookingapp/user/variables/colors.dart';
@@ -150,7 +151,7 @@ class MoviesInfo extends StatelessWidget {
                       borderRadius: BorderRadius.circular(13),
                     )),
                 onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder:(context) => DateandTimepage(filimTitile: '',) ));
+                  Navigator.push(context, MaterialPageRoute(builder:(context) =>const BookingPage() ));
                 },
                 child: Text(
                   'Book Tickets',

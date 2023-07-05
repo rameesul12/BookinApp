@@ -37,7 +37,9 @@ class LoginPage extends StatelessWidget {
           SizedBox(
             height: 50,
             width:size.width*0.7 ,
-            child: ElevatedButton(onPressed: (){}, child:const  Text('Login',style: TextStyle(color: textwhite,fontWeight: FontWeight.bold),),
+            child: ElevatedButton(
+              onPressed: (){},
+               child:const  Text('Login',style: TextStyle(color: textwhite,fontWeight: FontWeight.bold),),
             style: ElevatedButton.styleFrom(
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10)

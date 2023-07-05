@@ -31,7 +31,9 @@ class UserLogin extends StatelessWidget {
                 height: 60,
                 width: size.width * 0.7,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(builder:(context) =>const LoginPage() ,));
+                  },
                   child: Text('Login'),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: buttonColor,
@@ -43,7 +45,7 @@ class UserLogin extends StatelessWidget {
                 width: size.width * 0.7,
                 child: ElevatedButton(
                   onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder:(context) =>const LoginPage() ,));
+                  
                   },
                   child:const Text(
                     'Sighnup',

@@ -1,6 +1,6 @@
 import 'package:bookingapp/theatreOwner/view/homePage/dashboard.dart';
-import 'package:bookingapp/user/View/homePage/home.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../../user/core/textformfield.dart';
 import '../../../user/variables/colors.dart';
@@ -16,6 +16,7 @@ class SighnInPage extends StatelessWidget {
     TextEditingController ownerEmail = TextEditingController();
      TextEditingController LicenceNumber = TextEditingController();
       TextEditingController phone = TextEditingController();
+      TextEditingController place=TextEditingController();
     TextEditingController ownerPassword = TextEditingController();
     TextEditingController confirmPassword = TextEditingController();
 
@@ -70,6 +71,14 @@ class SighnInPage extends StatelessWidget {
                     textIcon: Icons.phone_android,
                   )),
                   sizedH10,
+                    Padding(
+                   padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: TextformField1(
+                    hintText: "place",
+                    textController: place,
+                    textIcon: Icons.place,
+                  )),
+                  sizedH10,
                    Padding(
                    padding: const EdgeInsets.symmetric(horizontal: 10),
                   child: TextformField1(
@@ -78,6 +87,7 @@ class SighnInPage extends StatelessWidget {
                     textIcon: Icons.credit_card,
                   )),
                   sizedH10,
+                  
               Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 10),
                   child: TextformField1(
@@ -93,7 +103,35 @@ class SighnInPage extends StatelessWidget {
                     textController: confirmPassword,
                     textIcon: Icons.lock,
                   )),
-                  sizedH10,
+                  sizedH20,
+                  Text("Upload Id",style: TextStyle(color: textwhite,fontSize: 20,fontWeight: FontWeight.bold),),
+                    Center(
+                child: Container(
+                  height: size.height *0.2,
+                  width: size.width *0.8,
+                  decoration: BoxDecoration(
+                  color: textFieldBackground,
+                  border: Border.all(
+                    color: colorTextwhite,
+                     )
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Center(child: ElevatedButton(onPressed: (){}, child: Text("UploadFile"),
+                      style: ElevatedButton.styleFrom(
+                       backgroundColor: Colors.amber,
+                        shape: RoundedRectangleBorder(
+                          borderRadius:BorderRadius.circular(10),
+                          
+                        )
+                      ),
+                      )
+                      )
+                    ],
+                  ),
+                ),
+              ),
               const Text(
                 "By registering you are agreeing to our Terms of use and privacy policy",
                 style: TextStyle(color: Colors.white70, fontSize: 10),
@@ -121,6 +159,7 @@ class SighnInPage extends StatelessWidget {
                 ),
               ),
               sizedH10,
+            
             const  Text('Already have an Account? Login',style: TextStyle(color: Colors.white70,fontSize: 10),)
           ],
         ),

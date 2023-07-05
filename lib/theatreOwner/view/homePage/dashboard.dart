@@ -4,10 +4,10 @@ import 'package:bookingapp/theatreOwner/view/showlist/showList.dart';
 import 'package:bookingapp/user/core/constant/constanwidgets.dart';
 import 'package:bookingapp/user/variables/sizedbox.dart';
 import 'package:flutter/material.dart';
-
 import '../../../user/variables/colors.dart';
 import '../bookingStatus/booking.dart';
 import '../core/functions.dart';
+
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key});
@@ -30,6 +30,7 @@ class HomePage extends StatelessWidget {
                   shrinkWrap: true,
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
+                    //childAspectRatio: 1.2,
                     mainAxisSpacing: 20,
                     crossAxisSpacing: 30,
                   ),
