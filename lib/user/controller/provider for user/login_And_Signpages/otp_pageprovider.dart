@@ -1,16 +1,14 @@
 import 'package:bookingapp/user/View/loginPages/otpPage.dart';
 import 'package:flutter/material.dart';
-
-import '../../Model/loginAnd_SignUp/login_PageModel.dart';
-import '../../services/otpSignup.dart';
+import '../../../services/otpSignup.dart';
 
 
-class FuncionsPage1 extends ChangeNotifier{
+class OtpPageProvider extends ChangeNotifier{
 
   // navigateFunctions(BuildContext context,FuncionsPage1 providerpage){
     
   // }
-    UserSighnUp? signUp;
+   
 
     
       TextEditingController username = TextEditingController();
@@ -18,7 +16,8 @@ class FuncionsPage1 extends ChangeNotifier{
     TextEditingController phone = TextEditingController();
     TextEditingController password = TextEditingController();
     TextEditingController confirmPassword = TextEditingController();
-   bool loading=false;
+   bool loading=true;
+
     
   Future <bool> otpChecking(BuildContext context)async{
     
@@ -28,7 +27,7 @@ class FuncionsPage1 extends ChangeNotifier{
        phone: phone.text,
         password: password.text,
          cpassword:confirmPassword.text,
-          signotp: otpController.text,
+          signotp: otpController.text, context: context,
           );
           notifyListeners();
           if (loading==true) {
@@ -38,7 +37,10 @@ class FuncionsPage1 extends ChangeNotifier{
             return false;
           }
   }
+  
    
+
+  
   //  Future<bool> loginChecking() async{
 
   //   //bool loading=

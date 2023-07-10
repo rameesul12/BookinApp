@@ -1,10 +1,10 @@
 import 'package:bookingapp/user/Model/loginAnd_SignUp/login_PageModel.dart';
 import 'package:bookingapp/user/core/textformfield.dart';
-import 'package:bookingapp/user/provider%20for%20user/login_And_Signpages/sighnupAndOtp.dart';
+import 'package:bookingapp/user/controller/provider%20for%20user/login_And_Signpages/sighnupAndOtp.dart';
 import 'package:bookingapp/user/variables/sizedbox.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../provider for user/functions/function1.dart';
+import '../../controller/provider for user/login_And_Signpages/otp_pageprovider.dart';
 import '../../variables/colors.dart';
 import 'otpPage.dart';
 
@@ -31,7 +31,7 @@ class _SighnUpPageState extends State<SighnUpPage> {
       body: SingleChildScrollView(
         child: Form(
           key: formKey,
-          child: Consumer<FuncionsPage1>(
+          child: Consumer<OtpPageProvider>(
             builder: (context,value,child) {
               return Column(
                 children: [

@@ -29,7 +29,7 @@ String? actionPath;
           child: SizedBox(
             height:25 ,
             width: size.width*0.2,
-            child: Image.asset(leadingPath!,color: textwhite,)),
+            child: Image.asset(leadingPath!)),
         ),
         // sizedW40,
         // sizedH20,

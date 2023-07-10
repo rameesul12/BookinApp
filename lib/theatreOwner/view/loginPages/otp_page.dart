@@ -1,23 +1,24 @@
-import 'dart:developer';
-import 'package:bookingapp/user/variables/colors.dart';
-import 'package:bookingapp/user/variables/sizedbox.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:pinput/pinput.dart';
 import 'package:provider/provider.dart';
-import '../../controller/provider for user/login_And_Signpages/otp_pageprovider.dart';
-import '../homePage/home.dart';
 
-class OtpVerificationPage extends StatelessWidget {
-  const OtpVerificationPage({super.key});
-  // final UserSighnUp sighnUp;
+import '../../../user/variables/colors.dart';
+import '../../../user/variables/sizedbox.dart';
+import '../../model/owner_login/owner_signup.dart';
+import '../../controller/provider/owner_Login/owner_otp_page.dart';
+import '../homePage/dashboard.dart';
+
+class OwnerOtpPage extends StatelessWidget {
+   OwnerOtpPage({super.key, this.loginDetails});
+   final OwnerLoginModel? loginDetails;
+
   @override
   Widget build(BuildContext context) {
- // bool loading=false;
-    // final provider=Provider.of<>(context)
+    final _provider=Provider.of<OwnerOtpProvider>(context,listen: false);
 
-    Size size = MediaQuery.of(context).size;
-    final defaultPinTheme = PinTheme(
+    final Size size=MediaQuery.of(context).size;
+     final defaultPinTheme = PinTheme(
       margin: EdgeInsets.only(right: 8),
       width: 39,
       height: 46,
@@ -49,8 +50,8 @@ class OtpVerificationPage extends StatelessWidget {
         child:SingleChildScrollView(
               child: Column(
                 children: [
-                  Column(
-                    children: [
+                  const Column(
+                    children:[
                       sizedH30,
                       Text(
                         "OTP Verification",
@@ -81,7 +82,7 @@ class OtpVerificationPage extends StatelessWidget {
                       //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Pinput(
-                          controller: otpController,
+                          controller:_provider.pinController ,
                           defaultPinTheme: defaultPinTheme,
                           focusedPinTheme: focusedPinTheme,
                           submittedPinTheme: submittedPinTheme,
@@ -104,21 +105,29 @@ class OtpVerificationPage extends StatelessWidget {
                       width: size.width * 0.9,
                       child:ElevatedButton(
                             onPressed: () async {
-                             
-                             await Provider.of<OtpPageProvider>(context,listen: false).otpChecking(context);
-                           
+                            //  bool loading=await Provider.of<OtpPageProvider>(context,listen: false).otpChecking(context);
+                        //   log("$loading");
+                            // if(loading==true){
                               
-                             
+                            //   Navigator.push(
+                            //       context,
+                            //       MaterialPageRoute(
+                            //         builder: (context) => const HomeScreen(),
+                            //       ));
+                            // }else{
+                            //   CircularProgressIndicator();
+                            // }
+                           await _provider.ownerDetailsSign(ownerDetails:loginDetails! , otpNumber:_provider.pinController.text , imageUrl: _provider.ownerImageUrl!);
                            
                             },
-                            child: Text(
-                              'Verify',
-                              style: TextStyle(color: textwhite),
-                            ),
                             style: ElevatedButton.styleFrom(
                                 backgroundColor: buttonColor,
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(13))),
+                            child:const Text(
+                              'Verify',
+                              style: TextStyle(color: textwhite),
+                            ),
                           )
                        )
                 ],
@@ -129,5 +138,3 @@ class OtpVerificationPage extends StatelessWidget {
     );
   }
 }
- TextEditingController otpController = TextEditingController();
-

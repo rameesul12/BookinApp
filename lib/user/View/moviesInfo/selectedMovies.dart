@@ -1,6 +1,4 @@
-import 'package:bookingapp/theatreOwner/view/bookingStatus/booking.dart';
 import 'package:bookingapp/user/View/bookinPage/bookingPage.dart';
-import 'package:bookingapp/user/View/dataAndTime/dateAndTime.dart';
 import 'package:bookingapp/user/variables/colors.dart';
 import 'package:bookingapp/user/variables/sizedbox.dart';
 import 'package:flutter/material.dart';
@@ -70,7 +68,7 @@ class MoviesInfo extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10),
                   border: Border.all(color: colorTextwhite),
                 ),
-                child: Center(
+                child: const Center(
                     child: Text(
                   '8.9/10',
                   style: TextStyle(
@@ -85,10 +83,10 @@ class MoviesInfo extends StatelessWidget {
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     border: Border.all(color: colorTextwhite)),
-                child: Column(
+                child: const Column(
                   children: [
                     sizedH20,
-                    const Text(
+                    Text(
                       'Dueration',
                       style: TextStyle(color: colorTextwhite),
                     ),
@@ -106,7 +104,7 @@ class MoviesInfo extends StatelessWidget {
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     border: Border.all(color: colorTextwhite)),
-                child: Column(
+                child: const Column(
                   children: [
                     sizedH20,
                     Text(
@@ -126,14 +124,14 @@ class MoviesInfo extends StatelessWidget {
             ],
           ),
           sizedH20,
-          Text(
+          const Text(
             'Overview',
             style: TextStyle(color: textwhite, fontWeight: FontWeight.bold),
           ),
           SizedBox(
             height: size.height * 0.25,
             width: size.width * 0.9,
-            child: ListView(children: [
+            child: ListView(children: const [
               Text(
                 '''Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin vel nunc interdum, pretium diam molestie, aliquam lacus. Donec sagittis odio felis, vel pharetra ligula pharetra sit amet. Etiam molestie vitae nunc vitae consequat. Praesent eget mi bibendum libero feugiat imperdiet vel vitae tortor. Fusce nec massa sollicitudin, gravida est ut, egestas eros. In in ipsum eu ante eleifend sollicitudin et quis neque. Suspendisse elementum pharetra blandit. Aliquam ut diam quis ligula elementum elementum. Fusce vitae dignissim magna, in sagittis velit. Duis tincidunt turpis non vestibulum vehicula. Sed maximus luctus dolor sed mattis. Praesent posuere malesuada elit, porta hendrerit urna volutpat sed.
                   
@@ -153,7 +151,7 @@ class MoviesInfo extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(context, MaterialPageRoute(builder:(context) =>const BookingPage() ));
                 },
-                child: Text(
+                child: const Text(
                   'Book Tickets',
                   style: TextStyle(color: textwhite),
                 )),
@@ -191,7 +189,7 @@ class MovieDetails extends StatelessWidget {
           children: [
             Text(
               filimTitle,
-              style: TextStyle(color: Colors.amberAccent),
+              style: const TextStyle(color: Colors.amberAccent),
             ),
             sizedH30,
             Row(
@@ -207,7 +205,7 @@ class MovieDetails extends StatelessWidget {
                     directorTitle,
                     overflow: TextOverflow.fade,
                     maxLines: 1,
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: colorTextwhite,
                     ),
                   ),
@@ -244,7 +242,7 @@ class MovieDetails extends StatelessWidget {
                     child: Text(
                   '$genreTitle',
                   overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: colorTextwhite,
                   ),
                 )),
