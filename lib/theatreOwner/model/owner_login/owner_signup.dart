@@ -25,8 +25,9 @@ class OwnerLoginModel{
     required this.password,
     required this.confirmPassword,
     this.status
- });
+  });
 
  factory OwnerLoginModel.fromJson(Map<String,dynamic>json)=>_$OwnerLoginModelFromJson(json);
  Map<String,dynamic>tojson()=>_$OwnerLoginModelToJson(this);
+
 } 

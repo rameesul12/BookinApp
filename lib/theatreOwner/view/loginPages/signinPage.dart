@@ -1,9 +1,13 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import '../../../common/dialogues.dart';
 import '../../../user/core/textformfield.dart';
 import '../../../user/variables/colors.dart';
 import '../../../user/variables/sizedbox.dart';
 import 'package:provider/provider.dart';
+import '../../dialogues/validation_function.dart';
+import '../../maps/map_class.dart';
 import '../../model/owner_login/owner_signup.dart';
 import '../../controller/provider/owner_Login/owner_otp_page.dart';
 import '../../controller/provider/owner_Login/owner_signup.dart';
@@ -59,6 +63,7 @@ class _SighnInPageState extends State<SighnInPage> {
                     hintText: "Theatre name",
                     textController:provider.theatreName ,
                     textIcon: Icons.home_filled,
+                    
                   ),
                 ),
                   sizedH10,
@@ -76,6 +81,7 @@ class _SighnInPageState extends State<SighnInPage> {
                       hintText: "Theatre Licence Number",
                       textController:provider.licenceNumber,
                       textIcon: Icons.credit_card_outlined,
+                      values: 10,
                     )),
                     sizedH10,
                      Padding(
@@ -84,14 +90,22 @@ class _SighnInPageState extends State<SighnInPage> {
                       hintText: "phone",
                       textController:provider. phone,
                       textIcon: Icons.phone_android,
+                      values: 10,
+                      input: TextInputType.number,
                     )),
                     sizedH10,
                       Padding(
                      padding: const EdgeInsets.symmetric(horizontal: 10),
                     child: TextformField1(
                       hintText: "place",
-                      textController:provider. place,
+                      textController:provider.place,
                       textIcon: Icons.place,
+                      fieldFuction:(){
+                        
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => const SelectLocation(),));
+                        provider.place.text=provider.location!;
+                        log("is this working");
+                      } ,
                     )),
                     sizedH10,
                      Padding(
@@ -100,6 +114,7 @@ class _SighnInPageState extends State<SighnInPage> {
                       hintText: "upload id(Adhar Number)",
                       textController: provider.adharNumber,
                       textIcon: Icons.credit_card,
+                      values: 14,
                     )),
                     sizedH10,
                     
@@ -129,7 +144,7 @@ class _SighnInPageState extends State<SighnInPage> {
                        otpsignProvider.filePicker();
                        otpsignProvider.imageadded=true;
                      });
-  
+                    
  
                        
                       },
@@ -142,7 +157,7 @@ class _SighnInPageState extends State<SighnInPage> {
                         ),
                         
                       ),
-                      child: otpsignProvider.imageadded==true?const  Text("Uploaded"):const Text("uploadfile"),
+                      child: otpsignProvider.imageadded == true?const  Text("Uploaded"):const Text("uploadfile"),
                       )
                       )
                     ],
@@ -162,6 +177,20 @@ class _SighnInPageState extends State<SighnInPage> {
                       onPressed: () async{
                       if (provider.formkey.currentState!.validate()) {
                         
+                        if (mailvalidation(provider.ownerEmail.text)==true) {
+                          getError("invalid Email", context);
+                        }else if(nameValidation(provider.theatreName.text)){
+                          getError("invalid theareName ", context);
+                        }else if(passwordChecking(provider.ownerPassword.text, provider.confirmPassword.text)){
+                          getError("passWord Not Matching", context);
+                        }else if(phoneValidation(provider.phone.text)){
+                          getError("phone Number Not filled", context);
+                        }else if(adharValidation(provider.adharNumber.text)){
+                        getError("adhar Number Not filled", context);
+                         } else if(otpsignProvider.imageadded){
+                          getError("image want To Add", context);
+                         }
+                         else{
                           OwnerLoginModel? ownerInformation=OwnerLoginModel(
                             theatreName:provider.theatreName.text,
                              email: provider.ownerEmail.text,
@@ -173,8 +202,7 @@ class _SighnInPageState extends State<SighnInPage> {
                                    confirmPassword:provider.confirmPassword.text,
                                    status: "Approved"
                                    );
-                         
-                         await provider.ownerSignUp(
+  await provider.ownerSignUp(
                       theatrename: provider.theatreName.text,
                        owneremail:provider.ownerEmail.text,
                         licence:provider.licenceNumber.text ,
@@ -186,22 +214,21 @@ class _SighnInPageState extends State<SighnInPage> {
                               context: context);
                                // ignore: use_build_context_synchronously
                                Navigator.push(context, MaterialPageRoute(builder: (context) => OwnerOtpPage(loginDetails: ownerInformation) ,));
-                              
-                             
+                         }      
                       }else{
-                        Dialogues.error("fill the fields", context);
+                        getError("fill the fields", context);
                       }
                                  
                                 
                       },
-                      child: Text(
-                        'Register Now',
-                        style: TextStyle(color: textwhite),
-                      ),
                       style: ElevatedButton.styleFrom(backgroundColor: buttonColor,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(13)
                         )
+                      ),
+                      child: const Text(
+                        'Register Now',
+                        style: TextStyle(color: textwhite),
                       ),
                     ),
                   ),

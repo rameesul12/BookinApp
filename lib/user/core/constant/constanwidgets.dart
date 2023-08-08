@@ -27,8 +27,8 @@ String? actionPath;
         Align(
           alignment: Alignment.centerLeft,
           child: SizedBox(
-            height:25 ,
-            width: size.width*0.2,
+            height:25,
+            width: size.width*0.25,
             child: Image.asset(leadingPath!)),
         ),
         // sizedW40,
@@ -37,14 +37,14 @@ String? actionPath;
             width: 0,
           ): Align(
             alignment: Alignment.center,
-            child: Text('$title',style:const TextStyle(color: Colors.white70,fontWeight: FontWeight.bold),)),
+            child: Text('$title',style:const TextStyle(color: Colors.white70,fontWeight: FontWeight.bold,fontSize: 20),)),
           actionPath==null?const SizedBox(
             width: 0,
           ):
         Align(
           alignment: Alignment.centerRight,
           child: InkWell(
-            onTap: () =>navigateFunction(context,trailNavigate!) ,
+         //   onTap: () =>navigateFunction(context,trailNavigate!) ,
             child: SizedBox(
               height:30 ,
               width: size.width*0.2,

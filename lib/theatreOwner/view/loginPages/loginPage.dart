@@ -1,10 +1,13 @@
-import 'package:bookingapp/theatreOwner/view/loginPages/sighninPage.dart';
+import 'package:bookingapp/common/dialogues.dart';
+import 'package:bookingapp/common/shared_preference_seting/set_bool.dart';
+import 'package:bookingapp/theatreOwner/view/loginPages/signinPage.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../user/core/textformfield.dart';
 import '../../../user/variables/colors.dart';
 import '../../../user/variables/sizedbox.dart';
+import '../../controller/provider/add_Screen/current_owner_provider.dart';
 import '../../controller/provider/owner_Login/owner_login_page.dart';
 
 class TheatreLoginPage  extends StatelessWidget {
@@ -29,12 +32,15 @@ class TheatreLoginPage  extends StatelessWidget {
              
                  Padding(
                    padding: const EdgeInsets.all(8.0),
-                   child: TextformField1(hintText: 'Username', textController:provider.ownerName,textIcon: Icons.person, ),
+                   child: TextformField1(hintText: 'Username',
+                    textController:provider.ownerName,textIcon: Icons.person, ),
                  ),
               sizedH10,
              Padding(
                padding: const EdgeInsets.all(8.0),
-               child: TextformField1(hintText: 'password', textController:provider. ownerPassword , textIcon: Icons.lock,),
+               child: TextformField1(hintText: 'password',
+                textController:provider. ownerPassword ,
+                 textIcon: Icons.lock,),
              ),
               sizedH60,
               SizedBox(
@@ -43,10 +49,14 @@ class TheatreLoginPage  extends StatelessWidget {
                 child: ElevatedButton(onPressed: ()async{
                  
                if (provider.formkey.currentState!.validate()) {
+                lottieshowing(context);
                  await  provider.ownerLoginRequest(
                 email: provider.ownerName.text, 
                 password: provider.ownerPassword.text,
                  context: context);
+                 setlogged(value: true);
+                // ignore: use_build_context_synchronously
+                await  Provider.of<AddScreenProvider>(context,listen: false).getCurrentOwner(context);
                }
                 },
                 style: ElevatedButton.styleFrom(
@@ -63,7 +73,7 @@ class TheatreLoginPage  extends StatelessWidget {
             sizedH30,
             TextButton(onPressed: (){
             Navigator.push(context, MaterialPageRoute(builder: (context) =>const SighnInPage() ,));
-            }, child:const Text("sighnin?",style: TextStyle(color: textwhite),))
+            }, child:const Text("sign In?",style: TextStyle(color: textwhite),))
             ],
           ),
         ),

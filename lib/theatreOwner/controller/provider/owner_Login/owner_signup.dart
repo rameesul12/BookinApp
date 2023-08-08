@@ -1,7 +1,9 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'dart:convert';
 import 'dart:developer';
 
+import 'package:bookingapp/common/dialogues.dart';
 import 'package:bookingapp/user/apiConfigurationclass/configuration.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +19,8 @@ class OwnerSignUpProvider extends ChangeNotifier{
      TextEditingController licenceNumber = TextEditingController();
       TextEditingController phone = TextEditingController();
        TextEditingController adharNumber= TextEditingController();
-      TextEditingController place=TextEditingController();
+     TextEditingController place=TextEditingController();
+     String? location;
     TextEditingController ownerPassword = TextEditingController();
     TextEditingController confirmPassword = TextEditingController();
     
@@ -37,7 +40,7 @@ class OwnerSignUpProvider extends ChangeNotifier{
      required BuildContext context
 
     }) async{
-bool isLoading=true;
+// bool isLoading=true;
   
    try {
      final response=await http.post(Uri.parse(ApiConfiguration.baseUrl+ApiConfiguration.ownerSignUp),
@@ -51,14 +54,19 @@ bool isLoading=true;
     "Password":password
    }
    );
+   final status=jsonDecode(response.body) as Map<String,dynamic>;
    log('$response');
    log('${response.statusCode}');
+   if (status["Approved"]=='Approved'){
+     getError("Admin approved your account", context);
+   }
    if (response. statusCode==200) {
      
-     isLoading=false;
+    //  isLoading=false;
      notifyListeners();
 
    }else{
+
     log("api not completed");
    }
    } catch (e) {

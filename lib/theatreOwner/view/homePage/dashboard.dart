@@ -1,31 +1,41 @@
+// ignore_for_file: use_build_context_synchronously
+
+import 'package:bookingapp/common/dialogues.dart';
+import 'package:bookingapp/theatreOwner/view/sails_Report/sailes_report.dart';
 import 'package:bookingapp/theatreOwner/view/screens/screenmanagment.dart';
-import 'package:bookingapp/theatreOwner/view/settings/settings.dart';
 import 'package:bookingapp/theatreOwner/view/showlist/showList.dart';
 import 'package:bookingapp/user/core/constant/constanwidgets.dart';
 import 'package:bookingapp/user/variables/sizedbox.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../../../user/variables/colors.dart';
+import '../../controller/provider/add_Screen/current_owner_provider.dart';
+import '../../controller/provider/add_Shows/add_show_provider.dart';
 import '../bookingStatus/booking.dart';
-import '../core/functions.dart';
 
 
 class HomePage extends StatelessWidget {
-  const HomePage({Key? key});
+   const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
+     Provider.of<AddScreenProvider>(context,listen: false).getCurrentOwner(context);
+    final provider=Provider.of<AddScreenProvider>(context,listen: false);
     return Scaffold(
       body: Column(
         children: [
           AppBarcontainer(
             title: 'Dashboard',
             actionPath: 'assets/images/profile.png',
-            trailNavigate: navigateFunction(context,SettingsPage()),
+           // trailNavigate: navigate,
           ),
           Flexible(
             child: Padding(
               padding: const EdgeInsets.all(10),
               child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10)
+                ),
                 child: GridView(
                   shrinkWrap: true,
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -36,28 +46,60 @@ class HomePage extends StatelessWidget {
                   ),
                   children:  [
                     InkWell(
-                      onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) =>const ScreenManagment(),));
-                      },
+                      onTap: () async {
+                      lottieshowing(context);
+                      await provider.getScreen(context);
+                     Navigator.pop(context);
+                        Navigator.push(context,MaterialPageRoute(builder: (context) => ScreenManagment(),));
+                     },
                       child:const GridviewCard(
                         image: 'assets/images/clapperboard.png',
                         name: 'Screen Management',
                       ),
                     ),
                     InkWell(
-                      onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) =>const BookingStatus(),)),
+                      onTap: () {
+                         Navigator.push(context, MaterialPageRoute(builder: (context) =>const BookingStatus(),));
+                      
+                      },
                       child:const GridviewCard(
                         image: 'assets/images/video-tutorial.png',
                         name: 'Booking Status',
                       ),
                     ),
                     InkWell(
-                      onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const ShowListPage() ,)),
+                      onTap: () async{ 
+                      lottieshowing(context);
+                      await Provider.of<AddShowProvider>(context,listen: false).showGetting(context);
+                       Navigator.pop(context);
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => const ShowListPage() ));
+                     // Navigator.pop(context);
+                      },
                       child:const GridviewCard(
                         image: 'assets/images/cinema_reel.png',
                         name: 'ShowList',
                       ),
                     ),
+                       InkWell(
+                      onTap: () async{ 
+                     
+                      Navigator.push(context,MaterialPageRoute(builder: (context)=> const SailesReport()));
+                     // Navigator.pop(context);
+                      },
+                      child:const GridviewCard(
+                        image: 'assets/images/report (1).png',
+                        name: 'Sails Report',
+                      ),
+                    ),
+                    // InkWell(
+                    //   onTap: () async{ 
+                    
+                    //   },
+                    //   child:const GridviewCard(
+                    //     image: 'assets/images/chat (1).png',
+                    //     name: 'chats ',
+                    //   ),
+                    // ),
                   // const  GridviewCard(
                   //     image: 'assets/images/revenue(1).png',
                   //     name: 'Revenue',
@@ -92,6 +134,7 @@ class GridviewCard extends StatelessWidget {
       width: size.width * 0.2,
       decoration: BoxDecoration(
         color:textFieldBackground,
+        borderRadius: BorderRadius.circular(10)
       //  image: DecorationImage(image: AssetImage(image))
       ),
       child: Column(

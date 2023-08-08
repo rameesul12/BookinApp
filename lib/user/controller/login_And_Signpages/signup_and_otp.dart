@@ -1,8 +1,10 @@
 import 'dart:convert';
-
+import 'dart:developer';
+import 'package:bookingapp/common/dialogues.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import '../../../apiConfigurationclass/configuration.dart';
+import '../../View/loginPages/otpPage.dart';
+import '../../apiConfigurationclass/configuration.dart';
 
 class LoginPageProvider with ChangeNotifier{
 
@@ -12,11 +14,13 @@ class LoginPageProvider with ChangeNotifier{
   required  String phone,
   required  String password,
   required  String cpassword,
+  required BuildContext context
   }) async {
    
 
    // isLoading=true;
-    final response = await http.post(
+    try {
+      final response = await http.post(
       Uri.parse(ApiConfiguration.baseUrl + ApiConfiguration.getOtp),
      
       body:{
@@ -29,17 +33,28 @@ class LoginPageProvider with ChangeNotifier{
     );
     notifyListeners();
 
-    print('************');
-    print(response.statusCode);
-    
+  log(response.body);
+    final status=jsonDecode(response.body)as Map<String,dynamic>;
     if (response.statusCode == 200) {
-      final decodedResponse = jsonDecode(response.body);
-      print(decodedResponse);
+    //  final decodedResponse = jsonDecode(response.body);
+       // ignore: use_build_context_synchronously
+       Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                         const OtpVerificationPage()));
+ 
 // isLoading=false;
-      return decodedResponse;
+    
     
     } else {
-      throw Exception('Failed to create account');
+      if (status["userExist"]==true|| response.statusCode==201) {
+        // ignore: use_build_context_synchronously
+        getError("User Already Exist", context);
+      }
+    }
+    } catch (e) {
+      getError(e.toString(),context);
     }
       
   }

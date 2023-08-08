@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -8,10 +10,12 @@ class TextformField1 extends StatelessWidget {
   final TextEditingController textController;
   final IconData textIcon;
   bool? isLast;
-int ? value=10;
+  Function()? fieldFuction;
+  final TextInputType? input;
+int ? values;
    
 
-    TextformField1({super.key, required this.hintText, required this.textController, required this.textIcon,this.value,this.isLast});
+    TextformField1({super.key, required this.hintText ,required this.textController, required this.textIcon,this.values,this.isLast,this.fieldFuction,this.input});
 
   @override
   Widget build(BuildContext context) {
@@ -20,16 +24,21 @@ int ? value=10;
       padding: const EdgeInsets.symmetric(horizontal: 10),
       child: TextFormField(
          textInputAction:isLast==null? TextInputAction.next:TextInputAction.none,
-
-         validator: (value) => value!.isEmpty ? "form not filled ":null,
+         
+         validator: (value) => value!.isEmpty ? "Field is empty ":null,
          // obscureText: true,
        // focusNode:,
         controller: textController,
-       inputFormatters: [LengthLimitingTextInputFormatter(value)],
+       inputFormatters: [LengthLimitingTextInputFormatter(values)],
         textAlign: TextAlign.left,
-       // keyboardType:input ,
+        keyboardType:input ,
         style:const  TextStyle(fontSize: 11,color: textwhite),
-        
+        onTap: 
+         
+          fieldFuction,
+        onChanged: (value) {
+          
+        },
         decoration: InputDecoration(
           filled: true,
           fillColor: textFieldBackground,

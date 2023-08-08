@@ -66,13 +66,13 @@ class OwnerOtpProvider extends ChangeNotifier{
 
   }
 
-
+//cloudinary details
 
   final cloudinary=Cloudinary.signedConfig(
     apiKey:"976681121275463" ,
      apiSecret: "mmMY_18TTAi6nrm48kDVfDfa8Kw",
       cloudName: "dt55a1jw7");
-
+//==========================================
 
   uploadImage(File imagePath )async{
       CloudinaryResponse response = await cloudinary.upload(

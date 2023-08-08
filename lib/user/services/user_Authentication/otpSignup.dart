@@ -1,12 +1,20 @@
 import 'dart:convert';
 import 'dart:developer';
+import 'package:bookingapp/common/dialogues.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import '../View/homePage/home.dart';
-import '../apiConfigurationclass/configuration.dart';
+import '../../View/homePage/home.dart';
+import '../../apiConfigurationclass/configuration.dart';
 
 class SignUp {
+
+
+
+
+  //fumctions==========
+
+
   static Future otpSignUp({
     required String name,
     required String email,
@@ -22,7 +30,7 @@ class SignUp {
       Uri.parse(ApiConfiguration.baseUrl + ApiConfiguration.signup),
        headers: {
          'Content-type': 'application/json;charset=utf-8',
-         'Accept': 'application/json',
+         'Accept':'application/json',
        },
       body:jsonEncode(
         {
@@ -37,19 +45,24 @@ class SignUp {
       }),
       encoding: Encoding.getByName('utf-8'),
     );
-    log('rameese moonji${response.body}');
+    final status=jsonDecode(response.body) as Map<String,dynamic>;
+    log(response.body);
     log('${response.statusCode}');
-      if (response.statusCode == 200) {
-      final jsonResponse = jsonDecode(response.body);
+      if (status["status"]==true) {
+      // final jsonResponse = jsonDecode(response.body);
+       // ignore: use_build_context_synchronously
        Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) => const HomeScreen(),
                                   ));
-      log('rameez $jsonResponse');
-      return jsonResponse;
+      log('rameez $status');
+      return status;
     } else {
+      // ignore: use_build_context_synchronously
+      getError("Incorrect Otp", context);
       throw Exception("Failed the process");
+      
     }
 
     } catch (e) {

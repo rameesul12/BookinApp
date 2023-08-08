@@ -5,6 +5,6 @@ void backarrrow(BuildContext context){
   Navigator.pop(context);
 }
 
- navigateFunction(BuildContext context,Widget navigate){
-return Navigator.push(context, MaterialPageRoute(builder: (context) =>  navigate,));
-}
+//  navigateFunction(BuildContext context,Widget navigate){
+// return Navigator.push(context, MaterialPageRoute(builder: (context) =>  navigate,));
+// }

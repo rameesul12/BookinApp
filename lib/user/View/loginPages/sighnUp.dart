@@ -1,10 +1,13 @@
+import 'package:bookingapp/common/dialogues.dart';
 import 'package:bookingapp/user/Model/loginAnd_SignUp/login_PageModel.dart';
 import 'package:bookingapp/user/core/textformfield.dart';
-import 'package:bookingapp/user/controller/provider%20for%20user/login_And_Signpages/sighnupAndOtp.dart';
+import 'package:bookingapp/user/controller/login_And_Signpages/signup_and_otp.dart';
+import 'package:bookingapp/user/dialogues/dialogue_functions.dart';
 import 'package:bookingapp/user/variables/sizedbox.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../controller/provider for user/login_And_Signpages/otp_pageprovider.dart';
+import '../../../theatreOwner/dialogues/validation_function.dart';
+import '../../controller/otp_pageprovider.dart';
 import '../../variables/colors.dart';
 import 'otpPage.dart';
 
@@ -69,7 +72,7 @@ class _SighnUpPageState extends State<SighnUpPage> {
                     padding: const EdgeInsets.symmetric(horizontal: 10),
                     child: TextformField1(
                       hintText: "Phone",
-                      value: 10,
+                      values: 10,
                       textController:value.phone,
                       textIcon: Icons.phone,
                     ),
@@ -78,7 +81,7 @@ class _SighnUpPageState extends State<SighnUpPage> {
                   Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 10),
                       child: TextformField1(
-                        value: 10,
+                        values: 10,
                         hintText: "Password",
                         textController: value.password,
                         // isLast: true,
@@ -88,7 +91,7 @@ class _SighnUpPageState extends State<SighnUpPage> {
                   Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 10),
                       child: TextformField1(
-                        value: 10,
+                        values: 10,
                         // value: password,
                         isLast: true,
                         hintText: "Confirm Password",
@@ -110,27 +113,27 @@ class _SighnUpPageState extends State<SighnUpPage> {
                         child: ElevatedButton(
                           onPressed: () async {
                             if (formKey.currentState!.validate()) {
-                              // Provider.of<LoginPageProvider>(context,listen: false).takeEmail(email: email.text);
-                           /*    Provider.of<OtpRegisterProvider>(context)
-                                  .userSignupDetails(
-                                      username: username.text,
-                                      email: email.text,
-                                      phone: phone.text,
-                                      password: password.text,
-                                      cpassword: confirmPassword.text); */
-                                      
-                           await   Provider.of<LoginPageProvider>(context, listen: false)
+                          if (usernameValidation(value.username.text)) {
+                            getError("Please Enter Username", context);
+                          }else if(usermailvalidation(value.email.text)){
+                            getError("Please Enter Email", context);
+                          }else if(userpPassWordValidation(value.password.text, value.confirmPassword.text)){
+                            getError("Incorrept Password", context);
+                          }else{
+                       await   Provider.of<LoginPageProvider>(context, listen: false)
                                   .createAccount(
                                       username:value.username.text,
                                       email:value.email.text,
                                       phone:value. phone.text,
                                       password: value.password.text,
-                                      cpassword:value.confirmPassword.text);
-                                        Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                         OtpVerificationPage()));
+                                      cpassword:value.confirmPassword.text,
+                                      context: context
+                                      );
+                                        // ignore: use_build_context_synchronously
+                                       
+                          }
+                                      
+                         
                             
                             } else {
                               Exception('somthing went wrong');
@@ -142,14 +145,14 @@ class _SighnUpPageState extends State<SighnUpPage> {
                               return ;
                             } */
                             },
-                          child: const Text(
-                            'Register',
-                            style: TextStyle(color: textwhite),
-                          ),
                           style: ElevatedButton.styleFrom(
                               backgroundColor: buttonColor,
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(13))),
+                          child: const Text(
+                            'Register',
+                            style: TextStyle(color: textwhite),
+                          ),
                         )),
                   ),
                   sizedH10,

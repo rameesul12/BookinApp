@@ -1,10 +1,19 @@
+// ignore_for_file: use_build_context_synchronously
+
+import 'package:bookingapp/common/dialogues.dart';
+import 'package:bookingapp/user/View/loginPages/loginSignupPage.dart';
 import 'package:bookingapp/user/core/textformfield.dart';
 import 'package:bookingapp/user/View/loginPages/sighnUp.dart';
-import 'package:bookingapp/user/controller/provider%20for%20user/login_And_Signpages/loginPageprovider.dart';
+import 'package:bookingapp/user/controller/loginPageprovider.dart';
+import 'package:bookingapp/user/dialogues/dialogue_functions.dart';
 import 'package:bookingapp/user/variables/colors.dart';
 import 'package:bookingapp/user/variables/sizedbox.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../dialogues/forget_password_dialogu.dart';
+import '../homePage/home.dart';
 
 
 class LoginPage extends StatelessWidget {
@@ -14,6 +23,7 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final provider = Provider.of<LoginProvider>(context, listen: false);
     // final functionProvider=Provider.of<>(context,listen: false);
+    final providerDialogue=Provider.of<DialogueProvider>(context,listen: false);
 
     final Size size = MediaQuery.of(context).size;
     return Scaffold(
@@ -37,7 +47,7 @@ class LoginPage extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: TextformField1(
                   hintText: 'Email',
-                  textController: provider.userNameController,
+                  textController: provider.userEmailController,
                   textIcon: Icons.person,
                 ),
               ),
@@ -50,6 +60,11 @@ class LoginPage extends StatelessWidget {
                   textIcon: Icons.password,
                 ),
               ),
+                                TextButton(onPressed: (){
+                                 
+                                providerDialogue.forgetPasswordDialogue(context: context);
+                                }, child:const Text('Forget PassWord ?',  style: TextStyle(color:Colors.white70,fontSize: 10))),
+
               sizedH60,
               SizedBox(
                 height: 50,
@@ -57,19 +72,31 @@ class LoginPage extends StatelessWidget {
                 child: ElevatedButton(
                   onPressed: () async {
                     if (provider.formKeys.currentState!.validate()) {
-                    await provider.loginFunction(provider.userNameController.text.trim(),provider.passWordController.text.trim(), context);
+                      if (usernameValidation(provider.userEmailController.text)) {
+                        getError("User Name Not filled", context);
+                      }else{
+                        lottieshowing(context);
+                    await provider.loginFunction(provider.userEmailController.text.trim(),provider.passWordController.text.trim(), context);
+                    Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const HomeScreen(),
+          ));
+                    setUserLogin(true);
+                     
+                      }
                     }
                   
                   },
-                  child: const Text(
-                    'Login',
-                    style:
-                        TextStyle(color: textwhite, fontWeight: FontWeight.bold),
-                  ),
                   style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10)),
                     backgroundColor: buttonColor,
+                  ),
+                  child: const Text(
+                    'Login',
+                    style:
+                        TextStyle(color: textwhite, fontWeight: FontWeight.bold),
                   ),
                 ),
               ),
@@ -88,13 +115,24 @@ class LoginPage extends StatelessWidget {
                         ));
                   },
                   child: const Text(
-                    "sighnin?",
+                    "Sign In?",
                     style: TextStyle(color: textwhite),
-                  ))
+                  )),
+
             ],
           ),
         ),
       ),
     );
+
   }
+
+Future setUserLogin(bool value)async{
+
+ SharedPreferences preferences=await SharedPreferences.getInstance();
+ preferences.setBool("userLogin", value);
+
+}
+   
+
 }

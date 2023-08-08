@@ -1,7 +1,12 @@
-import 'package:bookingapp/user/View/loginPages/otpPage.dart';
-import 'package:flutter/material.dart';
-import '../../../services/otpSignup.dart';
+import 'dart:convert';
+import 'dart:developer';
 
+import 'package:bookingapp/common/dialogues.dart';
+import 'package:bookingapp/user/View/loginPages/otpPage.dart';
+import 'package:bookingapp/user/services/user_Authentication/resend_otp.dart';
+import 'package:flutter/material.dart';
+import '../services/user_Authentication/otpSignup.dart';
+import 'package:http/http.dart' as http;
 
 class OtpPageProvider extends ChangeNotifier{
 
@@ -37,6 +42,28 @@ class OtpPageProvider extends ChangeNotifier{
             return false;
           }
   }
+
+
+ Future otpResend(BuildContext context)async{
+
+  final http.Response response;
+  try {
+    
+   response=await resendOtp(context, email.text);
+   final status=jsonDecode(response.body) as Map<String,dynamic>;
+  
+   if (status["status"]==true) {
+     getError("OTP Sended", context);
+   }else{
+    log("api function not ready");
+   }
+  } catch (e) {
+    log(e.toString());
+    getError(e.toString(), context);
+  }
+
+  
+ }
   
    
 
