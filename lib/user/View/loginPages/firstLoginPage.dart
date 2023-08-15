@@ -4,6 +4,7 @@ import 'package:bookingapp/common/dialogues.dart';
 import 'package:bookingapp/theatreOwner/view/loginPages/loginPage.dart';
 import 'package:bookingapp/user/View/homePage/home.dart';
 import 'package:bookingapp/user/View/loginPages/loginPage.dart';
+import 'package:bookingapp/user/controller/current_location/current_location.dart';
 import 'package:bookingapp/user/controller/fireBbse_Functions/firebase_function.dart';
 import 'package:bookingapp/user/controller/movie_pages_provider/home_page_providerr.dart';
 import 'package:flutter/material.dart';

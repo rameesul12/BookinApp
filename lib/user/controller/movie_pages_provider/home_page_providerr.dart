@@ -20,13 +20,22 @@ class MoviesProvider extends ChangeNotifier{
 
   List<MoviesData>moviesList=[];
   List<MoviesData>movie=[];
+  List<MoviesData>theatrePageList=[];
   List<GetFullMovieDetails>movieDetails=[];
   List<Cast>castList=[];
   List<Result>upcomingList=[];
+ int currentIndex=0;
+ Map<String,dynamic>? getMoviesData;
+
+
+  bottomValueChanging(int index){
+   currentIndex=index;
+    notifyListeners();
+  }
 
 
 //====================================
-// Home page Recomimeded movies getting
+//Home page Recomemeded movies getting
 //====================================
   Future homeGetMovies(BuildContext context) async{
     final http.Response response;
@@ -44,7 +53,7 @@ class MoviesProvider extends ChangeNotifier{
      languageChanging();
       notifyListeners();
 
-      log(movieDetails[0].backdropPath);
+     // log(movieDetails[0].backdropPath);
    
      // languageChanging();
       // log("movies Added");
@@ -55,8 +64,33 @@ class MoviesProvider extends ChangeNotifier{
       log(e.toString());
     }
   }
- 
+//**************************** */
 
+ //====================================
+// MovieDetails List id and FullMovieList comparing and taking those full data to another List
+//====================================
+
+ listTolistChanging(){
+ if (movieDetails.isNotEmpty) {
+  // log("yeah ok");
+    theatrePageList.clear();
+  for (var element in moviesList) {
+     if (element.title==movieDetails[0].title) {
+         
+       theatrePageList.add(element); 
+
+     notifyListeners();
+     }
+  }
+ }else{
+  log("MovieDetails is empty");
+ }
+
+ }
+
+
+
+//**************************** */
 //====================================
 //home page recommended movies listing
 //====================================
@@ -72,12 +106,14 @@ class MoviesProvider extends ChangeNotifier{
     }else{
 
     movie.add(moviesList[i]);
-    // log(moviesList[i].movieId.toString());    
+      
+     log(moviesList[i].id.toString());    
     }
   }
   notifyListeners();
   log(movie.toString());
  }
+ //**************************** */
 
  //====================================
 //languege changing
@@ -105,6 +141,8 @@ class MoviesProvider extends ChangeNotifier{
   notifyListeners();
 
  }
+//**************************** */
+
 
  //====================================
 // by clicking a movie from home or seemore page from there 
@@ -132,12 +170,16 @@ class MoviesProvider extends ChangeNotifier{
    GetFullMovieDetails details=GetFullMovieDetails.fromJson(statusdata);
   movieDetails.clear();
     movieDetails.addAll({details});
-    log('okey');
+    log("movieDetails");
+   // log("${movieDetails[0]}");
+    getMoviesData=statusdata;
+   
     notifyListeners();
-    
   // movieDetails=(statusdata as List).map((e) => GetFullMovieDetails.fromJson(e)).toList();  
-
+  log(getMoviesData.toString());
+   
   }
+  //**************************** */
 
 
  //====================================
@@ -176,6 +218,7 @@ log(castList.toString());
   // movieDetails=(statusdata as List).map((e) => GetFullMovieDetails.fromJson(e)).toList();  
 
   }
+  //**************************** */
 
 
 
@@ -209,6 +252,7 @@ try {
 
 
 }
+//**************************** */
 
 
 

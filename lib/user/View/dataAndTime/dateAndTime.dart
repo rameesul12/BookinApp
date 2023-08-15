@@ -1,8 +1,14 @@
+import 'dart:developer';
+
 import 'package:bookingapp/user/core/constant/constanwidgets.dart';
 import 'package:bookingapp/user/variables/colors.dart';
 import 'package:bookingapp/user/variables/sizedbox.dart';
+import 'package:date_picker_timeline/date_picker_widget.dart';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../../controller/theatre_showing/theatre_showing_controller.dart';
 
 class DateandTimepage extends StatelessWidget {
   const DateandTimepage({super.key, required this.filimTitile});
@@ -12,147 +18,181 @@ class DateandTimepage extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
 
     return Scaffold(
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          AppBarcontainer(
-            leadingPath: 'assets/images/left-arrow.png',
-            title: 'Starwars',
-          ),
-          Text(
-            'Today',
-            style: TextStyle(color: textwhite, fontSize: 30),
-          ),
-          Flexible(
-            child: SizedBox(
-              height: size.height * 0.16,
-              child: Row(
+      body: SingleChildScrollView(
+        child: SizedBox(
+          height: size.height,
+          width: size.width,
+          child: Consumer<TheatreShowingController>(
+            builder: (context,value,child) {
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  DateContainer(
-                    month: 'mar',
-                    date: '19',
-                    day: 'sun',
+                  AppBarcontainer(
+                    leadingPath: 'assets/images/left-arrow.png',
+                    title:filimTitile,
                   ),
-                  sizedW10,
-                  DateContainer(
-                    month: 'mar',
-                    date: '19',
-                    day: 'sun',
+                  const Text(
+                    'Today',
+                    style: TextStyle(color: textwhite, fontSize: 30),
                   ),
-                  sizedW10,
-                  DateContainer(
-                    month: 'mar',
-                    date: '19',
-                    day: 'sun',
+                  
+                  Consumer<TheatreShowingController>(
+                    builder: (context,datepicker,child) {
+                      return Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Container(
+                          width: size.width*0.6,
+                          height: size.height*0.13,
+                          decoration: BoxDecoration(
+                            color:textFieldBackground,
+                            borderRadius: BorderRadius.circular(10)
+                          ),
+                          child: DatePicker(
+                           DateTime.now(), // Start date
+                          initialSelectedDate:datepicker.selectedDate,
+                          selectionColor: Colors.blue,
+                          dayTextStyle:const TextStyle(color: textwhite),
+                          dateTextStyle: const TextStyle(color: textwhite),
+                          monthTextStyle: const TextStyle(color: textwhite),
+                          selectedTextColor: Colors.white,
+                          
+                          onDateChange: (date) {
+                            log(date.toString());
+                            datepicker.updateSelectedDate(date);
+                            
+                           
+                          },
+                          daysCount: 3, // Display 3 days
+                        ),
+                        ),
+                      );
+                    }
                   ),
-                  sizedW10,
-                  DateContainer(
-                    month: 'mar',
-                    date: '19',
-                    day: 'sun',
-                  ),
-                  sizedW10,
+                
+                //  sizedH20,
+                  
+            value.theatreList.isNotEmpty?      Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: SizedBox(
+                      height: size.height*0.6,
+                      child: ListView.separated(
+                        separatorBuilder: (context, index) => sizedH10,
+                        itemCount: value.theatreList.length,
+                        itemBuilder: (context, index) {
+                          return  TheatreWidget(size: size, place: value.theatreList[index].location, theatreName: value.theatreList[index].movieName, showTime: value.theatreList[index].showTime, );
+                        },
+                      ),
+                    )
+                    ):const Center(child: Text("Theatre Not available",style: TextStyle(color: textwhite),),)
+                    
+                      // : TheatreWidget(size: size, place: '', theatreName: '', showTime: '',)),
+                           
+                  
+                  //
+                  //        DateTimePicker(
+                  //   type: DateTimePickerType.dateTimeSeparate,
+                  //   dateMask: 'd MMM, yyyy',
+                  //   initialValue: DateTime.now().toString(),
+                  //   firstDate: DateTime(2000),
+                  //   lastDate: DateTime(2100),
+                  //   icon: Icon(Icons.event),
+                  //   dateLabelText: 'Date',
+                  //   timeLabelText: "Hour",
+                  //   fieldLabelText: '',style: TextStyle(color: textwhite),
+                  //   selectableDayPredicate: (date) {
+                  //     // Disable weekend days to select from the calendar
+                  //     if (date.weekday == 6 || date.weekday == 7) {
+                  //       return false;
+                  //     }
+                  
+                  //     return true;
+                  //   },
+                  //   onChanged: (val) => print(val),
+                  //   validator: (val) {
+                  //     print(val);
+                  //     return null;
+                  //   },
+                  //   onSaved: (val) => print(val),
+                  // )
+                  // DateTimePicker(
+                  //   firstDate: 20,
+                  // ),
                 ],
-              ),
-            ),
+              );
+            }
           ),
-          sizedH20,
+        ),
+      ),
+    );
+  }
+}
 
+class TheatreWidget extends StatelessWidget {
+   TheatreWidget({
+    super.key,
+    required this.size, required this.theatreName, required this.place, required this.showTime
+  });
+
+  final Size size;
+  final String theatreName;
+  final String place;
+  final String showTime;
+  
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: size.width * 0.85,
+      height: size.height * 0.2,
+      decoration:const BoxDecoration(color: textFieldBackground),
+      child: 
+         
           Padding(
-            padding: const EdgeInsets.all(10),
-            child: Center(
-              child: Container(
-                width: size.width * 0.85,
-                height: size.height * 0.2,
-                decoration: BoxDecoration(color: textFieldBackground),
-                child: Row(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: Column(
+               mainAxisAlignment: MainAxisAlignment.spaceAround,
+               crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                sizedH10,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    sizedW20,
-                    Column(
-                      // mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        sizedH10,
-                        Text(
-                          'Magic frame Anuragha',
-                          maxLines: 1,
-                          style: TextStyle(color: textwhite, fontSize: 18),
-                        ),
-                        Text(
-                          'cinema Tirur',
-                          maxLines: 1,
-                          style: TextStyle(color: textwhite, fontSize: 15),
-                        ),
-                        Text(
-                          'cansellation available',
-                          style: TextStyle(color: colorTextwhite),
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Container(
-                              height: size.height * 0.05,
-                              width: size.width * 0.2,
-                              decoration: BoxDecoration(
-                                  border: Border.all(color: Colors.blue)),
-                                  child: Center(child: Text('11:15',style: TextStyle(color: textwhite))),
-                            ),
-                           sizedW10,
-                            Container(
-                              height: size.height * 0.05,
-                              width: size.width * 0.2,
-                              decoration: BoxDecoration(
-                                  border: Border.all(color: Colors.blue)),
-                                    child: Center(child: Text('03:15',style: TextStyle(color: textwhite))),
-                            ),
-                            sizedW10,
-                            Container(
-                              height: size.height * 0.05,
-                              width: size.width * 0.2,
-                              decoration: BoxDecoration(
-                                  border: Border.all(color: Colors.blue)),
-                                    child: Center(child: Text('6:15',style: TextStyle(color: textwhite))),
-                            ),
-                          ],
-                        )
-                      ],
+                    
+                    SizedBox(
+                      width: size.width*0.7,
+                      child: Text(
+                        theatreName,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(color: textwhite, fontSize: 23),
+                      ),
                     ),
                   ],
                 ),
-              ),
+                SizedBox(
+                  width: size.width*0.4,
+                  child: Text(
+                    place,
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 2,
+                    style: TextStyle(color: textwhite, fontSize: 15),
+                  ),
+                ),
+                Text(
+                  'cansellation available',
+                  style: TextStyle(color: colorTextwhite),
+                ),
+                Container(
+                      height: size.height * 0.05,
+                      width: size.width * 0.2,
+                      decoration: BoxDecoration(
+                          border: Border.all(color: Colors.blue)),
+                          child: Center(child: Text(showTime,style: TextStyle(color: textwhite))),
+                    ),
+              ],
             ),
-          )
-
-          //
-          //        DateTimePicker(
-          //   type: DateTimePickerType.dateTimeSeparate,
-          //   dateMask: 'd MMM, yyyy',
-          //   initialValue: DateTime.now().toString(),
-          //   firstDate: DateTime(2000),
-          //   lastDate: DateTime(2100),
-          //   icon: Icon(Icons.event),
-          //   dateLabelText: 'Date',
-          //   timeLabelText: "Hour",
-          //   fieldLabelText: '',style: TextStyle(color: textwhite),
-          //   selectableDayPredicate: (date) {
-          //     // Disable weekend days to select from the calendar
-          //     if (date.weekday == 6 || date.weekday == 7) {
-          //       return false;
-          //     }
-
-          //     return true;
-          //   },
-          //   onChanged: (val) => print(val),
-          //   validator: (val) {
-          //     print(val);
-          //     return null;
-          //   },
-          //   onSaved: (val) => print(val),
-          // )
-          // DateTimePicker(
-          //   firstDate: 20,
-          // ),
-        ],
-      ),
+          ),
+       
     );
   }
 }

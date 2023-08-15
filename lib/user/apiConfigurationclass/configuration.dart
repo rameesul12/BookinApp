@@ -16,6 +16,8 @@ static String resertPassword="reset-password";
 static const movieApiKey='09d3fc1dfeba6863e19f1e7c677025d0';
 static const upcomingMovies='/movie/upcoming';
 static const getSearch='get-search/';
+static const theatreLocation='get-theatreShows';
+static const getTheatres='get-dates';
 
 
 

@@ -41,7 +41,7 @@ class Details {
     String? image;
     DateTime? createdAt;
     DateTime? updatedAt;
-    int v;
+    int? v;
     String? name;
     int? phone;
     String? email;

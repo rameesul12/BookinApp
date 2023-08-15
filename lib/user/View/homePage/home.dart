@@ -1,6 +1,9 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'dart:developer';
+
 import 'package:bookingapp/common/dialogues.dart';
+import 'package:bookingapp/theatreOwner/view/homePage/dashboard.dart';
 import 'package:bookingapp/user/View/search_screen/search_screen.dart';
 import 'package:bookingapp/user/View/settings/settings.dart';
 import 'package:bookingapp/user/controller/movie_pages_provider/home_page_providerr.dart';
@@ -10,6 +13,7 @@ import 'package:bookingapp/user/variables/colors.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../controller/current_location/current_location.dart';
 import '../../controller/fireBbse_Functions/firebase_function.dart';
 import '../../core/couponContainer/coupenCard.dart';
 import '../../variables/sizedbox.dart';
@@ -21,30 +25,48 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    int currentIndex=0;
     final provider =
         Provider.of<FireBaseFunctionProvider>(context, listen: false);
     final Size size = MediaQuery.of(context).size;
 
     return  Scaffold(
         backgroundColor: backgroundColor,
-        appBar: AppBar(
-          backgroundColor:backgroundColor,
-          title:const Center(child: Text('malappuram',style:TextStyle(color: Colors.white70,fontWeight: FontWeight.bold,fontSize: 20),)),
-          actions: [
-            InkWell(
-              onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) =>const SearchScreen(),));
-              },
-              child: SizedBox(
-                height:30 ,
-                width: size.width*0.2,
-                child: Image.asset('assets/images/loupe.png')),
-            ),
-          ],
-        ),
+      
         body: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
+            Consumer<CurrentLocation>(
+              builder: (context,locationData,child) {
+                return SizedBox(
+                  height: size.height*0.1,
+                  width: size.width,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                 //   crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      sizedW10,
+                      Image.asset('assets/images/placeholder.png',height: size.height*0.04,
+                      width: size.width*0.04,
+                      ),
+                      Text(locationData.currentAddress,style:const TextStyle(color: Colors.white70,fontWeight: FontWeight.bold,fontSize: 20),),
+                      SizedBox(
+                        width: size.width*0.3,
+                      ),
+                      InkWell(
+                  onTap: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) =>const SearchScreen(),));
+                  },
+                  child: SizedBox(
+                    height:30 ,
+                    width: size.width*0.2,
+                    child: Image.asset('assets/images/loupe.png')),
+                ),
+                    ],
+                  ),
+                );
+              }
+            ),
            
             StreamBuilder<QuerySnapshot>(
                 stream: FirebaseFirestore.instance
@@ -64,11 +86,12 @@ class HomeScreen extends StatelessWidget {
                     provider.valueDisplaying(snapshot);
                     return Consumer<FireBaseFunctionProvider>(
                         builder: (context, bannerData, child) {
-                      return Expanded(
+                      return SizedBox(
+                        height: size.height*0.25,
                         child: ListView.separated(
                             scrollDirection: Axis.horizontal,
                             itemCount: bannerData.bannerList.length,
-                            separatorBuilder: (context, index) => sizedH10,
+                            separatorBuilder: (context, index) => Divider(color: colorTextwhite),
                             itemBuilder: (context, index) {
                               return Stack(
                                 children: [
@@ -79,41 +102,49 @@ class HomeScreen extends StatelessWidget {
                                       width: MediaQuery.of(context).size.width,
                                       margin: const EdgeInsets.symmetric(
                                           horizontal: 5.0),
-                                      decoration: const BoxDecoration(
+                                      decoration:  BoxDecoration(
+                                       // borderRadius: BorderRadiusDirectional.circular(20),
                                           color: backgroundColor),
                                       //   child: Text('text ', style: TextStyle(fontSize: 16.0),)
-                                      child: Image.network(
-                                        "${bannerData.bannerList[index].imagePath}",
-                                        fit: BoxFit.fill,
-                                        loadingBuilder:
-                                            (context, child, loadingProgress) {
-                                          if (loadingProgress == null) {
-                                            return child;
-                                          } else {
-                                            return const Center(
-                                                child: CircularProgressIndicator());
-                                          }
-                                        },
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(10),
+                                        child: Image.network(
+                                          "${bannerData.bannerList[index].imagePath}",
+                                          fit: BoxFit.fill,
+                                          loadingBuilder:
+                                              (context, child, loadingProgress) {
+                                            if (loadingProgress == null) {
+                                              return child;
+                                            } else {
+                                              return const Center(
+                                                  child: CircularProgressIndicator());
+                                            }
+                                          },
+                                        ),
                                       ),
                                     ),
                                   ),
                                   Positioned(
                                     bottom: 0,
+                                    left: 140,
                                     //top: ,
                                     child: SizedBox(
-                                      child: TextScroll(
-                                        bannerData
-                                            .bannerList[index].movieDescription
-                                            .toString(),
-                                            
-                                        style: const TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            color: textwhite),
-                                            
-                                            textAlign: TextAlign.center,
-                                            textDirection: TextDirection.ltr,
-                                             mode: TextScrollMode.endless,
-                                             
+                                      child: Center(
+                                        child: TextScroll(
+                                          bannerData
+                                              .bannerList[index].moviName
+                                              .toString(),
+                                              
+                                          style: const TextStyle(
+                                            fontSize: 19,
+                                              fontWeight: FontWeight.bold,
+                                              color: textwhite),
+                                              
+                                              textAlign: TextAlign.center,
+                                              textDirection: TextDirection.ltr,
+                                               mode: TextScrollMode.endless,
+                                               
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -180,6 +211,7 @@ class HomeScreen extends StatelessWidget {
                               lottieshowing(context);
                               await movies.movieCastAndCrew(index, context);
                               await movies.moviesData(index, context);
+                               movies.listTolistChanging();
                               Navigator.pop(context);
                               Navigator.push(
                                   context,
@@ -215,35 +247,54 @@ class HomeScreen extends StatelessWidget {
                    itemCount: 3,
                    separatorBuilder: (context, index) => sizedW20,
                    itemBuilder: (context, index) {
-                     return CouponCard(imagepath:upcomingMovie.upcomingList[index].backdropPath,texttitle: upcomingMovie.upcomingList[index].title, releasingDate: upcomingMovie.upcomingList[index].releaseDate.toString().substring(0,10),);
+                     return CouponCard(imagepath:upcomingMovie.upcomingList[index].posterPath,overview: upcomingMovie.upcomingList[index].overview, releasingDate: upcomingMovie.upcomingList[index].releaseDate.toString().substring(0,10),);
 
                    },
                   ),
                 );
               }
             ),
-            Container(
-              height: 50,
-              width: MediaQuery.of(context).size.width,
-              color: backgroundColor,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  IconButton(onPressed: () {}, icon: const Icon(Icons.home)),
-                  IconButton(onPressed: () {}, icon: const Icon(Icons.topic)),
-                  IconButton(
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const SettingPage(),
-                            ));
-                      },
-                      icon: const Icon(Icons.person)),
-                ],
-              ),
-            )
+         
           ],
+        ),
+        bottomNavigationBar: Consumer<MoviesProvider>(
+          builder: (context,indexChanger,child) {
+            return BottomNavigationBar(
+              
+                 type: BottomNavigationBarType.fixed,
+              backgroundColor: backgroundColor,
+               selectedItemColor: Colors.blue,
+               unselectedItemColor: Colors.white70,
+              // currentIndex:indexChanger.currentIndex,
+
+              
+               
+              items:const [
+                
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.home,color: textwhite,),
+                 label:"Home"
+                ),
+                BottomNavigationBarItem(
+                  backgroundColor: colorTextwhite,
+                  icon: Icon(Icons.settings,color: textwhite,),
+                 label:"Settings"
+                )
+
+              ],
+              onTap: (index) {
+                log(index.toString());
+              //  indexChanger.bottomValueChanging(currentIndex);
+             indexChanger.bottomValueChanging(index);
+             
+                if (index==0) {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) =>const HomeScreen(),));
+                }else{
+                  Navigator.push(context, MaterialPageRoute(builder: (context) =>const SettingPage(),));
+                }
+              },
+               );
+          }
         ),
       );
   }
@@ -270,7 +321,7 @@ class MainCard extends StatelessWidget {
           SizedBox(
             child: Container(
               height: 150,
-              width: 140,
+              width: size.width*0.6,
               clipBehavior: Clip.hardEdge,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
@@ -297,14 +348,16 @@ class MainCard extends StatelessWidget {
               // child: Text('me'),
             ),
           ),
+          sizedH10,
           SizedBox(
-              width: size.width * 0.36,
+              width: size.width * 0.5,
               child: Text(
                 filimTitle,
                 overflow: TextOverflow.ellipsis,
                 style: const TextStyle(
                     color: textwhite, fontWeight: FontWeight.w800),
-              )),
+              )
+              ),
         ],
       ),
     );

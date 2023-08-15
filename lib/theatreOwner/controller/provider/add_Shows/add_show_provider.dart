@@ -188,19 +188,22 @@ final baseUrl=ApiConfiguration.getShow;
 
 final https.Response response;
 try {
-  response =await APiCallPage.apiGet(url: baseUrl, id: ownerId, context: context);
+  response =await APiCallPage.apiGet(url:baseUrl, id: ownerId, context: context);
  
  dynamic status=jsonDecode(response.body);
- 
+// log("response of show details${response.body}");
+shows.clear();
  if (status["success"]==true) {
 
- // ShowAdding showAdding=ShowAdding.fromJson(status);
-  // for (var element in showAdding.data) {
-  //   shows.add(element);
-  //   notifyListeners();
-  // }
-    shows=(status["data"] as List).map((element) =>ShowDetails.fromJson(element)).toList();
+ ShowAdding showAdding=ShowAdding.fromJson(status);
+  for (var element in showAdding.data) {
+    shows.add(element);
+   // notifyListeners();
+  }
  notifyListeners();
+  log(shows.toString());
+  //  shows=(status["data"] as List).map((element) =>ShowDetails.fromJson(element)).toList();
+  //  log(shows.toString());
    getError("success", context);
    log('is that rocky Kgf$shows');
    
@@ -304,8 +307,8 @@ final currentOwner= Provider.of<AddScreenProvider>(context,listen: false).curren
 
  values(int index){
 
-  movieNameController.text=shows[index].movieName;
-  showTimeController.text=shows[index].showTime;
+  movieNameController.text=shows[index].movieName!;
+  showTimeController.text=shows[index].showTime!;
   startDateController.text=shows[index].startDate.toString();
   endDateController.text=shows[index].endDate.toString();
  ticketPriceController.text=shows[index].price.toString();

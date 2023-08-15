@@ -1,46 +1,125 @@
 // To parse this JSON data, do
 //
-//     final showAdding = showAddingFromJson(jsonString);
+//     final searchShowDisplaying = searchShowDisplayingFromJson(jsonString);
 
 import 'dart:convert';
-import 'dart:developer';
 
-ShowAdding showAddingFromJson(String str) => ShowAdding.fromJson(json.decode(str));
+SearchShowDisplaying searchShowDisplayingFromJson(String str) => SearchShowDisplaying.fromJson(json.decode(str));
 
-String showAddingToJson(ShowAdding data) => json.encode(data.toJson());
+String searchShowDisplayingToJson(SearchShowDisplaying data) => json.encode(data.toJson());
 
-class ShowAdding {
+class SearchShowDisplaying {
     bool success;
-    String? message;
-    List<ShowDetails> data;
+    String message;
+    Data data;
 
-    ShowAdding({
+    SearchShowDisplaying({
         required this.success,
         required this.message,
         required this.data,
     });
 
-    factory ShowAdding.fromJson(Map<String, dynamic> json) => ShowAdding(
+    factory SearchShowDisplaying.fromJson(Map<String, dynamic> json) => SearchShowDisplaying(
         success: json["success"],
-        message: json["message"]??"okey",
-        data: List<ShowDetails>.from(json["data"].map((x) => ShowDetails.fromJson(x))),
+        message: json["message"],
+        data: Data.fromJson(json["data"]),
     );
 
     Map<String, dynamic> toJson() => {
         "success": success,
         "message": message,
-        "data": List<dynamic>.from(data.map((x) => x.toJson())),
+        "data": data.toJson(),
     };
 }
 
-class ShowDetails {
+class Data {
+    Owner? owner;
+    List<Show> shows;
+
+    Data({
+        required this.owner,
+        required this.shows,
+    });
+
+    factory Data.fromJson(Map<String, dynamic> json) => Data(
+        owner: Owner.fromJson(json["owner"]),
+        shows: List<Show>.from(json["shows"].map((x) => Show.fromJson(x))),
+    );
+
+    Map<String, dynamic> toJson() => {
+        "owner": owner?.toJson(),
+        "shows": List<dynamic>.from(shows.map((x) => x.toJson())),
+    };
+}
+
+class Owner {
     String? id;
-    String? screenId;
-    String? ownerId;
-    String? ownerName;
+    String? name;
+    int? phone;
+    String? email;
+    String? licence;
+    int? adhaar;
     String? location;
-    String? movieName;
-    String? showTime;
+    int? wallet;
+    String? images;
+    String? status;
+    bool? block;
+    int? v;
+
+    Owner({
+        required this.id,
+        required this.name,
+        required this.phone,
+        required this.email,
+        required this.licence,
+        required this.adhaar,
+        required this.location,
+        required this.wallet,
+        required this.images,
+        required this.status,
+        required this.block,
+        required this.v,
+    });
+
+    factory Owner.fromJson(Map<String, dynamic> json) => Owner(
+        id: json["_id"],
+        name: json["Name"],
+        phone: json["Phone"],
+        email: json["Email"],
+        licence: json["Licence"],
+        adhaar: json["Adhaar"],
+        location: json["Location"],
+        wallet: json["wallet"],
+        images: json["images"],
+        status: json["status"],
+        block: json["block"],
+        v: json["__v"],
+    );
+
+    Map<String, dynamic> toJson() => {
+        "_id": id,
+        "Name": name,
+        "Phone": phone,
+        "Email": email,
+        "Licence": licence,
+        "Adhaar": adhaar,
+        "Location": location,
+        "wallet": wallet,
+        "images": images,
+        "status": status,
+        "block": block,
+        "__v": v,
+    };
+}
+
+class Show {
+    String id;
+    String screenId;
+    String ownerId;
+    String ownerName;
+    String location;
+    String movieName;
+    String showTime;
     DateTime startDate;
     DateTime endDate;
     int price;
@@ -50,7 +129,7 @@ class ShowDetails {
     DateTime updatedAt;
     int v;
 
-    ShowDetails({
+    Show({
         required this.id,
         required this.screenId,
         required this.ownerId,
@@ -68,10 +147,7 @@ class ShowDetails {
         required this.v,
     });
 
-    factory ShowDetails.fromJson(Map<String, dynamic> json) { 
-    dynamic variable  = json["dates"] as List<dynamic>;
-    log(variable.toString());
-      return ShowDetails(
+    factory Show.fromJson(Map<String, dynamic> json) => Show(
         id: json["_id"],
         screenId: json["screenId"],
         ownerId: json["ownerId"],
@@ -83,11 +159,11 @@ class ShowDetails {
         endDate: DateTime.parse(json["endDate"]),
         price: json["price"],
         screen: json["screen"],
-        dates: List<Date>.from(variable.map((x) => Date.fromJson(x))),
+        dates: List<Date>.from(json["dates"].map((x) => Date.fromJson(x))),
         createdAt: DateTime.parse(json["createdAt"]),
         updatedAt: DateTime.parse(json["updatedAt"]),
         v: json["__v"],
-    );}
+    );
 
     Map<String, dynamic> toJson() => {
         "_id": id,
@@ -110,21 +186,21 @@ class ShowDetails {
 
 class Date {
     DateTime date;
-    List<Seat> seats;
+    List<Seat>? seats;
 
     Date({
         required this.date,
-        required this.seats,
+        this.seats,
     });
 
     factory Date.fromJson(Map<String, dynamic> json) => Date(
         date: DateTime.parse(json["date"]),
-        seats: List<Seat>.from(json["seats"].map((x) => Seat.fromJson(x))),
+        seats: json["seats"] == null ? [] : List<Seat>.from(json["seats"]!.map((x) => Seat.fromJson(x))),
     );
 
     Map<String, dynamic> toJson() => {
         "date": date.toIso8601String(),
-        "seats": List<dynamic>.from(seats.map((x) => x.toJson())),
+        "seats": seats == null ? [] : List<dynamic>.from(seats!.map((x) => x.toJson())),
     };
 }
 

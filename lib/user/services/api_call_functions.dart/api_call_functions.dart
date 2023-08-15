@@ -1,5 +1,7 @@
 
 
+import 'dart:developer';
+
 import 'package:bookingapp/user/apiConfigurationclass/configuration.dart';
 import 'package:http/http.dart'as http;
 
@@ -24,6 +26,7 @@ class ApiFunctions{
    static apiGetFunctionWithId(String uri,String id,String token) async{
 
     final http.Response response;
+    log(uri);
      final String baseUrl=ApiConfiguration.baseUrl+uri;
 
 

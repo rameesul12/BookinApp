@@ -1,4 +1,5 @@
 
+import 'package:bookingapp/user/View/settings/edit_profile.dart';
 import 'package:bookingapp/user/variables/colors.dart';
 import 'package:bookingapp/user/variables/sizedbox.dart';
 import 'package:flutter/material.dart';
@@ -8,138 +9,125 @@ class SettingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Size size=MediaQuery.of(context).size;
-    bool isValue = false;
+    final Size size=MediaQuery.of(context).size;
+   
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: backgroundColor,
-         leading: IconButton(onPressed: (){
-          Navigator.pop(context);
-         }, icon: Icon(Icons.arrow_back,color: textwhite,)),
-         title: Text('Settings',style:TextStyle(color: textwhite,fontWeight: FontWeight.bold),),
+      
           
-      ),
+      
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10),
-        child: Column(
-          children: [
+        padding:const  EdgeInsets.symmetric(horizontal: 10),
+        child: SafeArea(
+          child: Column(
+            children: [
+              //    sizedH10,
+              Row(
+                children: [
+                  IconButton(onPressed: (){
+                    Navigator.pop(context);
+                  }, icon:const Icon(Icons.arrow_back_ios,color: textwhite,)),
+                 sizedW30,
+               const   Text("Settings",style: TextStyle(color: textwhite,fontWeight: FontWeight.bold),)
+                ],
+
+              ),
+              sizedH10,
+         Padding(
+           padding: const EdgeInsets.all(8.0),
+           child: Align(
+             alignment: Alignment.centerLeft,
+            child: const   Text("Accounts",style: TextStyle(color:colorTextwhite),)),
+         ),
+         Padding(
+           padding: const EdgeInsets.all(8.0),
+           child: Container(
+             height: size.height*0.28,
+            decoration: BoxDecoration(
+               color: textFieldBackground,
+               borderRadius: BorderRadius.circular(15)
+            ),
+            child: Column(
+              children: [
+                InkWell(
+                   onTap: () {
+                     Navigator.push(context,MaterialPageRoute(builder: (context) =>const EditProfail(),));
+                   },
+                  child: ListTileValue(icons: Icons.person_2_outlined, title: "Edit Profail")),
+              ListTileValue(icons: Icons.security, title: "Security"),
+                ListTileValue(icons: Icons.privacy_tip_outlined, title: "privacy"),
+         
+              
+              ],
+            )),
+         ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Align(
+                       alignment: Alignment.centerLeft,
+                      child: const   Text("Support And About",style: TextStyle(color:colorTextwhite),)),
+            ),
+         Padding(
+           padding: const EdgeInsets.all(8.0),
+           child: Container(
+             height: size.height*0.19,
+              decoration: BoxDecoration(
+                 color: textFieldBackground,
+                 borderRadius: BorderRadius.circular(15)
+              ),
+            child: Column(
+              children: [
+                ListTileValue(icons: Icons.person_2_outlined, title: "Help And Support"),
+              ListTileValue(icons: Icons.security, title: "Terms And Support"),
+           ],
+            )),
+         ),
           sizedH10,
-            CircleAvatar(
-              radius: 70,
-              backgroundImage: AssetImage('assets/images/profile.webp'),
-            ),
-            sizedH60,
-            Container(
-              height: 60,
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: const  Align(
+             alignment: Alignment.centerLeft,
+            child: Text("Actions",style: TextStyle(color:colorTextwhite),)),
+          ),
+         Padding(
+           padding: const EdgeInsets.all(8.0),
+           child: Container(
+             height: size.height*0.095,
               decoration: BoxDecoration(
-                border: Border.all(color: textwhite),
-                borderRadius: BorderRadius.circular(20),
-                color: colorTextwhite.withOpacity(0.3),
+                 color: textFieldBackground,
+                 borderRadius: BorderRadius.circular(15)
               ),
-              child: ListTile(
-                title: const Text(
-                  'Light Mode',
-                 style: TextStyle(color: textwhite,fontWeight: FontWeight.bold),
-
-                ),
-                trailing: SizedBox(
-                  width: 25,
-                  height: 30,
-                  child: Switch(
-                    value: isValue,
-                    onChanged: (value) {},
-                  ),
-                ),
-              ),
-            ),
-            sizedH10,
-            Container(
-              decoration: BoxDecoration(
-                border: Border.all(color: textwhite),
-                borderRadius: BorderRadius.circular(20),
-                color: colorTextwhite.withOpacity(0.3),
-              ),
-              child: ExpansionTile(
-                title: Text(
-                  'help &support',
-                     style: TextStyle(color: textwhite,fontWeight: FontWeight.bold),
-
-                ),
-                children: [
-                  Text(
-                    'nothing mach',
-                    style: TextStyle(color: textwhite),
-                  )
-                ],
-              ),
-            ),
-            sizedH10,
-            Container(
-              decoration: BoxDecoration(
-                border: Border.all(color: textwhite),
-                borderRadius: BorderRadius.circular(20),
-                color: colorTextwhite.withOpacity(0.3),
-              ),
-              child: ExpansionTile(
-                title: Text(
-                  'help &support',
-                  style: TextStyle(color: textwhite,fontWeight: FontWeight.bold),
-
-                ),
-                children: [
-                  Text(
-                    'nothing mach',
-                    style: TextStyle(color: textwhite),
-                  )
-                ],
-              ),
-            ),
-            sizedH10,
-            Container(
-              decoration: BoxDecoration(
-                border: Border.all(color: textwhite),
-                borderRadius: BorderRadius.circular(20),
-                color: colorTextwhite.withOpacity(0.3),
-              ),
-              child: ExpansionTile(
-                title: Text(
-                  'Privacy & Policy',
-                  style: TextStyle(color: textwhite,fontWeight: FontWeight.bold),
-                ),
-                children: [
-                  Text(
-                    'nothing much',
-                    style: TextStyle(color: textwhite),
-                  )
-                ],
-              ),
-            ),
-            sizedH10,
-            Container(
-              height: 60,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                color: colorTextwhite.withOpacity(0.3),
-                border: Border.all(color: textwhite),
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: Row(
-               // mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  sizedW20,
-                  Text('Logout',style: TextStyle(color: textwhite,fontWeight: FontWeight.bold),),
-                 SizedBox(width: size.width*0.56,),
-                 SizedBox(
-                  height: 35,
-                  width: 60,
-                  child: IconButton(onPressed: (){},icon:Icon( Icons.logout,color: textwhite,))
-                 )
-
-                ],
-              ),
-            )
-          ],
+            child: Column(
+              children: [
+                ListTileValue(icons: Icons.login, title: "Log out"),
+              
+             
+              
+              ],
+            )),
+         ),
+            
+            ],
+          ),
         ),
+      ),
+    );
+  }
+}
+
+class ListTileValue extends StatelessWidget {
+   ListTileValue({
+    super.key, required this.icons,
+    required this.title
+  });
+final IconData icons;
+String title;
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: ListTile(
+        leading: Icon(icons,color:textwhite ,),
+        title: Text(title,style:const TextStyle(color: textwhite),),
       ),
     );
   }

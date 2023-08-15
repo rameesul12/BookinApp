@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:developer';
 
 import 'package:bookingapp/user/Model/banner_Model/banner_model_class.dart';
@@ -21,8 +22,8 @@ class FireBaseFunctionProvider extends ChangeNotifier {
 
       bannerList.add(banner);
       log("ramees${bannerList[0].imagePath}");
-    }
     notifyListeners();
+    }
   }
 
   // Uncomment this method if you intend to use it
@@ -34,3 +35,8 @@ class FireBaseFunctionProvider extends ChangeNotifier {
   //   }
   // }
 }
+
+
+
+
+

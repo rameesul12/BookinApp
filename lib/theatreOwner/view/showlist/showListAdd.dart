@@ -259,7 +259,7 @@ int? index;
                       if ( _formkey.currentState!.validate()) {
                         if (editShow==false) {
  // log("ok");v         
- log('editSHow NOT working');
+             log('editSHow NOT working');
                        lottieshowing(context);
                      await  provider.addShowApi(context);
                      await provider.showGetting(context);
@@ -313,9 +313,11 @@ int? index;
 
 
 
-Future<DateTime?>selectedDate(BuildContext context,) async{
+Future<DateTime?>selectedDate(BuildContext context) async{
 
 final initalDate=DateTime.now();
+final day1=initalDate.add(const Duration(days:2));
+log("okey ramees$day1");
 final FirstDate=initalDate.subtract(const Duration(days: 365 * 100));
 final lastDate=FirstDate.add(const Duration(days: 365 * 200));
 
@@ -325,12 +327,13 @@ final lastDate=FirstDate.add(const Duration(days: 365 * 200));
 
 
 }
-Future<TimeOfDay?> showTimepicker(BuildContext context) async{
+ Future<TimeOfDay?> showTimepicker(BuildContext context) async{
+
   final initialTime=TimeOfDay.fromDateTime(DateTime.now());
 
   final time=await showTimePicker(context: context, initialTime: initialTime);
 
   return time;
 
-}
+  }
 }

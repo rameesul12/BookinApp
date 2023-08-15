@@ -4,12 +4,14 @@ import 'package:bookingapp/theatreOwner/controller/provider/add_Shows/add_show_p
 import 'package:bookingapp/theatreOwner/controller/provider/booking_Status/booking_status.dart';
 import 'package:bookingapp/theatreOwner/controller/provider/owner_Login/owner_login_page.dart';
 import 'package:bookingapp/theatreOwner/controller/provider/owner_Login/owner_otp_page.dart';
+import 'package:bookingapp/user/controller/current_location/current_location.dart';
 import 'package:bookingapp/user/controller/fireBbse_Functions/firebase_function.dart';
 import 'package:bookingapp/user/controller/movie_pages_provider/home_page_providerr.dart';
 import 'package:bookingapp/user/controller/otp_pageprovider.dart';
 import 'package:bookingapp/user/controller/loginPageprovider.dart';
 import 'package:bookingapp/user/controller/login_And_Signpages/signup_and_otp.dart';
 import 'package:bookingapp/user/controller/search_screen_provider/search_screen.dart';
+import 'package:bookingapp/user/controller/theatre_showing/theatre_showing_controller.dart';
 import 'package:bookingapp/user/dialogues/forget_password_dialogu.dart';
 import 'package:bookingapp/user/firebase_options.dart';
 import 'package:bookingapp/user/variables/colors.dart';
@@ -47,8 +49,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => AddShowProvider(),),
         ChangeNotifierProvider(create: (context) => MoviesProvider(),),
         ChangeNotifierProvider(create: (context) => FireBaseFunctionProvider(),),
-        ChangeNotifierProvider(create: (context) => SearchScreenProvider(),)
-        
+        ChangeNotifierProvider(create: (context) => SearchScreenProvider(),),
+        ChangeNotifierProvider(create: (context) => CurrentLocation(),),
+        ChangeNotifierProvider(create: (context) => TheatreShowingController(),),
 
       ],
       child: MaterialApp(
@@ -56,6 +59,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
          scaffoldBackgroundColor:backgroundColor,
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          fontFamily:"NotoSans",
         //  textTheme:  GoogleFonts.latoTextTheme(),
           useMaterial3: true,
           

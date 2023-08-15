@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:bookingapp/common/dialogues.dart';
 import 'package:bookingapp/user/View/moviesInfo/selectedMovies.dart';
 import 'package:bookingapp/user/controller/movie_pages_provider/home_page_providerr.dart';
@@ -25,13 +27,14 @@ class LatestMovies extends StatelessWidget {
           return ListView.separated(
 
             itemBuilder:(context, index) =>  InkWell(
-              onTap: () {
+              onTap: () async{
                 lottieshowing(context);
-                data.moviesData(index, context);
+              await  data.moviesData(index, context);
+              
                 Navigator.pop(context);
                 Navigator.push(context,MaterialPageRoute(builder: (context) => const MoviesInfo(),));
               },
-              child: ListViewPage(movieName:data.moviesList[index].title, imagepath: 'https://www.themoviedb.org/t/p/w300_and_h450_bestv2${data.moviesList[index].image}', language: data.moviesList[index].language, releaseDate: data.moviesList[index].releaseDate.toString().substring(0,10),)) , 
+              child:data.moviesList.isEmpty?const Center(child: CircularProgressIndicator(),): ListViewPage(movieName:data.moviesList[index].title, imagepath: 'https://www.themoviedb.org/t/p/w300_and_h450_bestv2${data.moviesList[index].image}', language: data.moviesList[index].language, releaseDate: data.moviesList[index].releaseDate.toString().substring(0,10),)) , 
 
            separatorBuilder: (context, index) => sizedH10,
             itemCount: data.moviesList.length);
@@ -52,58 +55,63 @@ final String language;
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Container(
-          height:140 ,
-          width: 100,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadiusDirectional.circular(10),
-           
-          ),
-          child: Image.network(imagepath,fit: BoxFit.cover,
-          loadingBuilder: (context, child, loadingProgress) {
-            if (loadingProgress==null) {
-              return child;
-            }else{
-              return Center(child: CircularProgressIndicator(
-                 value: loadingProgress.expectedTotalBytes != null
-                            ? loadingProgress.cumulativeBytesLoaded /
-                                loadingProgress.expectedTotalBytes!
-                            : null,
-              ));
-            }
-
-          },
-          ),
-        ),
-        SizedBox(width: 20,),
-        Expanded(
-          child: Column(
-           // mainAxisAlignment: MainAxisAlignment.start,
-           crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(movieName,style:const TextStyle(color: Colors.white,fontWeight: FontWeight.bold ,fontSize: 16),),
-              sizedH20,
-              Text('$releaseDate',style:const TextStyle(color: colorTextwhite,fontSize: 11),),
-             //  sizedH10,
-              Text(language,style:const TextStyle(color: colorTextwhite,fontSize: 14,fontWeight: FontWeight.bold)),
-             sizedH10,
-             SizedBox(
-                height: 35,
-                width: MediaQuery.of(context).size.width* 0.29,
-                child: ElevatedButton(onPressed: (){},style: ElevatedButton.styleFrom(
-                  backgroundColor: buttonColor,
-                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(3)
-                 )
-                ), child:const Text('Booking',style: TextStyle(color: textwhite),),),
-              )
-            ],
-          ),
-        )
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Row(
+        children: [
+          Container(
+            height:140 ,
+            width: 100,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadiusDirectional.circular(10),
+             
+            ),
+            child: Image.network(imagepath,fit: BoxFit.cover,
+            loadingBuilder: (context, child, loadingProgress) {
+              if (loadingProgress==null) {
+                return child;
+              }else{
+                return Center(child: CircularProgressIndicator(
+                   value: loadingProgress.expectedTotalBytes != null
+                              ? loadingProgress.cumulativeBytesLoaded /
+                                  loadingProgress.expectedTotalBytes!
+                              : null,
+                ));
+              }
     
-      ],
+            },
+            ),
+          ),
+        const  SizedBox(width: 20,),
+          Expanded(
+            child: Column(
+             // mainAxisAlignment: MainAxisAlignment.start,
+             crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(movieName,style:const TextStyle(color: Colors.white,fontWeight: FontWeight.bold ,fontSize: 16),),
+                sizedH20,
+                Text('$releaseDate',style:const TextStyle(color: colorTextwhite,fontSize: 11),),
+               //  sizedH10,
+                Text(language,style:const TextStyle(color: colorTextwhite,fontSize: 14,fontWeight: FontWeight.bold)),
+               sizedH10,
+               SizedBox(
+                  height: 35,
+                  width: MediaQuery.of(context).size.width* 0.29,
+                  child: ElevatedButton(onPressed: (){},style: ElevatedButton.styleFrom(
+                    padding: EdgeInsets.all(0),
+                    backgroundColor: buttonColor,
+                   shape: RoundedRectangleBorder(
+                    
+                    borderRadius: BorderRadius.circular(6)
+                   )
+                  ), child:const Text('Booking',style: TextStyle(color: textwhite),),),
+                )
+              ],
+            ),
+          )
+      
+        ],
+      ),
     );
   }
   

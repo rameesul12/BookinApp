@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import '../theatreOwner/controller/provider/add_Screen/current_owner_provider.dart';
+import '../user/controller/current_location/current_location.dart';
 import '../user/controller/movie_pages_provider/home_page_providerr.dart';
 
 
@@ -19,6 +20,8 @@ class SplashScreen extends StatelessWidget {
 
  
   Widget build(BuildContext context) {
+  Provider.of<CurrentLocation>(context,listen: false).determinePosition();
+
     Provider.of<MoviesProvider>(context).upcomingMoviesGet(context);
     getlogin(context);
     Provider.of<AddScreenProvider>(context,listen: false).getCurrentOwner(context);
@@ -33,15 +36,15 @@ class SplashScreen extends StatelessWidget {
       ),
     );
   }
-Future getlogin(BuildContext context)async{
+Future getlogin(BuildContext context) async{
   await Future.delayed(const Duration(seconds: 3));
 
-  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) =>const FirstLoginPage(),));
+  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) =>const FirstLoginPage(), ));
 }
 
    
 }
-//  Future<void> getlogged(BuildContext context)async{
+//  Future<void> getlogged(BuildContext context)async{ 
 // await Future.delayed(const Duration(seconds: 2));
 //   final SharedPreferences shared_preferences= await SharedPreferences.getInstance();
 //   bool? value=shared_preferences.getBool('isLogged');

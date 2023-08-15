@@ -1,29 +1,30 @@
+
+
 // To parse this JSON data, do
 //
-//     final showAdding = showAddingFromJson(jsonString);
+//     final fullMovieTheatres = fullMovieTheatresFromJson(jsonString);
 
 import 'dart:convert';
-import 'dart:developer';
 
-ShowAdding showAddingFromJson(String str) => ShowAdding.fromJson(json.decode(str));
+FullMovieTheatres fullMovieTheatresFromJson(String str) => FullMovieTheatres.fromJson(json.decode(str));
 
-String showAddingToJson(ShowAdding data) => json.encode(data.toJson());
+String fullMovieTheatresToJson(FullMovieTheatres data) => json.encode(data.toJson());
 
-class ShowAdding {
+class FullMovieTheatres {
     bool success;
-    String? message;
-    List<ShowDetails> data;
+    String message;
+    List<TheatreData> data;
 
-    ShowAdding({
+    FullMovieTheatres({
         required this.success,
         required this.message,
         required this.data,
     });
 
-    factory ShowAdding.fromJson(Map<String, dynamic> json) => ShowAdding(
+    factory FullMovieTheatres.fromJson(Map<String, dynamic> json) => FullMovieTheatres(
         success: json["success"],
-        message: json["message"]??"okey",
-        data: List<ShowDetails>.from(json["data"].map((x) => ShowDetails.fromJson(x))),
+        message: json["message"],
+        data: List<TheatreData>.from(json["data"].map((x) => TheatreData.fromJson(x))),
     );
 
     Map<String, dynamic> toJson() => {
@@ -33,14 +34,14 @@ class ShowAdding {
     };
 }
 
-class ShowDetails {
-    String? id;
-    String? screenId;
-    String? ownerId;
-    String? ownerName;
-    String? location;
-    String? movieName;
-    String? showTime;
+class TheatreData {
+    String id;
+    String screenId;
+    String ownerId;
+    String ownerName;
+    String location;
+    String movieName;
+    String showTime;
     DateTime startDate;
     DateTime endDate;
     int price;
@@ -50,7 +51,7 @@ class ShowDetails {
     DateTime updatedAt;
     int v;
 
-    ShowDetails({
+    TheatreData({
         required this.id,
         required this.screenId,
         required this.ownerId,
@@ -68,10 +69,7 @@ class ShowDetails {
         required this.v,
     });
 
-    factory ShowDetails.fromJson(Map<String, dynamic> json) { 
-    dynamic variable  = json["dates"] as List<dynamic>;
-    log(variable.toString());
-      return ShowDetails(
+    factory TheatreData.fromJson(Map<String, dynamic> json) => TheatreData(
         id: json["_id"],
         screenId: json["screenId"],
         ownerId: json["ownerId"],
@@ -83,11 +81,11 @@ class ShowDetails {
         endDate: DateTime.parse(json["endDate"]),
         price: json["price"],
         screen: json["screen"],
-        dates: List<Date>.from(variable.map((x) => Date.fromJson(x))),
+        dates: List<Date>.from(json["dates"].map((x) => Date.fromJson(x))),
         createdAt: DateTime.parse(json["createdAt"]),
         updatedAt: DateTime.parse(json["updatedAt"]),
         v: json["__v"],
-    );}
+    );
 
     Map<String, dynamic> toJson() => {
         "_id": id,
