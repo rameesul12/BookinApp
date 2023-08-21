@@ -29,7 +29,7 @@ class BookingStatus extends StatelessWidget {
                   if ( snapshot.connectionState==ConnectionState.none) {
                     return const Text("No Booking Details",style: TextStyle(color: textwhite),);
                   }else if(snapshot.connectionState==ConnectionState.waiting){
-                    return Center(child: CircularProgressIndicator(),);
+                    return const Center(child: CircularProgressIndicator(),);
                   }
                   else if(snapshot.hasData){
 
@@ -45,7 +45,7 @@ class BookingStatus extends StatelessWidget {
               );
                   }
                   else{
-                    return Center(child: CircularProgressIndicator());
+                    return const Center(child: CircularProgressIndicator());
                   }
                 
                   } 
@@ -153,7 +153,7 @@ class bookingStatusWidget extends StatelessWidget {
                          )
                           )
                           
-                          , child:const Text("view")),
+                          , child:const Text("view",style: TextStyle(color: textwhite),)),
                         ),
                       ],
                     ),
