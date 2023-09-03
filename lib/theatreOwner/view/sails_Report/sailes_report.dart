@@ -1,7 +1,8 @@
 
 
+// ignore_for_file: must_be_immutable
+
 import 'dart:developer';
-import 'package:bookingapp/theatreOwner/dialogues/dialogue_provider.dart';
 import 'package:bookingapp/user/variables/colors.dart';
 import 'package:bookingapp/user/variables/sizedbox.dart';
 import 'package:flutter/material.dart';
@@ -29,7 +30,7 @@ class SailesReport extends StatelessWidget {
                   if ( snapshot.connectionState==ConnectionState.none) {
                     return const Text("No Sailes Report",style: TextStyle(color: textwhite),);
                   }else if(snapshot.connectionState==ConnectionState.waiting){
-                    return Center(child: CircularProgressIndicator(),);
+                    return const Center(child: CircularProgressIndicator(),);
                   }
                   else if(snapshot.hasData){
 
@@ -45,7 +46,7 @@ class SailesReport extends StatelessWidget {
               );
                   }
                   else{
-                    return Center(child: CircularProgressIndicator());
+                    return const Center(child: CircularProgressIndicator());
                   }
                 
                   } 
@@ -144,7 +145,7 @@ class SailesReportWidget extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                    const Text("Show Date	:",style: TextStyle(color: textwhite,fontWeight: FontWeight.bold),),
-                   SizedBox(child: Text('${listData.date}'.substring(0,10),overflow: TextOverflow.ellipsis,maxLines: 1,style: TextStyle(color: colorTextwhite),))
+                   SizedBox(child: Text('${listData.date}'.substring(0,10),overflow: TextOverflow.ellipsis,maxLines: 1,style:const TextStyle(color: colorTextwhite),))
                     ],
                   ),
                   

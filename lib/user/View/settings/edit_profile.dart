@@ -11,8 +11,8 @@ class EditProfail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     TextEditingController nameController=TextEditingController();
-     TextEditingController emailController=TextEditingController();
-      TextEditingController passwordController=TextEditingController();
+    //  TextEditingController emailController=TextEditingController();
+    //   TextEditingController passwordController=TextEditingController();
     final Size size=MediaQuery.of(context).size;
     return  Scaffold(
       body: SafeArea(child:
@@ -31,7 +31,7 @@ class EditProfail extends StatelessWidget {
         sizedH10,
                 Stack(
                   children: [
-                    CircleAvatar(
+                 const   CircleAvatar(
                       radius: 70,
                       backgroundImage: AssetImage("assets/images/profile.png"),
                     ),

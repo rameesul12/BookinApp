@@ -12,7 +12,6 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 
-import '../View/homePage/home.dart';
 import '../services/user_Authentication/forget_password.dart';
 
 class LoginProvider extends ChangeNotifier {

@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'dart:developer';
 
 import 'package:bookingapp/user/Model/banner_Model/banner_model_class.dart';

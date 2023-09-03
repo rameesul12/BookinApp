@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:bookingapp/user/View/bookinPage/bookingPage.dart';
 import 'package:bookingapp/user/core/constant/constanwidgets.dart';
 import 'package:bookingapp/user/variables/colors.dart';
 import 'package:bookingapp/user/variables/sizedbox.dart';
@@ -41,7 +42,7 @@ class DateandTimepage extends StatelessWidget {
                       return Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Container(
-                          width: size.width*0.6,
+                          width: size.width*0.59,
                           height: size.height*0.13,
                           decoration: BoxDecoration(
                             color:textFieldBackground,
@@ -56,9 +57,10 @@ class DateandTimepage extends StatelessWidget {
                           monthTextStyle: const TextStyle(color: textwhite),
                           selectedTextColor: Colors.white,
                           
-                          onDateChange: (date) {
+                          onDateChange: (date) async{
                             log(date.toString());
                             datepicker.updateSelectedDate(date);
+                           await datepicker.allTheatreGetting(context);
                             
                            
                           },
@@ -79,7 +81,11 @@ class DateandTimepage extends StatelessWidget {
                         separatorBuilder: (context, index) => sizedH10,
                         itemCount: value.theatreList.length,
                         itemBuilder: (context, index) {
-                          return  TheatreWidget(size: size, place: value.theatreList[index].location, theatreName: value.theatreList[index].movieName, showTime: value.theatreList[index].showTime, );
+                          return  InkWell(
+                            onTap: () {
+                              Navigator.push(context, MaterialPageRoute(builder: (context) =>const BookingPage(),));
+                            },
+                            child: TheatreWidget(size: size, place: value.theatreList[index].location, theatreName: value.theatreList[index].movieName, showTime: value.theatreList[index].showTime, ));
                         },
                       ),
                     )
@@ -128,7 +134,7 @@ class DateandTimepage extends StatelessWidget {
 }
 
 class TheatreWidget extends StatelessWidget {
-   TheatreWidget({
+  const TheatreWidget({
     super.key,
     required this.size, required this.theatreName, required this.place, required this.showTime
   });
@@ -178,8 +184,8 @@ class TheatreWidget extends StatelessWidget {
                     style: TextStyle(color: textwhite, fontSize: 15),
                   ),
                 ),
-                Text(
-                  'cansellation available',
+             const   Text(
+                  'cancellation available',
                   style: TextStyle(color: colorTextwhite),
                 ),
                 Container(
@@ -187,7 +193,7 @@ class TheatreWidget extends StatelessWidget {
                       width: size.width * 0.2,
                       decoration: BoxDecoration(
                           border: Border.all(color: Colors.blue)),
-                          child: Center(child: Text(showTime,style: TextStyle(color: textwhite))),
+                          child: Center(child: Text(showTime,style:const TextStyle(color: textwhite))),
                     ),
               ],
             ),

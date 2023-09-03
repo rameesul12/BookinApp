@@ -18,6 +18,7 @@ static const upcomingMovies='/movie/upcoming';
 static const getSearch='get-search/';
 static const theatreLocation='get-theatreShows';
 static const getTheatres='get-dates';
+static const getSeats='get-seats';
 
 
 

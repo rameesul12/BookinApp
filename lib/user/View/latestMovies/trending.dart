@@ -29,6 +29,7 @@ class LatestMovies extends StatelessWidget {
             itemBuilder:(context, index) =>  InkWell(
               onTap: () async{
                 lottieshowing(context);
+                 await data.movieCastAndCrew(index, context);
               await  data.moviesData(index, context);
               
                 Navigator.pop(context);

@@ -6,22 +6,21 @@ import 'package:bookingapp/user/dialogues/dialogue_functions.dart';
 import 'package:bookingapp/user/variables/sizedbox.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../../theatreOwner/dialogues/validation_function.dart';
 import '../../controller/otp_pageprovider.dart';
 import '../../variables/colors.dart';
-import 'otpPage.dart';
+
 
 final formKey = GlobalKey<FormState>();
 
-class SighnUpPage extends StatefulWidget {
-  const SighnUpPage({super.key});
+class SignUpPage extends StatefulWidget {
+  const SignUpPage({super.key});
 
   @override
-  State<SighnUpPage> createState() => _SighnUpPageState();
+  State<SignUpPage> createState() => _SighnUpPageState();
 }
 UserSighnUp? usersignup;
 
-class _SighnUpPageState extends State<SighnUpPage> {
+class _SighnUpPageState extends State<SignUpPage> {
   @override
   Widget build(BuildContext context) {
     // initState(){

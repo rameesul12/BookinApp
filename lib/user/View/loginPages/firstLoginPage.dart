@@ -4,8 +4,6 @@ import 'package:bookingapp/common/dialogues.dart';
 import 'package:bookingapp/theatreOwner/view/loginPages/loginPage.dart';
 import 'package:bookingapp/user/View/homePage/home.dart';
 import 'package:bookingapp/user/View/loginPages/loginPage.dart';
-import 'package:bookingapp/user/controller/current_location/current_location.dart';
-import 'package:bookingapp/user/controller/fireBbse_Functions/firebase_function.dart';
 import 'package:bookingapp/user/controller/movie_pages_provider/home_page_providerr.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
@@ -15,7 +13,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../../theatreOwner/view/homePage/dashboard.dart';
 import '../../variables/colors.dart';
 import '../../variables/sizedbox.dart';
-import 'loginSignupPage.dart';
 
 class FirstLoginPage extends StatelessWidget {
   const FirstLoginPage({super.key});
@@ -67,9 +64,10 @@ class FirstLoginPage extends StatelessWidget {
                 height: 60,
                 width: size.width * 0.7,
                 child: ElevatedButton(
-                  onPressed: () {
+                  onPressed: () async{
+                    lottieshowing(context);
+                 await getlogged(context);
                   Navigator.push(context, MaterialPageRoute(builder:(context) =>const TheatreLoginPage () ,));
-                  getlogged(context);
                   },
                   style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.transparent,
@@ -77,7 +75,7 @@ class FirstLoginPage extends StatelessWidget {
                           borderRadius: BorderRadius.circular(20),
                           side: BorderSide(color: Colors.white))),
                   child:const Text(
-                    'Login as theatre owner',
+                    'Login as Theatre Owner',
                     style: TextStyle(color: textwhite),
                   ),
                 )),
@@ -98,10 +96,11 @@ await Future.delayed(const Duration(seconds: 2));
   final SharedPreferences shared_preferences= await SharedPreferences.getInstance();
   bool? value=shared_preferences.getBool('isLogged');
 
-  if (value==true) {
-    
-    
+  if (value==true) { 
+
      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) =>const HomePage(),));
+ 
+ 
   }else{
    
    Navigator.pushReplacement(context, MaterialPageRoute(builder:  (context) => const TheatreLoginPage(),));

@@ -65,6 +65,7 @@ dependencies:
   flutter_neumorphic_plus: ^3.3.0
   flip_card: ^0.7.0
   date_picker_timeline: ^1.2.3
+  shimmer: ^3.0.0
 
   
   

@@ -40,7 +40,7 @@ class AddShowProvider extends ChangeNotifier {
    final token=await storegeRead();
 
     final https.Response response;
-    String addShow = ApiConfiguration.addShow;
+   // String addShow = ApiConfiguration.addShow;
     String timer=showTimeController.text;
    // final time=int.parse(timer);
     String _prices=ticketPriceController.text;
@@ -76,7 +76,7 @@ class AddShowProvider extends ChangeNotifier {
       
     
     notifyListeners();
-      log('Is List visible =${shows}');
+      log('Is List visible =$shows');
       getError("show Added", context);
     }else{
       getError("Show already Exist", context);
@@ -124,7 +124,6 @@ Future suggectionGet(BuildContext context)async{
          
       } else {
         log('No movie data found');
-        // ignore: use_build_context_synchronously
         getError("No movie data found",context);
         return [];
       }

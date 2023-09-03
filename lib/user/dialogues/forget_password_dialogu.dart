@@ -3,7 +3,6 @@
 
 // ignore_for_file: use_build_context_synchronously
 
-import 'dart:math';
 
 import 'package:bookingapp/common/dialogues.dart';
 import 'package:bookingapp/theatreOwner/dialogues/validation_function.dart';
@@ -31,7 +30,7 @@ forgetPasswordDialogue({required BuildContext context}){
     return  SizedBox(
       height: 180,
       child: SimpleDialog(
-        contentPadding: EdgeInsets.all(10),
+        contentPadding:const EdgeInsets.all(10),
         backgroundColor: textFieldBackground,
         title:const Text("Please Enter your email Id",style:TextStyle(color: textwhite,fontSize: 13,fontWeight: FontWeight.bold),),
         children: [

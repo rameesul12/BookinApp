@@ -1,17 +1,16 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'dart:developer';
-
 import 'package:bookingapp/common/dialogues.dart';
 import 'package:bookingapp/user/View/dataAndTime/dateAndTime.dart';
+import 'package:bookingapp/user/View/moviesInfo/widgets/cast_widgets.dart';
 import 'package:bookingapp/user/controller/movie_pages_provider/home_page_providerr.dart';
 import 'package:bookingapp/user/variables/colors.dart';
 import 'package:bookingapp/user/variables/sizedbox.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import '../../controller/search_screen_provider/search_screen.dart';
 import '../../controller/theatre_showing/theatre_showing_controller.dart';
+
 
 class MoviesInfo extends StatelessWidget {
   const MoviesInfo({super.key});
@@ -23,219 +22,215 @@ class MoviesInfo extends StatelessWidget {
  final provider=Provider.of<MoviesProvider>(context,listen: false);
 
     return Scaffold(
-      body: SingleChildScrollView(
-        child: SizedBox(
-          height: size.height,
-      
-          width: size.width,
-          child: Consumer<MoviesProvider>(
-            builder: (context,movieInfo,child) {
-              return 
-              Column(      
-                children: [
-                  SizedBox(
-                    height: size.height*0.07,
-                    width: size.width,
-                    child: Row(
-                      children: [
-                        IconButton(onPressed: (){
-                          Navigator.pop(context);
-                        }, icon:const Icon(Icons.arrow_back,color: textwhite,))
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: size.height * 0.49,
-                    width: size.width,
-                    // color: buttonColor,
-                    child: Stack(
-                      children: [
-                        SizedBox(
-                          height: size.height * 0.24,
-                          width: size.width,
-                          // decoration:const BoxDecoration(
-                          //     // color: Colors.amber,
-                          //     image: DecorationImage(
-                          //         image: NetworkImage(
-                          //             'https://www.themoviedb.org/t/p/w220_and_h330_face/34m2tygAYBGqA9MXKhRDtzYd4MR.jpg'),
-                          //         fit: BoxFit.fill)
-                          //         ),
-                          child: Image.network('https://www.themoviedb.org/t/p/w300_and_h450_bestv2${movieInfo.movieDetails[0].backdropPath}',
-                          fit: BoxFit.fill,
-                           loadingBuilder: (context, child, loadingProgress) {
-                                    if (loadingProgress==null) {
-                                      return child;
-                                    }else{
-                                      return const Center(child: CircularProgressIndicator(),);
-                                    }
-                   } ),
-                        ),
-                        Positioned(
-                          top: 170,
-                          left: 30,
-                          child: Align(
-                            alignment: Alignment.topLeft,
-                            child: SizedBox(
-                                height: size.height * 0.25,
-                                width: size.width * 0.38,
-                                child: Image.network(
-                                 'https://www.themoviedb.org/t/p/w300_and_h450_bestv2${movieInfo.movieDetails[0].posterPath}' ,
-                                  fit: BoxFit.fill,
-                                  loadingBuilder: (context, child, loadingProgress) {
-                                    if (loadingProgress==null) {
-                                      return child;
-                                    }else{
-                                      return const Center(child: CircularProgressIndicator(),);
-                                    }
-                                  },
-                                )
-                                ),
-                          ),
-                        ),
-                       
-                        Positioned(
-                          
-                          bottom: -5,
-                          left: size.width * 0.5,
-                          child: MovieDetails(
-                              size: size,
-                              filimTitle: movieInfo.movieDetails[0].title,
-                              directorTitle: movieInfo.movieDetails[0].productionCompanies[0].name.toString(),
-                              genreTitle: movieInfo.movieDetails[0].genres[0].name,
-                              writerTitle:movieInfo.movieDetails[0].popularity.toString()
-                              ),
-                        )
-                        // Text('hii',style: TextStyle(color: textwhite),)
-                      ],
-                    ),
-                  ),
-                  //  Text('ramees',style: TextStyle(color: colorTextwhite),)
-                  sizedH30,
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+      body: Consumer<MoviesProvider>(
+        builder: (context,movieInfo,child) {
+          return 
+          SingleChildScrollView(
+            child: Column(      
+              children: [
+                SizedBox(
+                  height: size.height*0.07,
+                  width: size.width,
+                  child: Row(
                     children: [
-                      Container(
-                        height: size.height * 0.1,
-                        width: size.width * 0.29,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          border: Border.all(color: colorTextwhite),
-                        ),
-                        child:  Center(
-                            child: Text(
-                          movieInfo.movieDetails[0].voteAverage.toString(),
-                          style:const TextStyle(
-                              color: textwhite,
-                              fontWeight: FontWeight.w900,
-                              fontSize: 18),
-                        )),
-                      ),
-                      Container(
-                        height: size.height * 0.1,
-                        width: size.width * 0.29,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            border: Border.all(color: colorTextwhite)),
-                        child:  Column(
-                          children: [
-                            sizedH20,
-                         const   Text(
-                              'Dueration',
-                              style: TextStyle(color: colorTextwhite),
-                            ),
-                            Text(
-                              '${movieInfo.movieDetails[0].runtime}Mins',
-                              style:const TextStyle(
-                                  color: textwhite, fontWeight: FontWeight.w800),
-                            )
-                          ],
-                        ),
-                      ),
-                      Container(
-                        height: size.height * 0.1,
-                        width: size.width * 0.29,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            border: Border.all(color: colorTextwhite)),
-                        child:  Column(
-                          children: [
-                            sizedH20,
-                            const Text(
-                              'Adults',
-                              style: TextStyle(color: colorTextwhite),
-                            ),
-                          movieInfo.movieDetails[0].adult==false? const  Text(
-                             '13+',
-                              style: TextStyle(
-                                  color: textwhite,
-                                  fontSize: 17,
-                                  fontWeight: FontWeight.w700),
-                            ):const Text(
-                             '18+',
-                              style: TextStyle(
-                                  color: textwhite,
-                                  fontSize: 17,
-                                  fontWeight: FontWeight.w700),
-                            )
-                          ],
-                        ),
-                      )
+                      IconButton(onPressed: (){
+                        Navigator.pop(context);
+                      }, icon:const Icon(Icons.arrow_back,color: textwhite,))
                     ],
                   ),
-                  // sizedH20,
-                  const Text(
-                    'Overview',
-                    style: TextStyle(color: textwhite, fontWeight: FontWeight.bold),
+                ),
+                SizedBox(
+                  height: size.height * 0.49,
+                  width: size.width,
+                  // color: buttonColor,
+                  child: Stack(
+                    children: [
+                      SizedBox(
+                        height: size.height * 0.24,
+                        width: size.width,
+                        // decoration:const BoxDecoration(
+                        //     // color: Colors.amber,
+                        //     image: DecorationImage(
+                        //         image: NetworkImage(
+                        //             'https://www.themoviedb.org/t/p/w220_and_h330_face/34m2tygAYBGqA9MXKhRDtzYd4MR.jpg'),
+                        //         fit: BoxFit.fill)
+                        //         ),
+                        child: Image.network('https://www.themoviedb.org/t/p/w300_and_h450_bestv2${movieInfo.movieDetails[0].backdropPath}',
+                        fit: BoxFit.fill,
+                         loadingBuilder: (context, child, loadingProgress) {
+                                  if (loadingProgress==null) {
+                                    return child;
+                                  }else{
+                                    return const Center(child: CircularProgressIndicator(),);
+                                  }
+                 } ),
+                      ),
+                      Positioned(
+                        top: 170,
+                        left: 30,
+                        child: Align(
+                          alignment: Alignment.topLeft,
+                          child: SizedBox(
+                              height: size.height * 0.25,
+                              width: size.width * 0.38,
+                              child: Image.network(
+                               'https://www.themoviedb.org/t/p/w300_and_h450_bestv2${movieInfo.movieDetails[0].posterPath}' ,
+                                fit: BoxFit.fill,
+                                loadingBuilder: (context, child, loadingProgress) {
+                                  if (loadingProgress==null) {
+                                    return child;
+                                  }else{
+                                    return const Center(child: CircularProgressIndicator(),);
+                                  }
+                                },
+                              )
+                              ),
+                        ),
+                      ),
+                     
+                      Positioned(
+                        
+                        bottom: -5,
+                        left: size.width * 0.5,
+                        child: MovieDetails(
+                            size: size,
+                            filimTitle: movieInfo.movieDetails[0].title,
+                            directorTitle: movieInfo.movieDetails[0].productionCompanies[0].name.toString(),
+                            genreTitle: movieInfo.movieDetails[0].genres[0].name,
+                            writerTitle:movieInfo.movieDetails[0].popularity.toString()
+                            ),
+                      )
+                      // Text('hii',style: TextStyle(color: textwhite),)
+                    ],
                   ),
-                     Padding(
-                   padding:const EdgeInsets.all(8.0),
-                   child: Text(
-                     movieInfo.movieDetails[0].overview,
-                     style:const TextStyle(color: colorTextwhite, fontSize: 12),
+                ),
+                //  Text('ramees',style: TextStyle(color: colorTextwhite),)
+                sizedH30,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Container(
+                      height: size.height * 0.1,
+                      width: size.width * 0.29,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(color: colorTextwhite),
+                      ),
+                      child:  Center(
+                          child: Text(
+                        movieInfo.movieDetails[0].voteAverage.toString(),
+                        style:const TextStyle(
+                            color: textwhite,
+                            fontWeight: FontWeight.w900,
+                            fontSize: 18),
+                      )),
+                    ),
+                    Container(
+                      height: size.height * 0.1,
+                      width: size.width * 0.29,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(color: colorTextwhite)),
+                      child:  Column(
+                        children: [
+                          sizedH20,
+                       const   Text(
+                            'Dueration',
+                            style: TextStyle(color: colorTextwhite),
+                          ),
+                          Text(
+                            '${movieInfo.movieDetails[0].runtime}Mins',
+                            style:const TextStyle(
+                                color: textwhite, fontWeight: FontWeight.w800),
+                          )
+                        ],
+                      ),
+                    ),
+                    Container(
+                      height: size.height * 0.1,
+                      width: size.width * 0.29,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(color: colorTextwhite)),
+                      child:  Column(
+                        children: [
+                          sizedH20,
+                          const Text(
+                            'Adults',
+                            style: TextStyle(color: colorTextwhite),
+                          ),
+                        movieInfo.movieDetails[0].adult==false? const  Text(
+                           '13+',
+                            style: TextStyle(
+                                color: textwhite,
+                                fontSize: 17,
+                                fontWeight: FontWeight.w700),
+                          ):const Text(
+                           '18+',
+                            style: TextStyle(
+                                color: textwhite,
+                                fontSize: 17,
+                                fontWeight: FontWeight.w700),
+                          )
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+                // sizedH20,
+                const Text(
+                  'Overview',
+                  style: TextStyle(color: textwhite, fontWeight: FontWeight.bold),
+                ),
+                   Padding(
+                 padding:const EdgeInsets.all(8.0),
+                 child: Text(
+                   movieInfo.movieDetails[0].overview,
+                   style:const TextStyle(color: colorTextwhite, fontSize: 12),
+                 ),
                    ),
+              const Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text('Casts',style: TextStyle(color: textwhite,fontSize: 22,fontWeight: FontWeight.bold),)),
+                  sizedH10,
+                     SizedBox(
+                      height: size.height*0.3,
+                       child: ListView.separated(
+                         scrollDirection: Axis.horizontal,
+//physics:const NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                         separatorBuilder: (context, index) => sizedH10,
+                         itemCount: 6,
+                         itemBuilder: (context, index) {
+                           return  CastView(size: size, name: movieInfo.castList[index].name!, imagePath:movieInfo.castList[index].profilePath!, originalName: movieInfo.castList[index].originalName!,);
+                          
+                           },                                                                   
+                       ),
                      ),
-                // const Align(
-                //     alignment: Alignment.centerLeft,
-                //     child: Text('Casts',style: TextStyle(color: textwhite,fontSize: 22,fontWeight: FontWeight.bold),)),
-                //        SizedBox(
-                //         height: size.height*0.5,
-                //          child: ListView.separated(
-                //           physics:const NeverScrollableScrollPhysics(),
-                //           shrinkWrap: true,
-                //            separatorBuilder: (context, index) => sizedH10,
-                //            scrollDirection: Axis.horizontal,
-                //            itemCount: movieInfo.castList.length,
-                //            itemBuilder: (context, index) {
-                //              return  CastView(size: size, name: movieInfo.castList[index].name!, imagePath:movieInfo.castList[index].profilePath!, originalName: movieInfo.castList[index].originalName!,);
-                            
-                //              },                                                                   
-                //          ),
-                //        ),
-                    
-                       
-                  // SizedBox(
-                  //   width: size.width * 0.85,
-                  //   child: ElevatedButton(
-                  //       style: ElevatedButton.styleFrom(
-                  //           backgroundColor: buttonColor,
-                  //           shape: RoundedRectangleBorder(
-                  //             borderRadius: BorderRadius.circular(13),
-                  //           )),
-                  //       onPressed: () {
-                  //         Navigator.push(context, MaterialPageRoute(builder:(context) =>const BookingPage() ));
-                  //       },
-                  //       child: const Text(
-                  //         'Book Tickets',
-                  //         style: TextStyle(color: textwhite),
-                  //       )),
-                  // )
-                
+                  
+                     
+                // SizedBox(
+                //   width: size.width * 0.85,
+                //   child: ElevatedButton(
+                //       style: ElevatedButton.styleFrom(
+                //           backgroundColor: buttonColor,
+                //           shape: RoundedRectangleBorder(
+                //             borderRadius: BorderRadius.circular(13),
+                //           )),
+                //       onPressed: () {
+                //         Navigator.push(context, MaterialPageRoute(builder:(context) =>const BookingPage() ));
+                //       },
+                //       child: const Text(
+                //         'Book Tickets',
+                //         style: TextStyle(color: textwhite),
+                //       )),
+                // )
               
-                ],
-              );
-            }
-          ),
-        ),
+            
+              ],
+            ),
+          );
+        }
       ),
       floatingActionButton: SizedBox(
         width: size.width*0.9,
@@ -260,37 +255,7 @@ class MoviesInfo extends StatelessWidget {
   }
 }
 
-class CastView extends StatelessWidget {
-  const CastView({
-    super.key,
-    required this.size, required this.imagePath, required this.name, required this.originalName,
-    
-  });
-  final String imagePath;
-  final String name;
-  final String originalName;
-  final Size size;
 
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-   //  width: size.width,
-     height: size.height*0.6,
-     decoration:const BoxDecoration(
-       color: textwhite
-     ),
-     child: Column(
-       children: [
-         CircleAvatar(
-      backgroundImage:NetworkImage(imagePath),
-       radius: 40,  ),
-        const Text('ramees',style: TextStyle(color: textwhite,fontSize: 20),),
-        const Text('originalName')
-       ],
-     ),
-    );
-  }
-}
 
 class MovieDetails extends StatelessWidget {
   const MovieDetails({
@@ -363,7 +328,7 @@ class MovieDetails extends StatelessWidget {
                     child: Text(
                   writerTitle,
                   overflow: TextOverflow.ellipsis,
-                  style: TextStyle(color: colorTextwhite),
+                  style:const TextStyle(color: colorTextwhite),
                 ))
               ],
             ),

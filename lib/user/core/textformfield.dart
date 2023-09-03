@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -9,10 +8,10 @@ class TextformField1 extends StatelessWidget {
   final String hintText;
   final TextEditingController textController;
   final IconData textIcon;
-  bool? isLast;
-  Function()? fieldFuction;
+final  bool? isLast;
+ final Function()? fieldFuction;
   final TextInputType? input;
-int ? values;
+final int ? values;
    
 
     TextformField1({super.key, required this.hintText ,required this.textController, required this.textIcon,this.values,this.isLast,this.fieldFuction,this.input});

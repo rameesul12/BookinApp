@@ -208,6 +208,7 @@ class MoviesProvider extends ChangeNotifier{
   for (var data in cast.cast) {
     castList.add(data!);
   }
+  log("okey DOne");
 log(castList.toString());
     log('okey cast');
     notifyListeners();

@@ -123,17 +123,17 @@ class ScreenAddingData extends StatelessWidget {
                                   children: [
                                      sizedW30,
                                      const Icon(Icons.chair,color: textwhite,),
-                                    Text("Total Seats    ",style: TextStyle(color: textwhite,fontWeight: FontWeight.bold),),
+                                const  Text("Total Seats    ",style: TextStyle(color: textwhite,fontWeight: FontWeight.bold),),
                                   sizedW10,
-                                  Text(":",style: TextStyle(color: textwhite),),
+                               const   Text(":",style: TextStyle(color: textwhite),),
                                    Text("${data.screenInfo[index].totalSeats}",style:const TextStyle(color: textwhite),),
                                   ],
                                 ),
                                 Row(
                                 children: [
                                    sizedW30,
-                                 Icon(Icons.table_rows,color: textwhite,),
-                                  Text("Columns",style: TextStyle(color: textwhite,fontWeight: FontWeight.bold),),
+                                const Icon(Icons.table_rows,color: textwhite,),
+                                const Text("Columns",style: TextStyle(color: textwhite,fontWeight: FontWeight.bold),),
                                   sizedW20,
                                   const Text(":",style: TextStyle(color: textwhite),),
                                    Text("${data.screenInfo[index].columns}",style:const TextStyle(color: textwhite),),

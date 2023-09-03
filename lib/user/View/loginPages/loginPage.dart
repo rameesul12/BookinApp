@@ -1,7 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:bookingapp/common/dialogues.dart';
-import 'package:bookingapp/user/View/loginPages/loginSignupPage.dart';
 import 'package:bookingapp/user/core/textformfield.dart';
 import 'package:bookingapp/user/View/loginPages/sighnUp.dart';
 import 'package:bookingapp/user/controller/loginPageprovider.dart';
@@ -111,7 +110,7 @@ class LoginPage extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const SighnUpPage(),
+                          builder: (context) => const SignUpPage(),
                         ));
                   },
                   child: const Text(

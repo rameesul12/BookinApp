@@ -32,11 +32,11 @@ class SettingPage extends StatelessWidget {
 
               ),
               sizedH10,
-         Padding(
-           padding: const EdgeInsets.all(8.0),
+       const  Padding(
+           padding:  EdgeInsets.all(8.0),
            child: Align(
              alignment: Alignment.centerLeft,
-            child: const   Text("Accounts",style: TextStyle(color:colorTextwhite),)),
+            child:    Text("Accounts",style: TextStyle(color:colorTextwhite),)),
          ),
          Padding(
            padding: const EdgeInsets.all(8.0),
@@ -52,9 +52,9 @@ class SettingPage extends StatelessWidget {
                    onTap: () {
                      Navigator.push(context,MaterialPageRoute(builder: (context) =>const EditProfail(),));
                    },
-                  child: ListTileValue(icons: Icons.person_2_outlined, title: "Edit Profail")),
-              ListTileValue(icons: Icons.security, title: "Security"),
-                ListTileValue(icons: Icons.privacy_tip_outlined, title: "privacy"),
+                  child: const ListTileValue(icons: Icons.person_2_outlined, title: "Edit Profail")),
+            const  ListTileValue(icons: Icons.security, title: "Security"),
+             const   ListTileValue(icons: Icons.privacy_tip_outlined, title: "privacy"),
          
               
               ],
@@ -115,12 +115,12 @@ class SettingPage extends StatelessWidget {
 }
 
 class ListTileValue extends StatelessWidget {
-   ListTileValue({
+ const  ListTileValue({
     super.key, required this.icons,
     required this.title
   });
 final IconData icons;
-String title;
+final String title;
   @override
   Widget build(BuildContext context) {
     return Padding(

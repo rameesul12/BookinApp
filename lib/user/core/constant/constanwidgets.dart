@@ -1,7 +1,6 @@
 import 'package:bookingapp/user/variables/colors.dart';
 import 'package:flutter/material.dart';
 
-import '../../../theatreOwner/view/core/functions.dart';
 
 // ignore: must_be_immutable
 class AppBarcontainer extends StatelessWidget {

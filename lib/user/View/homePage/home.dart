@@ -1,13 +1,11 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'dart:developer';
-
 import 'package:bookingapp/common/dialogues.dart';
-import 'package:bookingapp/theatreOwner/view/homePage/dashboard.dart';
+import 'package:bookingapp/user/View/homePage/widgets/shimmer_widgets.dart';
 import 'package:bookingapp/user/View/search_screen/search_screen.dart';
 import 'package:bookingapp/user/View/settings/settings.dart';
 import 'package:bookingapp/user/controller/movie_pages_provider/home_page_providerr.dart';
-import 'package:bookingapp/user/core/constant/constanwidgets.dart';
 import 'package:bookingapp/user/View/moviesInfo/selectedMovies.dart';
 import 'package:bookingapp/user/variables/colors.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -18,17 +16,17 @@ import '../../controller/fireBbse_Functions/firebase_function.dart';
 import '../../core/couponContainer/coupenCard.dart';
 import '../../variables/sizedbox.dart';
 import '../latestMovies/trending.dart';
-import 'package:text_scroll/text_scroll.dart';
+
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    int currentIndex=0;
+  //  int currentIndex=0;
     final provider =
         Provider.of<FireBaseFunctionProvider>(context, listen: false);
-    final Size size = MediaQuery.of(context).size;
+    final size = MediaQuery.of(context).size;
 
     return  Scaffold(
         backgroundColor: backgroundColor,
@@ -36,6 +34,9 @@ class HomeScreen extends StatelessWidget {
         body: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
+   
+       //    ScreenHomeShimmer(size: size),
+
             Consumer<CurrentLocation>(
               builder: (context,locationData,child) {
                 return SizedBox(
@@ -79,9 +80,7 @@ class HomeScreen extends StatelessWidget {
                     );
                   } else if (snapshot.connectionState ==
                       ConnectionState.waiting) {
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
+                    return ScreenHomeShimmer(size: size);
                   } else {
                     provider.valueDisplaying(snapshot);
                     return Consumer<FireBaseFunctionProvider>(
@@ -91,7 +90,7 @@ class HomeScreen extends StatelessWidget {
                         child: ListView.separated(
                             scrollDirection: Axis.horizontal,
                             itemCount: bannerData.bannerList.length,
-                            separatorBuilder: (context, index) => Divider(color: colorTextwhite),
+                            separatorBuilder: (context, index) =>const Divider(color: colorTextwhite),
                             itemBuilder: (context, index) {
                               return Stack(
                                 children: [
@@ -102,7 +101,7 @@ class HomeScreen extends StatelessWidget {
                                       width: MediaQuery.of(context).size.width,
                                       margin: const EdgeInsets.symmetric(
                                           horizontal: 5.0),
-                                      decoration:  BoxDecoration(
+                                      decoration:  const BoxDecoration(
                                        // borderRadius: BorderRadiusDirectional.circular(20),
                                           color: backgroundColor),
                                       //   child: Text('text ', style: TextStyle(fontSize: 16.0),)
@@ -116,38 +115,14 @@ class HomeScreen extends StatelessWidget {
                                             if (loadingProgress == null) {
                                               return child;
                                             } else {
-                                              return const Center(
-                                                  child: CircularProgressIndicator());
+                                              return const Center(child: CircularProgressIndicator(),);
                                             }
                                           },
                                         ),
                                       ),
                                     ),
                                   ),
-                                  Positioned(
-                                    bottom: 0,
-                                    left: 140,
-                                    //top: ,
-                                    child: SizedBox(
-                                      child: Center(
-                                        child: TextScroll(
-                                          bannerData
-                                              .bannerList[index].moviName
-                                              .toString(),
-                                              
-                                          style: const TextStyle(
-                                            fontSize: 19,
-                                              fontWeight: FontWeight.bold,
-                                              color: textwhite),
-                                              
-                                              textAlign: TextAlign.center,
-                                              textDirection: TextDirection.ltr,
-                                               mode: TextScrollMode.endless,
-                                               
-                                        ),
-                                      ),
-                                    ),
-                                  ),
+                                 
                                 ],
                               );
                             }),
@@ -180,6 +155,11 @@ class HomeScreen extends StatelessWidget {
                           MaterialPageRoute(
                             builder: (context) => const LatestMovies(),
                           ));
+                      //  Navigator.push(
+                      //     context,
+                      //     MaterialPageRoute(
+                      //       builder: (context) =>  ScreenHomeShimmer(size: size,),
+                       //   ));
                     },
                     child: const Text(
                       'SeeMore>',
@@ -189,12 +169,8 @@ class HomeScreen extends StatelessWidget {
                     ))
               ],
             ),
-            // Row(
-            //   children: [
-    
-            //   ],
-            // ),
-            //  sizedH10,
+           
+           
             Expanded(
               child:
                   Consumer<MoviesProvider>(builder: (context, movies, child) {
@@ -299,6 +275,8 @@ class HomeScreen extends StatelessWidget {
       );
   }
 }
+
+
 
 // ignore: must_be_immutable
 class MainCard extends StatelessWidget {

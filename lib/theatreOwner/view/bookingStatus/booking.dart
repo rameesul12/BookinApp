@@ -61,11 +61,11 @@ class BookingStatus extends StatelessWidget {
 
 class bookingStatusWidget extends StatelessWidget {
  
-   bookingStatusWidget({
+   const bookingStatusWidget({
     super.key,
     required this.listData
   });
-  BookingDetails listData;
+ final BookingDetails listData;
 
   @override
   Widget build(BuildContext context) {
@@ -99,7 +99,7 @@ class bookingStatusWidget extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                   Text("User Name:",style: TextStyle(color: textwhite,fontWeight: FontWeight.bold),),
+                const  Text("User Name:",style: TextStyle(color: textwhite,fontWeight: FontWeight.bold),),
                    SizedBox(child: Text(listData.userName,overflow: TextOverflow.ellipsis,maxLines: 1,style:const TextStyle(color: colorTextwhite),))
                     ],
                   ),
@@ -129,7 +129,7 @@ class bookingStatusWidget extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                    const Text("Booking Date	:",style: TextStyle(color: textwhite,fontWeight: FontWeight.bold),),
-                   SizedBox(child: Text('${listData.date}'.substring(0,10),overflow: TextOverflow.ellipsis,maxLines: 1,style: TextStyle(color: colorTextwhite),))
+                   SizedBox(child: Text('${listData.date}'.substring(0,10),overflow: TextOverflow.ellipsis,maxLines: 1,style:const TextStyle(color: colorTextwhite),))
                     ],
                   ),
                   

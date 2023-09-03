@@ -61,7 +61,8 @@ final payload={
  
  encoding: Encoding.getByName('utf-8')
  ); 
-// log(response.body);
+ log("we checking if in get seats show id getting");
+ log(response.body);
 
  final status=jsonDecode(response.body)as Map<String,dynamic>;
 theatreList.clear();

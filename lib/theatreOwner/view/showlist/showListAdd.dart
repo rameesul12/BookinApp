@@ -1,9 +1,9 @@
+
 // ignore_for_file: use_build_context_synchronously
 
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import '../../../common/dialogues.dart';
@@ -17,8 +17,8 @@ import '../../controller/provider/add_Shows/add_show_provider.dart';
 class ShowListAdding extends StatelessWidget {
    ShowListAdding ({super.key,this.index,this.editShow});
 final _formkey=GlobalKey<FormState>();
- bool? editShow=false;
-int? index;
+ bool? editShow=false; 
+final int? index;
 
   @override
   Widget build(BuildContext context) {
@@ -83,7 +83,7 @@ int? index;
                             fillColor: textFieldBackground,
                             // contentPadding: new EdgeInsets.symmetric(vertical: 0.0),
                           // icon: Icon(textIcon,color: Colors.white,),
-                            prefixIcon:Icon(Icons.movie,color: Colors.white,),
+                            prefixIcon:const Icon(Icons.movie,color: Colors.white,),
                             hintText: "Movie Name",hintStyle:const TextStyle(color: Colors.grey),
                             border:
                             OutlineInputBorder(    
@@ -143,7 +143,7 @@ int? index;
                                    filled: true,
                                    fillColor: textFieldBackground,
                                    
-                                   prefixIcon:Icon(Icons.movie,color: Colors.white,),
+                                   prefixIcon:const Icon(Icons.movie,color: Colors.white,),
                                    hintText: "Show Time",hintStyle:const TextStyle(color: Colors.grey),
                                    border:
                                    OutlineInputBorder(    
@@ -187,7 +187,7 @@ int? index;
                                  fillColor: textFieldBackground,
                                  // contentPadding: new EdgeInsets.symmetric(vertical: 0.0),
                                // icon: Icon(textIcon,color: Colors.white,),
-                                 prefixIcon:Icon(Icons.movie,color: Colors.white,),
+                                 prefixIcon:const Icon(Icons.movie,color: Colors.white,),
                                  hintText: "Start Date",hintStyle:const TextStyle(color: Colors.grey),
                                  border:
                                  OutlineInputBorder(    
@@ -234,7 +234,7 @@ int? index;
                                    fillColor: textFieldBackground,
                                    // contentPadding: new EdgeInsets.symmetric(vertical: 0.0),
                                  // icon: Icon(textIcon,color: Colors.white,),
-                                  prefixIcon:Icon(Icons.movie,color: Colors.white,),
+                                  prefixIcon:const Icon(Icons.movie,color: Colors.white,),
                                    hintText: "End Date",hintStyle:const TextStyle(color: Colors.grey),
                                    border:
                                    OutlineInputBorder(    
