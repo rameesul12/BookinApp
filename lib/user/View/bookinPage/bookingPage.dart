@@ -14,7 +14,9 @@ class _MyAppState extends State<BookingPage> {
 
   @override
   Widget build(BuildContext context) {
+
     final size=MediaQuery.of(context).size;
+    
     return  Scaffold(
       body: Column(
        // crossAxisAlignment: CrossAxisAlignment.center,
