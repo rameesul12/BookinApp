@@ -16,7 +16,7 @@ class SettingsPage extends StatelessWidget {
         child: Column(
           children: [
           sizedH10,
-            CircleAvatar(
+          const  CircleAvatar(
               radius: 70,
               backgroundImage: AssetImage('assets/images/profile.webp'),
             ),
@@ -51,7 +51,7 @@ class SettingsPage extends StatelessWidget {
                 borderRadius: BorderRadius.circular(20),
                 color: colorTextwhite.withOpacity(0.3),
               ),
-              child: ExpansionTile(
+              child: const ExpansionTile(
                 title: Text(
                   'help &support',
                      style: TextStyle(color: textwhite,fontWeight: FontWeight.bold),
@@ -72,7 +72,7 @@ class SettingsPage extends StatelessWidget {
                 borderRadius: BorderRadius.circular(20),
                 color: colorTextwhite.withOpacity(0.3),
               ),
-              child: ExpansionTile(
+              child: const ExpansionTile(
                 title: Text(
                   'help &support',
                   style: TextStyle(color: textwhite,fontWeight: FontWeight.bold),
@@ -93,7 +93,7 @@ class SettingsPage extends StatelessWidget {
                 borderRadius: BorderRadius.circular(20),
                 color: colorTextwhite.withOpacity(0.3),
               ),
-              child: ExpansionTile(
+              child: const ExpansionTile(
                 title: Text(
                   'Privacy & Policy',
                   style: TextStyle(color: textwhite,fontWeight: FontWeight.bold),
@@ -119,12 +119,12 @@ class SettingsPage extends StatelessWidget {
                // mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   sizedW20,
-                  Text('Logout',style: TextStyle(color: textwhite,fontWeight: FontWeight.bold),),
+                const  Text('Logout',style: TextStyle(color: textwhite,fontWeight: FontWeight.bold),),
                  SizedBox(width: size.width*0.56,),
                  SizedBox(
                   height: 35,
                   width: 60,
-                  child: IconButton(onPressed: (){},icon:Icon( Icons.logout,color: textwhite,))
+                  child: IconButton(onPressed: (){},icon:const Icon( Icons.logout,color: textwhite,))
                  )
 
                 ],

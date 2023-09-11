@@ -59,6 +59,7 @@ class BookingStatus extends StatelessWidget {
 }
 
 
+// ignore: camel_case_types
 class bookingStatusWidget extends StatelessWidget {
  
    const bookingStatusWidget({

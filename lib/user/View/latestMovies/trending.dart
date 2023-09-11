@@ -1,7 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:bookingapp/common/dialogues.dart';
-import 'package:bookingapp/user/View/moviesInfo/selectedMovies.dart';
+import 'package:bookingapp/user/View/moviesInfo/selected_movies.dart';
 import 'package:bookingapp/user/controller/movie_pages_provider/home_page_providerr.dart';
 import 'package:bookingapp/user/variables/colors.dart';
 import 'package:bookingapp/user/variables/sizedbox.dart';
@@ -91,7 +91,7 @@ final String language;
               children: [
                 Text(movieName,style:const TextStyle(color: Colors.white,fontWeight: FontWeight.bold ,fontSize: 16),),
                 sizedH20,
-                Text('$releaseDate',style:const TextStyle(color: colorTextwhite,fontSize: 11),),
+                Text(releaseDate,style:const TextStyle(color: colorTextwhite,fontSize: 11),),
                //  sizedH10,
                 Text(language,style:const TextStyle(color: colorTextwhite,fontSize: 14,fontWeight: FontWeight.bold)),
                sizedH10,
@@ -99,7 +99,7 @@ final String language;
                   height: 35,
                   width: MediaQuery.of(context).size.width* 0.29,
                   child: ElevatedButton(onPressed: (){},style: ElevatedButton.styleFrom(
-                    padding: EdgeInsets.all(0),
+                    padding:const EdgeInsets.all(0),
                     backgroundColor: buttonColor,
                    shape: RoundedRectangleBorder(
                     

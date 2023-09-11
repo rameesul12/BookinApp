@@ -2,6 +2,8 @@
 //
 //     final searchResp = searchRespFromJson(jsonString);
 
+// ignore_for_file: constant_identifier_names
+
 import 'dart:convert';
 
 SearchResp searchRespFromJson(String str) => SearchResp.fromJson(json.decode(str));

@@ -5,7 +5,7 @@ import 'package:lottie/lottie.dart';
 
 
   getError(String error,BuildContext ctx){
- return ScaffoldMessenger.of(ctx).showSnackBar(SnackBar(backgroundColor: Colors.black,content: Text(error,style: TextStyle(color: Colors.white),)));
+ return ScaffoldMessenger.of(ctx).showSnackBar(SnackBar(backgroundColor: Colors.black,content: Text(error,style:const TextStyle(color: Colors.white),)));
 } 
 
 

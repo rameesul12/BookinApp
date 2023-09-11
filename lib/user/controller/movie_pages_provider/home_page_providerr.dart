@@ -49,6 +49,7 @@ class MoviesProvider extends ChangeNotifier{
 
     if (status['success']==true) {
       moviesList=(status['data']as List).map((e) =>MoviesData.fromJson(e)).toList();
+      log(moviesList.length.toString());
       listValueChanging();
      languageChanging();
       notifyListeners();

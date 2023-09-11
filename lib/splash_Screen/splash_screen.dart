@@ -4,7 +4,7 @@
 
 // ignore_for_file: use_build_context_synchronously
 
-import 'package:bookingapp/user/View/loginPages/firstLoginPage.dart';
+import 'package:bookingapp/user/View/loginPages/first_login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
@@ -39,7 +39,7 @@ class SplashScreen extends StatelessWidget {
 Future getlogin(BuildContext context) async{
   await Future.delayed(const Duration(seconds: 3));
 
-  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) =>const FirstLoginPage(), ));
+  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) =>const FirstLoginPage(),));
 }
 
    

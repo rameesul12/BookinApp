@@ -11,8 +11,8 @@ class ApiFunctions{
 
     final http.Response response;
      final String baseUrl=ApiConfiguration.baseUrl+uri;
-
-
+try {
+  
     response =await http.get(Uri.parse(baseUrl),
      headers: {'Content-type': 'application/json;charset=utf-8',
       'Accept': 'application/json',
@@ -21,6 +21,10 @@ class ApiFunctions{
     );
 
     return response;
+} catch (e) {
+  log(e.toString());
+}
+
   }
 
    static apiGetFunctionWithId(String uri,String id,String token) async{

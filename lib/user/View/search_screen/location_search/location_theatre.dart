@@ -6,7 +6,6 @@ import 'package:bookingapp/common/dialogues.dart';
 import 'package:bookingapp/user/View/search_screen/location_search/show_details.dart';
 import 'package:bookingapp/user/variables/colors.dart';
 import 'package:bookingapp/user/variables/sizedbox.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic_plus/flutter_neumorphic.dart';
 import 'package:provider/provider.dart';
 
@@ -103,7 +102,7 @@ class NeumorphicWidget extends StatelessWidget {
         height: size.height * 0.2,
         width: size.width,
         child: Neumorphic(
-          padding: EdgeInsets.all(10),
+          padding:const EdgeInsets.all(10),
          // margin: EdgeInsets.all(6),
           style: NeumorphicStyle(
               color: textFieldBackground,

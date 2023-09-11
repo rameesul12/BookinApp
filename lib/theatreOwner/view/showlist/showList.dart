@@ -3,7 +3,7 @@
 import 'dart:developer';
 
 import 'package:bookingapp/common/dialogues.dart';
-import 'package:bookingapp/theatreOwner/view/showlist/showListAdd.dart';
+import 'package:bookingapp/theatreOwner/view/showlist/show_list_add.dart';
 import 'package:bookingapp/user/variables/colors.dart';
 import 'package:bookingapp/user/variables/sizedbox.dart';
 import 'package:flutter/material.dart';
@@ -60,7 +60,7 @@ class ShowListPage extends StatelessWidget {
 }
 
 class ShowListDisplaying extends StatelessWidget {
-   ShowListDisplaying({
+   const ShowListDisplaying({
     super.key,
     required this.index
   });

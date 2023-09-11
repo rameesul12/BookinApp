@@ -8,7 +8,7 @@ import 'package:bookingapp/user/controller/current_location/current_location.dar
 import 'package:bookingapp/user/controller/fireBbse_Functions/firebase_function.dart';
 import 'package:bookingapp/user/controller/movie_pages_provider/home_page_providerr.dart';
 import 'package:bookingapp/user/controller/otp_pageprovider.dart';
-import 'package:bookingapp/user/controller/loginPageprovider.dart';
+import 'package:bookingapp/user/controller/login_page_provider.dart';
 import 'package:bookingapp/user/controller/login_And_Signpages/signup_and_otp.dart';
 import 'package:bookingapp/user/controller/search_screen_provider/search_screen.dart';
 import 'package:bookingapp/user/controller/theatre_showing/theatre_showing_controller.dart';
@@ -52,6 +52,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => SearchScreenProvider(),),
         ChangeNotifierProvider(create: (context) => CurrentLocation(),),
         ChangeNotifierProvider(create: (context) => TheatreShowingController(),),
+      //  ChangeNotifierProvider(create: (context) => RazorPayProvider(),)
 
       ],
       child: MaterialApp(

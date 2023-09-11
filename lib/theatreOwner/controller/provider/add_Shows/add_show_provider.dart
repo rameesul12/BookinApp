@@ -1,4 +1,4 @@
-// ignore_for_file: use_build_context_synchronously
+// ignore_for_file: use_build_context_synchronously, no_leading_underscores_for_local_identifiers
 
 import 'dart:convert';
 import 'dart:developer';
@@ -35,7 +35,7 @@ class AddShowProvider extends ChangeNotifier {
 //==============================
 
   Future addShowApi(BuildContext context) async {
-  final CurrentOwner= Provider.of<AddScreenProvider>(context,listen: false).currentOwner;
+  final currentOwner= Provider.of<AddScreenProvider>(context,listen: false).currentOwner;
 
    final token=await storegeRead();
 
@@ -49,7 +49,7 @@ class AddShowProvider extends ChangeNotifier {
     int screen=int.parse(_screen);
    
     final payload = {  
-      "owner":CurrentOwner,
+      "owner":currentOwner,
       "inputValue":movieNameController.text,
       "time":timer,
       "startDate":startDateController.text,
@@ -178,8 +178,8 @@ list.clear();
 //=============================
 
 Future showGetting(BuildContext context) async{
-final CurrentOwner= Provider.of<AddScreenProvider>(context,listen: false).currentOwner;
-final ownerId=CurrentOwner!["_id"];
+final currentOwner= Provider.of<AddScreenProvider>(context,listen: false).currentOwner;
+final ownerId=currentOwner!["_id"];
 
 
 // ignore: prefer_interpolation_to_compose_strings
@@ -221,7 +221,7 @@ shows.clear();
 
  Future showDeleting(BuildContext context,int index) async{
 
-  final token = await storegeRead();
+  // final token = await storegeRead();
   log("${shows[index].id}");
   final https.Response response;
   final payload={

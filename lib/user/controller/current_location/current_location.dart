@@ -9,7 +9,7 @@ import 'package:geolocator/geolocator.dart';
 
 class CurrentLocation extends ChangeNotifier{
 
-   String currentAddress="My Address";
+   String currentAddress="";
   Position? currentPosition; 
   Future determinePosition() async{
 

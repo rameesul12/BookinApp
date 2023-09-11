@@ -1,6 +1,6 @@
 import 'package:bookingapp/common/dialogues.dart';
 import 'package:bookingapp/common/shared_preference_seting/set_bool.dart';
-import 'package:bookingapp/theatreOwner/view/loginPages/signinPage.dart';
+import 'package:bookingapp/theatreOwner/view/loginPages/signin_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -54,9 +54,9 @@ class TheatreLoginPage  extends StatelessWidget {
                 email: provider.ownerName.text, 
                 password: provider.ownerPassword.text,
                  context: context);
-                 setlogged(value: true);
                 // ignore: use_build_context_synchronously
                 await  Provider.of<AddScreenProvider>(context,listen: false).getCurrentOwner(context);
+                 setlogged(value: true);
                }
                 },
                 style: ElevatedButton.styleFrom(

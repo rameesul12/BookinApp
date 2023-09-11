@@ -1,5 +1,5 @@
 
-// ignore_for_file: use_build_context_synchronously
+// ignore_for_file: use_build_context_synchronously, must_be_immutable
 
 import 'dart:developer';
 
@@ -22,7 +22,7 @@ final int? index;
 
   @override
   Widget build(BuildContext context) {
-    final Size size=MediaQuery.of(context).size;
+   // final Size size=MediaQuery.of(context).size;
     final provider =Provider.of<AddShowProvider>(context,listen: false);
     return Scaffold(
       body:  SingleChildScrollView(
@@ -318,6 +318,7 @@ Future<DateTime?>selectedDate(BuildContext context) async{
 final initalDate=DateTime.now();
 final day1=initalDate.add(const Duration(days:2));
 log("okey ramees$day1");
+// ignore: non_constant_identifier_names
 final FirstDate=initalDate.subtract(const Duration(days: 365 * 100));
 final lastDate=FirstDate.add(const Duration(days: 365 * 200));
 

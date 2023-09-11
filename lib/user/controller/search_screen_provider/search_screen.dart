@@ -58,6 +58,7 @@ notifyListeners();
  searchList=(values["data"] as List).map((e) => Details.fromJson(e)).toList();
 
  movieSearch(query);
+ // ignore: use_build_context_synchronously
  indexListValueAdding(context);
 // log("oke molu");
  

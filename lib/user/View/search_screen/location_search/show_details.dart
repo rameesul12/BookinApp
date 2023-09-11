@@ -3,7 +3,6 @@
 
 import 'package:bookingapp/user/variables/colors.dart';
 import 'package:bookingapp/user/variables/sizedbox.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic_plus/flutter_neumorphic.dart';
 import 'package:provider/provider.dart';
 import 'package:text_scroll/text_scroll.dart';
@@ -88,7 +87,7 @@ class NeumorphicWidgetClass extends StatelessWidget {
         height: size.height * 0.3,
         width: size.width,
         child: Neumorphic(
-          padding: EdgeInsets.all(10),
+          padding:const EdgeInsets.all(10),
           style: NeumorphicStyle(
               color: textFieldBackground,
               intensity: 5,

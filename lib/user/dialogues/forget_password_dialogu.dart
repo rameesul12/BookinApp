@@ -12,7 +12,7 @@ import 'package:bookingapp/user/variables/colors.dart';
 import 'package:bookingapp/user/variables/sizedbox.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../controller/loginPageprovider.dart';
+import '../controller/login_page_provider.dart';
 import 'dialogue_functions.dart';
 
 class DialogueProvider extends ChangeNotifier{

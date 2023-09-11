@@ -60,11 +60,11 @@ class SettingPage extends StatelessWidget {
               ],
             )),
          ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
+          const  Padding(
+              padding:  EdgeInsets.all(8.0),
               child: Align(
                        alignment: Alignment.centerLeft,
-                      child: const   Text("Support And About",style: TextStyle(color:colorTextwhite),)),
+                      child:    Text("Support And About",style: TextStyle(color:colorTextwhite),)),
             ),
          Padding(
            padding: const EdgeInsets.all(8.0),
@@ -74,7 +74,7 @@ class SettingPage extends StatelessWidget {
                  color: textFieldBackground,
                  borderRadius: BorderRadius.circular(15)
               ),
-            child: Column(
+            child: const Column(
               children: [
                 ListTileValue(icons: Icons.person_2_outlined, title: "Help And Support"),
               ListTileValue(icons: Icons.security, title: "Terms And Support"),
@@ -82,9 +82,9 @@ class SettingPage extends StatelessWidget {
             )),
          ),
           sizedH10,
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: const  Align(
+          const Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Align(
              alignment: Alignment.centerLeft,
             child: Text("Actions",style: TextStyle(color:colorTextwhite),)),
           ),
@@ -96,7 +96,7 @@ class SettingPage extends StatelessWidget {
                  color: textFieldBackground,
                  borderRadius: BorderRadius.circular(15)
               ),
-            child: Column(
+            child:const Column(
               children: [
                 ListTileValue(icons: Icons.login, title: "Log out"),
               

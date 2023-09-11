@@ -1,4 +1,4 @@
-import 'package:bookingapp/user/View/loginPages/loginPage.dart';
+import 'package:bookingapp/user/View/loginPages/login_page.dart';
 import 'package:bookingapp/user/variables/sizedbox.dart';
 import 'package:flutter/material.dart';
 
@@ -35,10 +35,10 @@ class UserLogin extends StatelessWidget {
                       Navigator.push(context, MaterialPageRoute(builder:(context) =>const LoginPage() ,));
                  
                   },
-                  child: Text('Login'),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: buttonColor,
                   ),
+                  child:const Text('Login'),
                 )),
             sizedH30,
             SizedBox(
@@ -48,15 +48,15 @@ class UserLogin extends StatelessWidget {
                   onPressed: () {
                   
                   },
-                  child:const Text(
-                    'Sighnup',
-                    style: TextStyle(color: textwhite),
-                  ),
                   style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.transparent,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20),
-                          side: BorderSide(color: Colors.white))),
+                          side:const BorderSide(color: Colors.white))),
+                  child:const Text(
+                    'Sighnup',
+                    style: TextStyle(color: textwhite),
+                  ),
                 )),
             sizedH30,
             sizedH60,

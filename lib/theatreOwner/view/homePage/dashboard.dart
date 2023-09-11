@@ -50,7 +50,7 @@ class HomePage extends StatelessWidget {
                       lottieshowing(context);
                       await provider.getScreen(context);
                      Navigator.pop(context);
-                        Navigator.push(context,MaterialPageRoute(builder: (context) => ScreenManagment(),));
+                        Navigator.push(context,MaterialPageRoute(builder: (context) =>const ScreenManagment(),));
                      },
                       child:const GridviewCard(
                         image: 'assets/images/clapperboard.png',

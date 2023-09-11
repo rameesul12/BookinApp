@@ -1,9 +1,11 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'dart:developer';
+
 import 'package:bookingapp/common/dialogues.dart';
-import 'package:bookingapp/theatreOwner/view/loginPages/loginPage.dart';
+import 'package:bookingapp/theatreOwner/view/loginPages/login_page.dart';
 import 'package:bookingapp/user/View/homePage/home.dart';
-import 'package:bookingapp/user/View/loginPages/loginPage.dart';
+import 'package:bookingapp/user/View/loginPages/login_page.dart';
 import 'package:bookingapp/user/controller/movie_pages_provider/home_page_providerr.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
@@ -48,15 +50,17 @@ class FirstLoginPage extends StatelessWidget {
                   child: ElevatedButton(
                     onPressed: () async{
                       lottieshowing(context);
-                      userGetLogin(context);
-                     // Provider.of<FireBaseFunctionProvider>(context,listen: false).
                     await  Provider.of<MoviesProvider>(context,listen: false).homeGetMovies(context);
+                     Navigator.pop(context);
+                      userGetLogin(context);
+    
+                     // Provider.of<FireBaseFunctionProvider>(context,listen: false).
                     //  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) =>const UserLogin() ,));
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: buttonColor,
                     ),
-                    child: const Text('Login As a user',style: TextStyle(color: textwhite),),
+                    child: const Text('Login As A User',style: TextStyle(color: textwhite),),
                   )),
             ),
             sizedH30,
@@ -73,7 +77,7 @@ class FirstLoginPage extends StatelessWidget {
                       backgroundColor: Colors.transparent,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20),
-                          side: BorderSide(color: Colors.white))),
+                          side:const BorderSide(color: Colors.white))),
                   child:const Text(
                     'Login as Theatre Owner',
                     style: TextStyle(color: textwhite),
@@ -81,10 +85,10 @@ class FirstLoginPage extends StatelessWidget {
                 )),
             sizedH30,
             sizedH60,
-            const Text(
-              'continue as a guest?',
-              style: TextStyle(color: textwhite),
-            )
+            // const Text(
+            //   'continue as a guest?',
+            //   style: TextStyle(color: textwhite),
+            // )
           ],
         ),
       ),
@@ -93,6 +97,7 @@ class FirstLoginPage extends StatelessWidget {
 
    Future<void> getlogged(BuildContext context)async{
 await Future.delayed(const Duration(seconds: 2));
+  // ignore: non_constant_identifier_names
   final SharedPreferences shared_preferences= await SharedPreferences.getInstance();
   bool? value=shared_preferences.getBool('isLogged');
 
@@ -111,9 +116,11 @@ await Future.delayed(const Duration(seconds: 2));
  Future userGetLogin(BuildContext context)async{
 SharedPreferences preferences=await SharedPreferences.getInstance();
   
-final value = preferences.getBool("userLogin");
+var data = preferences.getBool("userLogin");
+
+log(data.toString());
  
- if (value==true) {
+ if (data==true) {
    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) =>const HomeScreen(),));
  }else{
   Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) =>const LoginPage(),));

@@ -2,7 +2,7 @@
 
 import 'dart:developer';
 import 'package:bookingapp/common/dialogues.dart';
-import 'package:bookingapp/user/View/dataAndTime/dateAndTime.dart';
+import 'package:bookingapp/user/View/dataAndTime/date_and_time.dart';
 import 'package:bookingapp/user/View/moviesInfo/widgets/cast_widgets.dart';
 import 'package:bookingapp/user/controller/movie_pages_provider/home_page_providerr.dart';
 import 'package:bookingapp/user/variables/colors.dart';
@@ -200,7 +200,7 @@ class MoviesInfo extends StatelessWidget {
 //physics:const NeverScrollableScrollPhysics(),
                         shrinkWrap: true,
                          separatorBuilder: (context, index) => sizedH10,
-                         itemCount: 6,
+                         itemCount: movieInfo.castList.length>=6?6:movieInfo.castList.length,
                          itemBuilder: (context, index) {
                            return  CastView(size: size, name: movieInfo.castList[index].name!, imagePath:movieInfo.castList[index].profilePath!, originalName: movieInfo.castList[index].originalName!,);
                           

@@ -20,7 +20,7 @@ class SeatsModelClass {
     });
 
     factory SeatsModelClass.fromJson(Map<String, dynamic> json) => SeatsModelClass(
-        success: json["success"],
+        success: json["success"]??false,
         message: json["message"],
         data: Data.fromJson(json["data"]),
     );
@@ -55,6 +55,7 @@ class Data {
         "showData": showData.toJson(),
     };
 }
+
 
 class Screen {
     String id;
@@ -104,7 +105,7 @@ class Screen {
     };
 }
 
-class Seats {
+class Seats{
     String id;
     List<Date> dates;
 
@@ -165,6 +166,7 @@ class Seat {
 }
 
 enum SeatStatus {
+    // ignore: constant_identifier_names
     AVAILABLE
 }
 

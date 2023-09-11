@@ -81,7 +81,7 @@ class OtpVerificationPage extends StatelessWidget {
 TextButton(onPressed: ()async{
   await  Provider.of<OtpPageProvider>(context,listen: false).otpResend(context);
 }, child:const Text('Resend Otp',style: TextStyle(color: textwhite),)),
-                 Divider(color: textwhite), 
+               const  Divider(color: textwhite), 
                  ],) ),
                 
                   sizedH10,

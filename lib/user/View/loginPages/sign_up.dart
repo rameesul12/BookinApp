@@ -1,5 +1,5 @@
 import 'package:bookingapp/common/dialogues.dart';
-import 'package:bookingapp/user/Model/loginAnd_SignUp/login_PageModel.dart';
+import 'package:bookingapp/user/Model/loginAnd_SignUp/login_page_model.dart';
 import 'package:bookingapp/user/core/textformfield.dart';
 import 'package:bookingapp/user/controller/login_And_Signpages/signup_and_otp.dart';
 import 'package:bookingapp/user/dialogues/dialogue_functions.dart';

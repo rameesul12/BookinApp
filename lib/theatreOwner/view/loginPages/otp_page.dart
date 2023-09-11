@@ -1,6 +1,6 @@
 import 'package:bookingapp/common/dialogues.dart';
 import 'package:bookingapp/theatreOwner/dialogues/validation_function.dart';
-import 'package:bookingapp/user/View/loginPages/loginPage.dart';
+import 'package:bookingapp/user/View/loginPages/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:pinput/pinput.dart';
@@ -21,28 +21,28 @@ class OwnerOtpPage extends StatelessWidget {
 
     final Size size = MediaQuery.of(context).size;
     final defaultPinTheme = PinTheme(
-      margin: EdgeInsets.only(right: 8),
+      margin:const EdgeInsets.only(right: 8),
       width: 39,
       height: 46,
-      textStyle: TextStyle(
+      textStyle:const TextStyle(
           fontSize: 20,
           color: Color.fromRGBO(30, 60, 87, 1),
           fontWeight: FontWeight.w600),
       decoration: BoxDecoration(
         color: Colors.white,
-        border: Border.all(color: Color.fromRGBO(234, 239, 243, 1)),
+        border: Border.all(color: const Color.fromRGBO(234, 239, 243, 1)),
         borderRadius: BorderRadius.circular(10),
       ),
     );
 
     final focusedPinTheme = defaultPinTheme.copyDecorationWith(
-      border: Border.all(color: Color.fromRGBO(114, 178, 238, 1)),
+      border: Border.all(color:const Color.fromRGBO(114, 178, 238, 1)),
       borderRadius: BorderRadius.circular(8),
     );
 
     final submittedPinTheme = defaultPinTheme.copyWith(
       decoration: defaultPinTheme.decoration!.copyWith(
-        color: Color.fromRGBO(234, 239, 243, 1),
+        color:const Color.fromRGBO(234, 239, 243, 1),
       ),
     );
 

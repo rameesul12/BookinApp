@@ -25,7 +25,7 @@ class ScreenHomeShimmer extends StatelessWidget {
               height: size.height*0.71,
               color:const Color.fromARGB(255, 48, 45, 45),
               child: Shimmer.fromColors(
-          baseColor: Colors.white54,
+          baseColor: Colors.black54,
           highlightColor: const Color.fromARGB(255, 112, 111, 103),
           child: Padding(
             padding: const EdgeInsets.all(10.0),
@@ -88,23 +88,25 @@ class ScreenHomeShimmer extends StatelessWidget {
                 sizedH10,
                 Row(
                     children: [
-                      SizedBox(
-                        width: size.width,
-                        height: size.height*0.26,
-                        child: ListView.separated(
-                          shrinkWrap: true,
-                           physics:const AlwaysScrollableScrollPhysics(),
-                          scrollDirection: Axis.horizontal,
-                          itemCount: 3,
-                          separatorBuilder: (context, index) => sizedW10,
-                          itemBuilder: (context, index) {
-                          return Container(
-                        //  height: size.height*0.2,
-                          width: size.width*0.4,
-                          color: textwhite,
-                               );
-                            
-                          },
+                      Expanded(
+                        child: SizedBox(
+                          width: size.width,
+                          height: size.height*0.26,
+                          child: ListView.separated(
+                            shrinkWrap: true,
+                             physics:const AlwaysScrollableScrollPhysics(),
+                            scrollDirection: Axis.horizontal,
+                            itemCount: 3,
+                            separatorBuilder: (context, index) => sizedW10,
+                            itemBuilder: (context, index) {
+                            return Container(
+                          //  height: size.height*0.2,
+                            width: size.width*0.4,
+                            color: textwhite,
+                                 );
+                              
+                            },
+                          ),
                         ),
                       ),
                     ],

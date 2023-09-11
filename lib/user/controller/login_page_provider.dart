@@ -46,7 +46,7 @@ class LoginProvider extends ChangeNotifier {
       Map<String,dynamic>tokenSaver=jsonDecode(response.body);
       String token=tokenSaver['token'];
       secureStorage.write(key: "Token", value: token);
-      log("ram$token");
+     // log("ram$token");
       
       
       isloading = false;

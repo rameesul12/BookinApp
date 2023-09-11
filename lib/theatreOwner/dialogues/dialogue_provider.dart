@@ -13,7 +13,7 @@ static bookingData({required BuildContext context,required BookingDetails data,i
       backgroundColor: textFieldBackground,
       title: const Text("Booking Details",style: TextStyle(color: textwhite),),
       children: [
-    Text("===============================",style: TextStyle(color: Colors.white60),),
+   const Text("===============================",style: TextStyle(color: Colors.white60),),
     sizedH20,
     Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -22,34 +22,34 @@ static bookingData({required BuildContext context,required BookingDetails data,i
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Column(
+              const Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                  
-                 const Text("Screen:",style: TextStyle(color: colorTextwhite),),
-                const Text("Languege:",style: TextStyle(color: colorTextwhite),),
-                const Text("Seats :",style: TextStyle(color: colorTextwhite),),
-                const Text("Date :",style: TextStyle(color: colorTextwhite),),
-                const Text("Show Time :",style: TextStyle(color: colorTextwhite),),
-                const Text("Booking Id :",style: TextStyle(color: colorTextwhite),),
-                const Text("Sub Total :",style: TextStyle(color: colorTextwhite),),
-                const Text("Convenience fees :",style: TextStyle(color: colorTextwhite),),
+                 Text("Screen:",style: TextStyle(color: colorTextwhite),),
+                Text("Languege:",style: TextStyle(color: colorTextwhite),),
+                Text("Seats :",style: TextStyle(color: colorTextwhite),),
+                Text("Date :",style: TextStyle(color: colorTextwhite),),
+                Text("Show Time :",style: TextStyle(color: colorTextwhite),),
+                Text("Booking Id :",style: TextStyle(color: colorTextwhite),),
+                Text("Sub Total :",style: TextStyle(color: colorTextwhite),),
+                Text("Convenience fees :",style: TextStyle(color: colorTextwhite),),
                 sizedH10,
-                const Text("Total:",style: TextStyle(color: textwhite,fontWeight: FontWeight.bold),),
+                Text("Total:",style: TextStyle(color: textwhite,fontWeight: FontWeight.bold),),
                 ]),
               //  column
              Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                   
-               Text("${data.screen}",overflow:TextOverflow.ellipsis,style: TextStyle(color: colorTextwhite),),
-                 Text("${data.language} :",overflow: TextOverflow.ellipsis,style: TextStyle(color: colorTextwhite),),
-                 Text(data.selectedSeats[0].id,overflow: TextOverflow.ellipsis,style: TextStyle(color: colorTextwhite),),
-                 Text("${data.date} :".substring(0,10),style: TextStyle(color: colorTextwhite),),
-                 Text("${data.showTime} :",style: TextStyle(color: colorTextwhite),),
-                 Text("${data.bookingId} :",style: TextStyle(color: colorTextwhite),),
-                 Text("${data.subtotal }:",style: TextStyle(color: colorTextwhite),),
-                 Text("${data.fee}:",style: TextStyle(color: colorTextwhite),),
+               Text("${data.screen}",overflow:TextOverflow.ellipsis,style:const TextStyle(color: colorTextwhite),),
+                 Text("${data.language} :",overflow: TextOverflow.ellipsis,style:const TextStyle(color: colorTextwhite),),
+                 Text(data.selectedSeats[0].id,overflow: TextOverflow.ellipsis,style:const TextStyle(color: colorTextwhite),),
+                 Text("${data.date} :".substring(0,10),style:const TextStyle(color: colorTextwhite),),
+                 Text("${data.showTime} :",style:const TextStyle(color: colorTextwhite),),
+                 Text("${data.bookingId} :",style:const TextStyle(color: colorTextwhite),),
+                 Text("${data.subtotal }:",style:const TextStyle(color: colorTextwhite),),
+                 Text("${data.fee}:",style:const TextStyle(color: colorTextwhite),),
                 sizedH10,
                  Text("${data.total}",style:const TextStyle(color: textwhite,fontWeight: FontWeight.bold),),
 
@@ -63,7 +63,7 @@ static bookingData({required BuildContext context,required BookingDetails data,i
          
               Center(child: ElevatedButton(onPressed: (){Navigator.pop(context);},
               style: ElevatedButton.styleFrom(backgroundColor: Colors.blue,shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6))) 
-              , child: Text("Ok")))
+              , child:const Text("Ok")))
          
         ],
       ),

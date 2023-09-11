@@ -2,6 +2,8 @@
 //
 //     final searchShowDisplaying = searchShowDisplayingFromJson(jsonString);
 
+// ignore_for_file: constant_identifier_names
+
 import 'dart:convert';
 
 SearchShowDisplaying searchShowDisplayingFromJson(String str) => SearchShowDisplaying.fromJson(json.decode(str));

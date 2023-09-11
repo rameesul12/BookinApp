@@ -1,11 +1,13 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:convert';
 import 'dart:developer';
 
 import 'package:bookingapp/common/dialogues.dart';
-import 'package:bookingapp/user/View/loginPages/otpPage.dart';
+import 'package:bookingapp/user/View/loginPages/otp_page.dart';
 import 'package:bookingapp/user/services/user_Authentication/resend_otp.dart';
 import 'package:flutter/material.dart';
-import '../services/user_Authentication/otpSignup.dart';
+import '../services/user_Authentication/otp_signup.dart';
 import 'package:http/http.dart' as http;
 
 class OtpPageProvider extends ChangeNotifier{

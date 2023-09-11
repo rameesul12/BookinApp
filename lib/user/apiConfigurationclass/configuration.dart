@@ -19,6 +19,8 @@ static const getSearch='get-search/';
 static const theatreLocation='get-theatreShows';
 static const getTheatres='get-dates';
 static const getSeats='get-seats';
+static String payment='get-payment';
+static String getCurrentUser='getcurrentuser';
 
 
 

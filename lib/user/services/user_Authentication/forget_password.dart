@@ -18,7 +18,8 @@ import '../../../common/secure_storage/flutter_securestorage.dart';
 //====================//====================
 
 Future getOtp(BuildContext context,String email  )async{
-  log("entho");
+ // log("entho");
+  // ignore: no_leading_underscores_for_local_identifiers
   final _token=await storegeRead();
   log("$_token");
    

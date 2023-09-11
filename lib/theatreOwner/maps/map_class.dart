@@ -1,4 +1,6 @@
 
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:async';
 
 import 'package:bookingapp/common/dialogues.dart';
@@ -51,7 +53,7 @@ class _HomePageState extends State<SelectLocation> {
       body: _buildBody(),
       //get a float button to click and go to current location
       floatingActionButton: Padding(
-        padding: EdgeInsets.only(left: 22),
+        padding:const EdgeInsets.only(left: 22),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -94,9 +96,9 @@ class _HomePageState extends State<SelectLocation> {
   Widget _showDraggedAddress() {
     return SafeArea(
       child: Padding(
-        padding: EdgeInsets.all(10),
+        padding:const EdgeInsets.all(10),
         child: Container(
-          padding: EdgeInsets.symmetric(horizontal:15),
+          padding:const EdgeInsets.symmetric(horizontal:15),
           width: MediaQuery.of(context).size.width,
           height: 60,
           decoration: BoxDecoration(

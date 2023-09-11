@@ -2,6 +2,8 @@
 //
 //     final showAdding = showAddingFromJson(jsonString);
 
+// ignore_for_file: constant_identifier_names
+
 import 'dart:convert';
 import 'dart:developer';
 

@@ -1,7 +1,7 @@
 
 
 import 'package:json_annotation/json_annotation.dart';
-  part 'login_PageModel.g.dart';
+  part 'login_page_model.g.dart';
 
 @JsonSerializable()
 class UserSighnUp  {

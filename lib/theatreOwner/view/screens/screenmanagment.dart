@@ -1,7 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:bookingapp/common/dialogues.dart';
-import 'package:bookingapp/theatreOwner/view/screens/screenAdding.dart';
+import 'package:bookingapp/theatreOwner/view/screens/screen_adding.dart';
 import 'package:bookingapp/user/variables/colors.dart';
 import 'package:bookingapp/user/variables/sizedbox.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +16,7 @@ class ScreenManagment extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
- final provider=Provider.of<AddScreenProvider>(context,listen: false);
+//  final provider=Provider.of<AddScreenProvider>(context,listen: false);
 
    
     return Scaffold(
@@ -111,7 +111,7 @@ class ScreenAddingData extends StatelessWidget {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
                                    sizedW30,
-                                   Icon(Icons.chair_alt_outlined,color: textwhite,),
+                                  const Icon(Icons.chair_alt_outlined,color: textwhite,),
                                   const Text("Screen Number : ",style: TextStyle(color: textwhite,fontWeight: FontWeight.bold),),
                                 //Text(" 1",style: TextStyle(color: textwhite,fontWeight: FontWeight.bold),),
                                   Text("${data.screenInfo[index].screen}",style:const TextStyle(color: textwhite),),

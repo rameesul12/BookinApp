@@ -6,14 +6,14 @@ import 'package:bookingapp/user/View/homePage/widgets/shimmer_widgets.dart';
 import 'package:bookingapp/user/View/search_screen/search_screen.dart';
 import 'package:bookingapp/user/View/settings/settings.dart';
 import 'package:bookingapp/user/controller/movie_pages_provider/home_page_providerr.dart';
-import 'package:bookingapp/user/View/moviesInfo/selectedMovies.dart';
+import 'package:bookingapp/user/View/moviesInfo/selected_movies.dart';
 import 'package:bookingapp/user/variables/colors.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../controller/current_location/current_location.dart';
 import '../../controller/fireBbse_Functions/firebase_function.dart';
-import '../../core/couponContainer/coupenCard.dart';
+import '../../core/couponContainer/coupen_card.dart';
 import '../../variables/sizedbox.dart';
 import '../latestMovies/trending.dart';
 
@@ -50,7 +50,7 @@ class HomeScreen extends StatelessWidget {
                       Image.asset('assets/images/placeholder.png',height: size.height*0.04,
                       width: size.width*0.04,
                       ),
-                      Text(locationData.currentAddress,style:const TextStyle(color: Colors.white70,fontWeight: FontWeight.bold,fontSize: 20),),
+                     Text(locationData.currentAddress,style:const TextStyle(color: Colors.white70,fontWeight: FontWeight.bold,fontSize: 20),),
                       SizedBox(
                         width: size.width*0.3,
                       ),

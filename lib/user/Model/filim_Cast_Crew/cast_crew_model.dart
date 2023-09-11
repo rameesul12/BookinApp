@@ -2,6 +2,8 @@
 //
 //     final movieCast = movieCastFromJson(jsonString);
 
+// ignore_for_file: constant_identifier_names
+
 import 'dart:convert';
 
 MovieCast movieCastFromJson(String str) => MovieCast.fromJson(json.decode(str));

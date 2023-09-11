@@ -1,12 +1,17 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'package:bookingapp/common/dialogues.dart';
+import 'package:bookingapp/common/secure_storage/flutter_securestorage.dart';
+import 'package:bookingapp/user/services/api_call_functions.dart/api_call_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import '../../View/loginPages/otpPage.dart';
+import '../../Model/current_user/current_user_model.dart';
+import '../../View/loginPages/otp_page.dart';
 import '../../apiConfigurationclass/configuration.dart';
 
 class LoginPageProvider with ChangeNotifier{
+
+  CurrentUserModal? userData;
 
   Future createAccount({
   required  String username,
@@ -57,6 +62,30 @@ class LoginPageProvider with ChangeNotifier{
       getError(e.toString(),context);
     }
       
+  }
+
+  //get current user
+
+  Future currentUserGet() async{
+
+
+    final http.Response response;
+    String url=ApiConfiguration.getCurrentUser;
+    final token=await storageUser();
+    log(url);
+  //  log(token);
+  log("oke");
+
+
+    response =await ApiFunctions.apiGetFunction(url, token);
+    log(response.body);
+    final status=jsonDecode(response.body)as Map<String,dynamic>;
+
+  if (response.statusCode==200) {
+    userData=CurrentUserModal.fromJson(status);
+    log(userData.toString());
+  }
+   
   }
   }
 

@@ -147,6 +147,7 @@ class Seat {
 }
 
 enum SeatStatus {
+    // ignore: constant_identifier_names
     AVAILABLE
 }
 

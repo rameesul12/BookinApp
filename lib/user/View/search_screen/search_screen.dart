@@ -14,7 +14,7 @@ import 'package:provider/provider.dart';
 import '../../../common/dialogues.dart';
 import '../../controller/movie_pages_provider/home_page_providerr.dart';
 import '../../controller/search_screen_provider/search_screen.dart';
-import '../moviesInfo/selectedMovies.dart';
+import '../moviesInfo/selected_movies.dart';
 import 'location_search/location_theatre.dart';
 
 class SearchScreen extends StatelessWidget {
