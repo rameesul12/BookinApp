@@ -21,11 +21,19 @@ class AddShowProvider extends ChangeNotifier {
   TextEditingController endDateController = TextEditingController();
   TextEditingController ticketPriceController = TextEditingController();
   TextEditingController screenNumberController = TextEditingController();
+  String screen='';
   bool isSearch=false;
    List<SearchResult>movieList=[];
    List<SearchResult>list=[];
   // int? index;
   List<ShowDetails>shows=[];
+
+
+  valueChanging(String value){
+
+    screenNumberController.text=value;
+    notifyListeners();
+  }
  
   
 
@@ -35,7 +43,7 @@ class AddShowProvider extends ChangeNotifier {
 //==============================
 
   Future addShowApi(BuildContext context) async {
-  final currentOwner= Provider.of<AddScreenProvider>(context,listen: false).currentOwner;
+  final owner= Provider.of<AddScreenProvider>(context,listen: false);
 
    final token=await storegeRead();
 
@@ -49,7 +57,7 @@ class AddShowProvider extends ChangeNotifier {
     int screen=int.parse(_screen);
    
     final payload = {  
-      "owner":currentOwner,
+      "owner":{"_id": owner.currentOwner!["_id"]},
       "inputValue":movieNameController.text,
       "time":timer,
       "startDate":startDateController.text,

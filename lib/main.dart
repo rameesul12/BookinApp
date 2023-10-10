@@ -10,6 +10,7 @@ import 'package:bookingapp/user/controller/movie_pages_provider/home_page_provid
 import 'package:bookingapp/user/controller/otp_pageprovider.dart';
 import 'package:bookingapp/user/controller/login_page_provider.dart';
 import 'package:bookingapp/user/controller/login_And_Signpages/signup_and_otp.dart';
+import 'package:bookingapp/user/controller/razor_pay/razor_pay_controller.dart';
 import 'package:bookingapp/user/controller/search_screen_provider/search_screen.dart';
 import 'package:bookingapp/user/controller/theatre_showing/theatre_showing_controller.dart';
 import 'package:bookingapp/user/dialogues/forget_password_dialogu.dart';
@@ -18,18 +19,20 @@ import 'package:bookingapp/user/variables/colors.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import 'theatreOwner/controller/provider/owner_Login/owner_signup.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
+
 
 void main() async{
    WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-);
+ //  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform,);
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+
+  
   const MyApp({super.key});
 
   // This widget is the root of your application.
@@ -52,11 +55,11 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => SearchScreenProvider(),),
         ChangeNotifierProvider(create: (context) => CurrentLocation(),),
         ChangeNotifierProvider(create: (context) => TheatreShowingController(),),
-      //  ChangeNotifierProvider(create: (context) => RazorPayProvider(),)
+        ChangeNotifierProvider(create: (context) => RazorPayController(),)
 
       ],
       child: MaterialApp(
-        title: 'Flutter Demo',
+        title: 'Book My Tickets',
         theme: ThemeData(
          scaffoldBackgroundColor:backgroundColor,
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),

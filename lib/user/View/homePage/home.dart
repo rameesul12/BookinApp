@@ -13,9 +13,11 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../controller/current_location/current_location.dart';
 import '../../controller/fireBbse_Functions/firebase_function.dart';
+import '../../controller/razor_pay/razor_pay_controller.dart';
 import '../../core/couponContainer/coupen_card.dart';
 import '../../variables/sizedbox.dart';
 import '../latestMovies/trending.dart';
+import '../show_ticket/screen_show_tickets.dart';
 
 
 class HomeScreen extends StatelessWidget {
@@ -42,28 +44,60 @@ class HomeScreen extends StatelessWidget {
                 return SizedBox(
                   height: size.height*0.1,
                   width: size.width,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                 //   crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      sizedW10,
-                      Image.asset('assets/images/placeholder.png',height: size.height*0.04,
-                      width: size.width*0.04,
-                      ),
-                     Text(locationData.currentAddress,style:const TextStyle(color: Colors.white70,fontWeight: FontWeight.bold,fontSize: 20),),
-                      SizedBox(
-                        width: size.width*0.3,
-                      ),
-                      InkWell(
-                  onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) =>const SearchScreen(),));
-                  },
-                  child: SizedBox(
-                    height:30 ,
-                    width: size.width*0.2,
-                    child: Image.asset('assets/images/loupe.png')),
-                ),
-                    ],
+                  child: SafeArea(
+                    child: Stack(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                                   //   crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            sizedW10,
+                            Image.asset('assets/images/placeholder.png',height: size.height*0.04,
+                            width: size.width*0.04,
+                            ),
+                           Text(locationData.currentAddress,style:const TextStyle(color: Colors.white70,fontWeight: FontWeight.bold,fontSize: 20),),
+                            SizedBox(
+                              width: size.width*0.2,
+                            ),
+                            Consumer<RazorPayController>(
+                              builder: (context,data,child) {
+                                return data.isLoaded==false? InkWell(
+                                  onTap: () {
+                                    Navigator.push(context, MaterialPageRoute(builder: (context) => const SchowTicketsScreen(),));
+                                  },
+                                  child: Image.asset('assets/images/ticket.png',fit: BoxFit.contain,
+                                  width: size.width*0.08,
+                                  ),
+                                ):const Text("ta",style: TextStyle(color: backgroundColor),)  ;
+                              }
+                            ),
+                            InkWell(
+                        onTap: () {
+                          Navigator.push(context, MaterialPageRoute(builder: (context) =>const SearchScreen(),));
+                        },
+                        child: SizedBox(
+                          height:30 ,
+                          width: size.width*0.2,
+                          child: Image.asset('assets/images/loupe.png')),
+                                  ),
+                                   
+                          ],
+                        ),
+                         Positioned(
+                              right: 90,
+                              top: 08,
+                              
+                              child:   Consumer<RazorPayController>(
+                              builder: (context,data,child) {
+                                return CircleAvatar(
+                                    radius: 4,
+                                    backgroundColor:data.isLoaded==false? Colors.red:backgroundColor,
+                                  );
+                                }
+                              ),
+                            ),
+                      ],
+                    ),
                   ),
                 );
               }
@@ -87,43 +121,40 @@ class HomeScreen extends StatelessWidget {
                         builder: (context, bannerData, child) {
                       return SizedBox(
                         height: size.height*0.25,
+                    //  width: size.width*0.8,
                         child: ListView.separated(
                             scrollDirection: Axis.horizontal,
                             itemCount: bannerData.bannerList.length,
                             separatorBuilder: (context, index) =>const Divider(color: colorTextwhite),
                             itemBuilder: (context, index) {
-                              return Stack(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(horizontal: 10),
-                                    child: Container(
-                                      height: size.height * 0.4,
-                                      width: MediaQuery.of(context).size.width,
-                                      margin: const EdgeInsets.symmetric(
-                                          horizontal: 5.0),
-                                      decoration:  const BoxDecoration(
-                                       // borderRadius: BorderRadiusDirectional.circular(20),
-                                          color: backgroundColor),
-                                      //   child: Text('text ', style: TextStyle(fontSize: 16.0),)
-                                      child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(10),
-                                        child: Image.network(
-                                          "${bannerData.bannerList[index].imagePath}",
-                                          fit: BoxFit.fill,
-                                          loadingBuilder:
-                                              (context, child, loadingProgress) {
-                                            if (loadingProgress == null) {
-                                              return child;
-                                            } else {
-                                              return const Center(child: CircularProgressIndicator(),);
-                                            }
-                                          },
-                                        ),
-                                      ),
+                              return Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 10),
+                                child: Container(
+                                  height: size.height * 0.4,
+                                  
+                                  width: MediaQuery.of(context).size.width*0.9,
+                                  margin: const EdgeInsets.symmetric(
+                                      horizontal: 5.0),
+                                  decoration:  const BoxDecoration(
+                                   // borderRadius: BorderRadiusDirectional.circular(20),
+                                      color: backgroundColor),
+                                  //   child: Text('text ', style: TextStyle(fontSize: 16.0),)
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(10),
+                                    child: Image.network(
+                                      "${bannerData.bannerList[index].imagePath}",
+                                      fit: BoxFit.cover,
+                                      loadingBuilder:
+                                          (context, child, loadingProgress) {
+                                        if (loadingProgress == null) {
+                                          return child;
+                                        } else {
+                                          return const Center(child: CircularProgressIndicator(),);
+                                        }
+                                      },
                                     ),
                                   ),
-                                 
-                                ],
+                                ),
                               );
                             }),
                       );

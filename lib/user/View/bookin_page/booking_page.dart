@@ -1,17 +1,22 @@
+// ignore_for_file: unrelated_type_equality_checks
+
+
 import 'package:bookingapp/user/variables/colors.dart';
 import 'package:bookingapp/user/variables/sizedbox.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter_neumorphic_plus/flutter_neumorphic.dart';
 import 'package:provider/provider.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
-
+import '../../controller/razor_pay/razor_pay_controller.dart';
 import '../../controller/theatre_showing/theatre_showing_controller.dart';
-import '../../services/razorpay/razorpay_api_call.dart';
 import '../show_ticket/screen_show_tickets.dart';
+import '../voucher_screen/voucher_screen.dart';
+
+
 
 class BookingPage extends StatefulWidget {
-  const BookingPage({Key? key, required this.movieName}) : super(key: key);
+  const BookingPage({Key? key, this.movieName}) : super(key: key);
 
-  final String movieName;
+  final String? movieName;
 
   @override
   State<BookingPage> createState() => _BookingPageState();
@@ -58,11 +63,13 @@ class _BookingPageState extends State<BookingPage> {
                       width: size.width * 0.7,
                       child: Center(
                           child: Text(
-                        widget.movieName,
+                        widget.movieName!,
                         overflow: TextOverflow.ellipsis,
                         style:
                             const TextStyle(color: Colors.white, fontSize: 16),
-                      )))
+                      )
+                      )
+                      )
                 ],
               ),
             ),
@@ -249,7 +256,8 @@ class _BookingPageState extends State<BookingPage> {
                                 border: Border.all(width: 1, color: textBlack),
                                 color: Colors.yellow),
                           ),
-                        )),
+                        )
+                        ),
                   ),
                   Expanded(
                     child: SizedBox(
@@ -273,7 +281,38 @@ class _BookingPageState extends State<BookingPage> {
                   )
                 ],
               ),
-            )
+            ),
+             sizedH10,
+             Consumer<TheatreShowingController>(
+               builder: (context,buttonValue,child) {
+                 return NeumorphicButton(
+      onPressed: (){
+        
+        if (buttonValue.voucherLoaded==false && buttonValue.ticketCount.isNotEmpty) {
+          Navigator.push(context,MaterialPageRoute(builder: (context) =>const VoucherScreen(),));
+        }else if(buttonValue.ticketCount.isEmpty){
+             ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                              backgroundColor: Colors.red,
+                              content: Text("please select any seats")));
+        } else{
+           ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                              backgroundColor: Colors.red,
+                              content: Text("Voucher Already Added ")));
+        }
+      },
+      style: NeumorphicStyle(
+        depth: 2,
+        lightSource: LightSource.topLeft,
+        color:buttonValue.voucherLoaded ==false? Colors.blue:Colors.grey,
+        shape: NeumorphicShape.convex,
+      ),
+      child:buttonValue.voucherLoaded ==false? const Text('Apply Voucher',style: TextStyle(color: textwhite)): const Text('Voucher Added',style: TextStyle(color: textwhite))
+      
+    );
+              
+               }
+             )
+             
           ]),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: Padding(
@@ -285,15 +324,22 @@ class _BookingPageState extends State<BookingPage> {
               height: size.height * 0.06,
               child: FloatingActionButton(
                 backgroundColor: buttonColor,
-                onPressed: () async {
-                  // dynamic options = {
-                  //   'key': 'rzp_test_LS04j2FVS1akZj',
-                  //   'amount': value.tottalPrice * 100,
-                  //   'name': "BuyMyticket",
-                  //   'timeout': 300,
-                  // };
-                  // razorpay.open(options);
-                  Navigator.push(context, MaterialPageRoute(builder: (context) =>const SchowTicketsScreen(),));
+                onPressed: ()  {
+                  if (provider.ticketCount.isNotEmpty) {
+                    
+                  dynamic options = {
+                    'key': 'rzp_test_LS04j2FVS1akZj',
+                    'amount': value.tottalPrice * 100,
+                    'name': "BuyMyticket",
+                    'timeout': 300,
+                  };
+                  razorpay.open(options);
+                  }else{
+   ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                              backgroundColor: Colors.red,
+                              content: Text("please select any seats")));                  }
+          // await Provider.of<RazorPayController>(context,listen: false).razorPayResponse(context);
+                //  Navigator.push(context, MaterialPageRoute(builder: (context) => SchowTicketsScreen(),));
                 },
                 child: Center(
                   child: Text(
@@ -301,7 +347,8 @@ class _BookingPageState extends State<BookingPage> {
                     style: const TextStyle(color: textwhite),
                   ),
                 ),
-              ));
+              )
+              );
         }),
       ),
     );
@@ -314,8 +361,8 @@ class _BookingPageState extends State<BookingPage> {
   }
 
   _handlePaymentSuccess(PaymentSuccessResponse response) {
-       razorpaymentApi(context);
-    Navigator.push(context, MaterialPageRoute(builder: (context) =>  const SchowTicketsScreen(),));
+     Provider.of<RazorPayController>(context,listen: false).razorPayResponse(context);
+    Navigator.push(context, MaterialPageRoute(builder: (context) => const  SchowTicketsScreen(),));
   }
 
   void _handlePaymentError(PaymentFailureResponse response) {}

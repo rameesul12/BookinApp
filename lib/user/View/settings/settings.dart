@@ -1,8 +1,16 @@
 
-import 'package:bookingapp/user/View/settings/edit_profile.dart';
+// ignore_for_file: use_build_context_synchronously
+
+import 'package:bookingapp/user/View/loginPages/login_page.dart';
+import 'package:bookingapp/user/View/settings/widgets/help_and_support.dart';
+import 'package:bookingapp/user/View/settings/widgets/privacy.dart';
+import 'package:bookingapp/user/View/settings/widgets/terms_and_condition.dart';
+import 'package:bookingapp/user/View/settings/widgets/user/user_profile.dart';
 import 'package:bookingapp/user/variables/colors.dart';
 import 'package:bookingapp/user/variables/sizedbox.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SettingPage extends StatelessWidget {
   const SettingPage({super.key});
@@ -12,8 +20,6 @@ class SettingPage extends StatelessWidget {
     final Size size=MediaQuery.of(context).size;
    
     return Scaffold(
-      
-          
       
       body: Padding(
         padding:const  EdgeInsets.symmetric(horizontal: 10),
@@ -36,25 +42,30 @@ class SettingPage extends StatelessWidget {
            padding:  EdgeInsets.all(8.0),
            child: Align(
              alignment: Alignment.centerLeft,
-            child:    Text("Accounts",style: TextStyle(color:colorTextwhite),)),
+            child:Text("Accounts",style: TextStyle(color:colorTextwhite),)),
          ),
          Padding(
            padding: const EdgeInsets.all(8.0),
            child: Container(
-             height: size.height*0.28,
+             height: size.height*0.2,
             decoration: BoxDecoration(
                color: textFieldBackground,
                borderRadius: BorderRadius.circular(15)
             ),
             child: Column(
               children: [
-                InkWell(
-                   onTap: () {
+                 InkWell(
+                  onTap: () {
                      Navigator.push(context,MaterialPageRoute(builder: (context) =>const EditProfail(),));
-                   },
-                  child: const ListTileValue(icons: Icons.person_2_outlined, title: "Edit Profail")),
-            const  ListTileValue(icons: Icons.security, title: "Security"),
-             const   ListTileValue(icons: Icons.privacy_tip_outlined, title: "privacy"),
+                  },
+                  child: const  ListTileValue(icons: Icons.person_3_outlined, title: "Profail")),
+             //   const ListTileValue(icons: Icons.person_add_alt, title: "Edit Profail"),
+           
+             InkWell(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) =>const PrivacyPolicyScreen(),));
+              },
+              child: const   ListTileValue(icons: Icons.privacy_tip_outlined, title: "privacy")),
          
               
               ],
@@ -74,10 +85,18 @@ class SettingPage extends StatelessWidget {
                  color: textFieldBackground,
                  borderRadius: BorderRadius.circular(15)
               ),
-            child: const Column(
+            child:  Column(
               children: [
-                ListTileValue(icons: Icons.person_2_outlined, title: "Help And Support"),
-              ListTileValue(icons: Icons.security, title: "Terms And Support"),
+                InkWell(
+                  onTap: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) =>const HelpAndSupportScreen(),));
+                  },
+                  child:const ListTileValue(icons: Icons.person_2_outlined, title: "Help And Support")),
+              InkWell(
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) =>const TermsAndConditionScreen(),));
+                },
+                child:const ListTileValue(icons: Icons.security, title: "Terms And Support")),
            ],
             )),
          ),
@@ -96,14 +115,40 @@ class SettingPage extends StatelessWidget {
                  color: textFieldBackground,
                  borderRadius: BorderRadius.circular(15)
               ),
-            child:const Column(
-              children: [
-                ListTileValue(icons: Icons.login, title: "Log out"),
-              
-             
-              
-              ],
-            )),
+            child: InkWell(
+               onTap:  () async{
+                showDialog(context: context, 
+                builder: (context) {
+                  return SizedBox(
+                    height: size.height*0.3,
+                    child: SimpleDialog(
+                      backgroundColor: textFieldBackground,
+                      shape:Border.all(width: 1 ,style: BorderStyle.solid) ,
+                      title:const Text("Do You Want To Logout... ",style: TextStyle(color: textwhite,fontSize: 17,fontWeight: FontWeight.bold),),
+                      titlePadding:const EdgeInsets.all(10.0),
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            TextButton(onPressed: (){
+                              Navigator.pop(context);
+                            }, child:const Text('cancel',style: TextStyle(color: textwhite),)),
+                             TextButton(onPressed: (){
+                              FlutterSecureStorage storage=const FlutterSecureStorage();
+                              storage.delete(key: "Token");
+                              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) =>const LoginPage(),));
+                             }, child:const Text('Logout',style: TextStyle(color: textwhite),))
+                  
+                         
+                          ],
+                        )
+                      ],
+                    ),
+                  );
+                },);
+
+               },
+              child:const ListTileValue(icons: Icons.login, title: "Log out"))),
          ),
             
             ],
@@ -111,6 +156,11 @@ class SettingPage extends StatelessWidget {
         ),
       ),
     );
+
+  }
+    Future setUserLogin(bool value) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    preferences.setBool("userLogin", value);
   }
 }
 

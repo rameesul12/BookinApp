@@ -1,3 +1,7 @@
+// ignore_for_file: use_build_context_synchronously, no_leading_underscores_for_local_identifiers
+
+import 'dart:developer';
+
 import 'package:bookingapp/common/dialogues.dart';
 import 'package:bookingapp/theatreOwner/dialogues/validation_function.dart';
 import 'package:bookingapp/user/View/loginPages/login_page.dart';
@@ -12,7 +16,7 @@ import '../../model/owner_login/owner_signup.dart';
 import '../../controller/provider/owner_Login/owner_otp_page.dart';
 
 class OwnerOtpPage extends StatelessWidget {
-  OwnerOtpPage({super.key, this.loginDetails});
+ const OwnerOtpPage({super.key, this.loginDetails});
   final OwnerLoginModel? loginDetails;
 
   @override
@@ -97,7 +101,7 @@ class OwnerOtpPage extends StatelessWidget {
                     pinputAutovalidateMode: PinputAutovalidateMode.onSubmit,
                     length: 6,
                     showCursor: true,
-                    onCompleted: (pin) => print(pin),
+                    onCompleted: (pin) => log(pin),
                   ),
                 ],
               ),
@@ -132,7 +136,7 @@ class OwnerOtpPage extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => LoginPage(),
+                          builder: (context) => const LoginPage(),
                         ));
                     }
                   },

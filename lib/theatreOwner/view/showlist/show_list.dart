@@ -120,7 +120,7 @@ class ShowListDisplaying extends StatelessWidget {
                         children: [
                         const   Text("Start Date :",style: TextStyle(color: colorTextwhite,fontWeight: FontWeight.bold,fontSize: 18),),
                           sizedW20,
-                           Expanded(child:    Text("${showData.shows[index].startDate}".substring(0,10),style: TextStyle(color: colorTextwhite),)),
+                           Expanded(child:    Text("${showData.shows[index].startDate}".substring(0,10),style:const TextStyle(color: colorTextwhite),)),
                         ],
                       ),
                         Row(

@@ -27,7 +27,7 @@ class TheatreLoginPage  extends StatelessWidget {
             children: [
                sizedH120,
              const   Center(child: Text('Welcome',style: TextStyle(color: textwhite,fontSize: 60),)),
-              const  Text('Login to your create account',style:TextStyle(color: textwhite,fontWeight: FontWeight.w100),),
+              const  Text('Login to your created account',style:TextStyle(color: textwhite,fontWeight: FontWeight.w100),),
               sizedH60,
              
                  Padding(

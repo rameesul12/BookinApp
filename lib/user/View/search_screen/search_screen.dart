@@ -49,7 +49,7 @@ class SearchScreen extends StatelessWidget {
                 // obscureText: true,
                // focusNode:,
               
-              controller:query ,
+              controller:query,
                 textAlign: TextAlign.left,
               //  keyboardType:input ,
                 style:const  TextStyle(fontSize: 11,color: textwhite),
@@ -212,7 +212,7 @@ class SearchScreen extends StatelessWidget {
                                                itemBuilder:(context, index) {
                                                  return InkWell(
                                                   onTap: () async{
-                                                    log("amina");
+                                                  //  log("amina");
                                                     log("ramees${searchData.indexList[index]
                                                     }");
                                                      lottieshowing(context);

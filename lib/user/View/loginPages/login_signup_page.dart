@@ -54,16 +54,16 @@ class UserLogin extends StatelessWidget {
                           borderRadius: BorderRadius.circular(20),
                           side:const BorderSide(color: Colors.white))),
                   child:const Text(
-                    'Sighnup',
+                    'Signup',
                     style: TextStyle(color: textwhite),
                   ),
                 )),
             sizedH30,
             sizedH60,
-            const Text(
-              'continue as a guest?',
-              style: TextStyle(color: textwhite),
-            )
+            // const Text(
+            //   'continue as a guest?',
+            //   style: TextStyle(color: textwhite),
+            // )
           ],
         ),
       ),

@@ -22,6 +22,7 @@ TextEditingController columnController=TextEditingController();
 Map<String,dynamic>? currentOwner;
 List<ScreenDeatails>screenInfo=[];
 ScreenDeatails ? details;
+List<String>screens=[];
 
 
   getCurrentOwner(BuildContext context)async{
@@ -80,7 +81,8 @@ log("rameez");
  }
 
 }
-Future<void> getScreen(BuildContext context) async {
+
+ Future<void> getScreen(BuildContext context) async {
   try {
     //log('Fetching screen data...');
     String getScreen = ApiConfiguration.getScreen;
@@ -89,14 +91,16 @@ Future<void> getScreen(BuildContext context) async {
 
     response = await APiCallPage.apiGet(url: getScreen, id: ownerId, context: context);
     final status = jsonDecode(response.body) as Map<String, dynamic>;
-    
+   // log("screen response=${response.body}");
+      screenInfo.clear();
     if (status["success"] == true) {
       // Clear the list before adding new data
-      screenInfo.clear();
-      
+       // screens=status["data"]["screen"] as List;
+        
       AddingScreen addingScreen = AddingScreen.fromJson(status);
       screenInfo.addAll(addingScreen.data);
-      
+     // log(screenInfo.toString());
+    //  screenFetching();
       notifyListeners();
       log("Screen data fetched successfully.");
     } else {
@@ -108,6 +112,19 @@ Future<void> getScreen(BuildContext context) async {
     getError("An error occurred while fetching screen data.", context);
   }
 }
+
+// screenFetching(){
+
+//  for (var data in screenInfo) {
+//    screens.add(data.screen.toString());
+
+//    final List<String>list=screens.map((dynamic items) =>items as String ).toList();
+
+//  }
+//  log(screens.toString());
+//  notifyListeners();
+
+// }
 
 Future<void> screenDeleting(String id, int index, BuildContext context) async {
   try {

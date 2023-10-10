@@ -53,7 +53,7 @@ final status=jsonDecode(response.body) as Map<String,dynamic>;
    if(response.statusCode==200){
         log("data ethi");
         // ignore: use_build_context_synchronously
-        Navigator.push(context, MaterialPageRoute(builder: (context) =>const HomePage(),));
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) =>const HomePage(),));
       }else{
         
   if (status.containsKey("noUser")) {

@@ -13,6 +13,7 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../theatreOwner/view/homePage/dashboard.dart';
+import '../../controller/login_And_Signpages/signup_and_otp.dart';
 import '../../variables/colors.dart';
 import '../../variables/sizedbox.dart';
 
@@ -50,9 +51,11 @@ class FirstLoginPage extends StatelessWidget {
                   child: ElevatedButton(
                     onPressed: () async{
                       lottieshowing(context);
-                    await  Provider.of<MoviesProvider>(context,listen: false).homeGetMovies(context);
-                     Navigator.pop(context);
                       userGetLogin(context);
+                      Navigator.pop(context);
+                    await Provider.of<LoginPageProvider>(context,listen: false).currentUserGet();
+                    await  Provider.of<MoviesProvider>(context,listen: false).homeGetMovies(context);
+                    
     
                      // Provider.of<FireBaseFunctionProvider>(context,listen: false).
                     //  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) =>const UserLogin() ,));
@@ -72,6 +75,7 @@ class FirstLoginPage extends StatelessWidget {
                     lottieshowing(context);
                  await getlogged(context);
                   Navigator.push(context, MaterialPageRoute(builder:(context) =>const TheatreLoginPage () ,));
+                 
                   },
                   style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.transparent,
@@ -113,20 +117,25 @@ await Future.delayed(const Duration(seconds: 2));
 
  }
 
- Future userGetLogin(BuildContext context)async{
-SharedPreferences preferences=await SharedPreferences.getInstance();
-  
-var data = preferences.getBool("userLogin");
+Future<void> userGetLogin(BuildContext context) async {
+  try {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    var data = preferences.getBool("userLogin");
 
-log(data.toString());
- 
- if (data==true) {
-   Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) =>const HomeScreen(),));
- }else{
-  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) =>const LoginPage(),));
- }
+    log(data.toString());
 
- }
+    if (data == true) {
+      Navigator.push(context, MaterialPageRoute(builder: (context) => const HomeScreen()));
+    } else {
+      Navigator.push(context, MaterialPageRoute(builder: (context) => const LoginPage()));
+    }
+  } catch (e) {
+    // Handle any errors that occur during SharedPreferences operations.
+    log("Error: $e");
+    // You can add error handling logic here.
+  }
+}
+
 }
 
     

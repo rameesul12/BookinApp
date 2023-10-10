@@ -89,6 +89,7 @@ log(response.body);
  return response;
 
 } catch (e) {
+  log("error catch try");
   log(e.toString());
 }
 

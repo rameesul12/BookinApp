@@ -41,7 +41,7 @@ class MoviesProvider extends ChangeNotifier{
     final http.Response response;
     final getMovies=ApiConfiguration.getMovies;
     
-    final token=await storegeRead();
+    final token=await storageUser();
 
     try {
       response=await ApiFunctions.apiGetFunction(getMovies, token);
@@ -62,6 +62,7 @@ class MoviesProvider extends ChangeNotifier{
       log("No movies Added");
     }
     } catch (e) {
+      log("home movies error");
       log(e.toString());
     }
   }
@@ -248,6 +249,7 @@ try {
     getError("somthing went Wrong", context);
   }
 } catch (e) {
+  log("home get movies error");
  log(e.toString());
 }
 

@@ -11,6 +11,7 @@ class ApiFunctions{
 
     final http.Response response;
      final String baseUrl=ApiConfiguration.baseUrl+uri;
+     log("ramees$token");
 try {
   
     response =await http.get(Uri.parse(baseUrl),
@@ -31,6 +32,7 @@ try {
 
     final http.Response response;
     log(uri);
+    log("ramees$token");
      final String baseUrl=ApiConfiguration.baseUrl+uri;
 
 
@@ -40,6 +42,7 @@ try {
       'Authorization': 'Bearer $token'
      }
     );
+    log(response.body);
 
     return response;
   }

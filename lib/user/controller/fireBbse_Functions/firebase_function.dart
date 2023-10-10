@@ -21,7 +21,6 @@ class FireBaseFunctionProvider extends ChangeNotifier {
 
       bannerList.add(banner);
       log("ramees${bannerList[0].imagePath}");
-    notifyListeners();
     }
   }
 

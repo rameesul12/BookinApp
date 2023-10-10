@@ -4,24 +4,26 @@ static  String baseUrl='https://bookmyscreen.onrender.com/';
 
 //=========================
 //user Side
-static  String signup='signUp';
-static String getOtp='getOtp';
-static String login='signIn';
-static String resendOtp='resendOtp';
-static String forgetPass="get-verify";
-static String sendOtpEmail="forgotOtp";
-static String resertPassword="reset-password";
- static const baseUrlFilim="https://api.themoviedb.org/3";
- static const apiKey="a16115323f4b6863e6772960d6d13c22";
-static const movieApiKey='09d3fc1dfeba6863e19f1e7c677025d0';
-static const upcomingMovies='/movie/upcoming';
-static const getSearch='get-search/';
-static const theatreLocation='get-theatreShows';
-static const getTheatres='get-dates';
-static const getSeats='get-seats';
-static String payment='get-payment';
-static String getCurrentUser='getcurrentuser';
-
+ static  String signup='signUp';
+ static String getOtp='getOtp';
+ static String login='signIn';
+ static String resendOtp='resendOtp';
+ static String forgetPass="get-verify";
+ static String sendOtpEmail="forgotOtp";
+ static String resertPassword="reset-password";
+  static const baseUrlFilim="https://api.themoviedb.org/3";
+  static const apiKey="a16115323f4b6863e6772960d6d13c22";
+ static const movieApiKey='09d3fc1dfeba6863e19f1e7c677025d0';
+ static const upcomingMovies='/movie/upcoming';
+ static const getSearch='get-search/';
+ static const theatreLocation='get-theatreShows';
+ static const getTheatres='get-dates';
+ static const getSeats='get-seats';
+ static String payment='get-payment';
+ static String getCurrentUser='getcurrentuser';
+ static const userEdit='edit-profile';
+ static String cancelingorder='cancel-order';
+ 
 
 
 

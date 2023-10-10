@@ -15,3 +15,10 @@ storageUser()async{
   final String? token=await storage.read(key: "Token");
   return token;
 }
+
+storageDeleting() async{
+  FlutterSecureStorage storage=const FlutterSecureStorage();
+
+ await storage.delete(key:"Token" );
+
+}

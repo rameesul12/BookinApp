@@ -7,6 +7,9 @@ import 'package:bookingapp/user/variables/colors.dart';
 import 'package:bookingapp/user/variables/sizedbox.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import '../../controller/theatre_showing/theatre_showing_controller.dart';
+import '../dataAndTime/date_and_time.dart';
 const imageUrl='https://www.themoviedb.org/t/p/w220_and_h330_face/gO9k7t9jSdkkWVG0deMZDpELZGw.jpg';
 class LatestMovies extends StatelessWidget {
   const LatestMovies({super.key});
@@ -31,6 +34,8 @@ class LatestMovies extends StatelessWidget {
                 lottieshowing(context);
                  await data.movieCastAndCrew(index, context);
               await  data.moviesData(index, context);
+              data.listTolistChanging();
+
               
                 Navigator.pop(context);
                 Navigator.push(context,MaterialPageRoute(builder: (context) => const MoviesInfo(),));
@@ -56,6 +61,7 @@ final String language;
 
   @override
   Widget build(BuildContext context) {
+     final provider=Provider.of<MoviesProvider>(context,listen: false);
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Row(
@@ -98,7 +104,15 @@ final String language;
                SizedBox(
                   height: 35,
                   width: MediaQuery.of(context).size.width* 0.29,
-                  child: ElevatedButton(onPressed: (){},style: ElevatedButton.styleFrom(
+                  child: ElevatedButton(onPressed: ()async{
+                    
+                    lottieshowing(context);
+                            await Provider.of<TheatreShowingController>(context,listen: false).allTheatreGetting(context);  
+                    provider.listTolistChanging();
+                    Navigator.pop(context);
+            Navigator.push(context, MaterialPageRoute(builder: (context) => DateandTimepage(filimTitile:provider.movieDetails[0].title),));    
+
+                  },style: ElevatedButton.styleFrom(
                     padding:const EdgeInsets.all(0),
                     backgroundColor: buttonColor,
                    shape: RoundedRectangleBorder(

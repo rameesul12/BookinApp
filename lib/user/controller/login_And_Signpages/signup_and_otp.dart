@@ -73,17 +73,18 @@ class LoginPageProvider with ChangeNotifier{
     String url=ApiConfiguration.getCurrentUser;
     final token=await storageUser();
     log(url);
-  //  log(token);
+    log(token);
   log("oke");
 
 
-    response =await ApiFunctions.apiGetFunction(url, token);
+    response =await ApiFunctions.apiGetFunction(url,token);
     log(response.body);
     final status=jsonDecode(response.body)as Map<String,dynamic>;
 
   if (response.statusCode==200) {
     userData=CurrentUserModal.fromJson(status);
     log(userData.toString());
+    
   }
    
   }

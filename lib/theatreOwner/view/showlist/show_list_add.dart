@@ -1,5 +1,5 @@
 
-// ignore_for_file: use_build_context_synchronously, must_be_immutable
+// ignore_for_file: use_build_context_synchronously, must_be_immutable, unused_local_variable
 
 import 'dart:developer';
 
@@ -10,7 +10,9 @@ import '../../../common/dialogues.dart';
 import '../../../user/core/textformfield.dart';
 import '../../../user/variables/colors.dart';
 import '../../../user/variables/sizedbox.dart';
+import '../../controller/provider/add_Screen/current_owner_provider.dart';
 import '../../controller/provider/add_Shows/add_show_provider.dart';
+
 
 
 
@@ -22,7 +24,9 @@ final int? index;
 
   @override
   Widget build(BuildContext context) {
-   // final Size size=MediaQuery.of(context).size;
+   //  String screen='';
+    final Size size=MediaQuery.of(context).size;
+   final providerScreen=Provider.of<AddScreenProvider>(context,listen: false);
     final provider =Provider.of<AddShowProvider>(context,listen: false);
     return Scaffold(
       body:  SingleChildScrollView(
@@ -252,8 +256,47 @@ final int? index;
                      TextformField1(hintText: 'Price ', textController:provider.ticketPriceController, textIcon: Icons.table_rows_outlined,input: TextInputType.phone,),
                      sizedH20,
                       const Text('Enter Screen Number?',style: TextStyle(color: textwhite,fontSize: 20,fontWeight: FontWeight.bold,),),
-                     TextformField1(hintText: 'Screen Number ', textController:provider.screenNumberController, textIcon: Icons.table_rows_outlined,input: TextInputType.phone,),
-                   
+                    //  TextformField1(hintText: 'Screen Number ', textController:provider.screenNumberController, textIcon: Icons.table_rows_outlined,input: TextInputType.phone,),
+                Container(
+                  width: size.width,
+                  height: size.height*0.07,
+                  padding:const EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(color:colorTextwhite)
+                  ),
+                  child: Consumer<AddScreenProvider>(
+                    builder: (context,data,child) {
+                      return Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Consumer<AddShowProvider>(
+                            builder: (context,value,child) {
+                              return Text(value.screenNumberController.text,style:const TextStyle(color: textwhite),);
+                            }
+                          ),
+                          DropdownButton(
+                                  itemHeight: size.height*0.06,
+                                  
+                                  items: List.generate(
+                                      data.screenInfo.length,
+                                      (index) => DropdownMenuItem<dynamic>(
+                                          value:data.screenInfo[index].screen.toString() ,
+                                          child: Text(data.screenInfo[index].screen.toString(),style:const TextStyle(color: Colors.black,fontSize: 16),))),
+                                  onChanged: (values) {
+                                    // ignore: avoid_print
+                                    provider.valueChanging(values);
+               
+                                  },
+                                  onTap: () => log(provider.screenNumberController.toString()),
+                                  
+                                  ),
+                        ],
+                      );
+                    }
+                  ),
+                ),
+        
                     sizedH30,
                      ElevatedButton(onPressed: () async{
                       if ( _formkey.currentState!.validate()) {

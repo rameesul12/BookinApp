@@ -3,7 +3,7 @@
 import 'package:bookingapp/common/dialogues.dart';
 import 'package:bookingapp/theatreOwner/view/sails_Report/sailes_report.dart';
 import 'package:bookingapp/theatreOwner/view/screens/screenmanagment.dart';
-import 'package:bookingapp/theatreOwner/view/showlist/showList.dart';
+import 'package:bookingapp/theatreOwner/view/showlist/show_list.dart';
 import 'package:bookingapp/user/core/constant/constanwidgets.dart';
 import 'package:bookingapp/user/variables/sizedbox.dart';
 import 'package:flutter/material.dart';
@@ -49,6 +49,7 @@ class HomePage extends StatelessWidget {
                       onTap: () async {
                       lottieshowing(context);
                       await provider.getScreen(context);
+                     
                      Navigator.pop(context);
                         Navigator.push(context,MaterialPageRoute(builder: (context) =>const ScreenManagment(),));
                      },

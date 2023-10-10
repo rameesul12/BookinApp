@@ -10,6 +10,7 @@ import 'package:bookingapp/user/variables/sizedbox.dart';
 import 'package:date_picker_timeline/date_picker_widget.dart';
 
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 
 import '../../controller/theatre_showing/theatre_showing_controller.dart';
@@ -86,7 +87,7 @@ class DateandTimepage extends StatelessWidget {
                   
                   //  sizedH20,
                     
-                          value.theatreList.isNotEmpty?      Padding(
+                          value.theatreList.isNotEmpty?  Padding(
                       padding: const EdgeInsets.all(10),
                       child: SizedBox(
                         height: size.height*0.6,
@@ -99,14 +100,22 @@ class DateandTimepage extends StatelessWidget {
                                 lottieshowing(context);
                               //  log(provider.theatreSeats!.data.screen.totalSeats.toString());
                                 await Provider.of<TheatreShowingController>(context,listen: false).seatingCountForBookingPage(index);
+                                 Provider.of<TheatreShowingController>(context,listen: false).ticketCount.clear();
                                  Navigator.pop(context);
                                 Navigator.push(context, MaterialPageRoute(builder: (context) => BookingPage(movieName: filimTitile,),));
                               },
-                              child: TheatreWidget(size: size, place: value.theatreList[index].location, theatreName: value.theatreList[index].movieName, showTime: value.theatreList[index].showTime, ));
+                              child: TheatreWidget(size: size, place: value.theatreList[index].location, theatreName: value.theatreList[index].ownerName, showTime: value.theatreList[index].showTime, ));
                           },
                         ),
                       )
-                      ):const Center(child: Text("Theatre Not available",style: TextStyle(color: textwhite),),)
+                      ):Column(
+                        children: [
+                          SizedBox(height: size.height*0.25,),
+              Center(child: Lottie.asset('assets/animation/animation_ll0s7qfl.json',reverse: true,height: size.height*0.2,width: size.width*0.3)),
+
+                          const Center(child: Text("Theatre Not available",style: TextStyle(color: textwhite),),),
+                        ],
+                      )
                       
                         // : TheatreWidget(size: size, place: '', theatreName: '', showTime: '',)),
                              
